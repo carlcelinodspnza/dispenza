@@ -1,3 +1,9 @@
 .DS_Store
 Thumbs.db
 node_modules/
+
+# in-progress layout prototypes — never published
+pm-layouts.html
+pm-body-layouts.html
+pm-body-image-layouts.html
+pm-sleek-concepts.html
