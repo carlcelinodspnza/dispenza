@@ -95,3 +95,30 @@
     width: min(100%, 360px);
   }
 }
+
+/* ============================================================================
+   HERO COPY SITS OPTICALLY LOW ON PHONES                          2026-08-24
+   ----------------------------------------------------------------------------
+   .mc-hero__content centres on the pin (top:50%), but .site-header is
+   position:fixed and covers the top 74px of it (60px tall, offset 14px). So the
+   copy is centred on the pin while being READ against the area below the
+   header, and the two bands are unequal to the eye even though they are equal
+   in the box model:
+
+       390x844   137 visible above   vs  211 below
+       375x667    51 visible above   vs  125 below     <- cramped
+       360x740    90 visible above   vs  164 below
+
+   Shifting down by half the header's footprint centres the copy in the space
+   the reader actually sees: 174/174 at 390x844, 88/88 at 375x667. The bands'
+   TOTAL is unchanged -- that is fixed by (pin - copy) on a 100vh pin -- this
+   only stops the header from eating one side of it.
+
+   74px is measured, not guessed, and is constant at 360/375/390/430/700.
+   Phones only; the same imbalance exists on tablet and desktop but was not in
+   scope here.
+   ============================================================================ */
+@media (max-width: 700px) {
+  .mc-hero__pin { --hero-chrome-top: 74px; }
+  .mc-hero__content { top: calc(50% + var(--hero-chrome-top) / 2); }
+}
