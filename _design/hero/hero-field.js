@@ -93,6 +93,35 @@
   var W   = +vb[2], H = +vb[3];
   var HZN = H * 0.20;
 
+  /* ---- PORTRAIT VIEWPORTS: BACK THE CAMERA OFF -----------------------------
+     preserveAspectRatio is "xMidYMid slice", so the field is scaled to COVER.
+     On a portrait screen the HEIGHT drives that scale and the width is cropped
+     hard: at 390x844 only ~25% of the 1400-unit field is visible, magnified by
+     1.11 -- the same hexagons as desktop, seen through a quarter-width window,
+     which is why they read as enormous. Desktop sees 87% and looks correct.
+
+     Pushing the near plane out shrinks everything on screen, since a hex
+     projects to RW * F / Z: twice the near distance is half the size. On its
+     own that would lift the plane's near edge off the bottom of the frame and
+     leave a dead band, so the eye rises to match.
+
+     EY is SOLVED from ZN, not picked. The shipped pair (ZN 300, EY 250)
+     satisfies EY = (1.055 * H - HZN) * ZN / F to the unit, where 1.055 is the
+     deliberate bleed past H that keeps the nearest row running off the bottom
+     edge. Holding that identity means framing is untouched and only scale
+     moves -- at BACK = 1 this reproduces the original constants exactly, which
+     is why desktop is provably unaffected.
+
+     Cell count barely moves: cMax depends on W, F and ZF, not ZN; the row loop
+     just starts further away, so there are slightly FEWER cells, not more.
+     ------------------------------------------------------------------------ */
+  var ASPECT = window.innerHeight / Math.max(1, window.innerWidth);
+  var BACK   = ASPECT >= 1.6 ? 2.0 : (ASPECT >= 1.2 ? 1.45 : 1);
+  if (BACK !== 1) {
+    ZN = ZN * BACK;
+    EY = (1.055 * H - HZN) * ZN / F;
+  }
+
   function px(X, Z) { return W / 2 + X * F / Z; }
   function py(Z, up) { return HZN + (EY - up) * F / Z; }
 
