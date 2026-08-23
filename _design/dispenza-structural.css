@@ -53,9 +53,10 @@
 @media (prefers-reduced-motion: reduce) { .mc-hero { height: 100vh; } }
 
 /* ============================================================================
-   CTA BUTTONS ON PHONES — stacked, centred, equal length          2026-08-24
+   CTA BUTTONS ON PHONE + TABLET — stacked, centred, equal length  2026-08-24
    ----------------------------------------------------------------------------
-   Owner: every CTA group stacks on mobile, one per line, all the same length.
+   Owner: every CTA group stacks on mobile AND tablet, one per line, all the
+   same length.
 
    .mc-actions is the whole job. A sweep of all 27 pages at 390px for any
    container holding two or more button-like children found exactly four group
@@ -71,9 +72,11 @@
    the vCard pages. The 360px cap stops them stretching near the breakpoint,
    and .btn already sets justify-content:center, so labels stay centred.
 
-   Scoped to 700px, the site's own phone breakpoint (the one .mc-hero uses).
-   The nav does not go to a drawer until 1023px, so tablets between 701 and
-   1023 keep their side-by-side row, where there is ample width for it.
+   Scoped to 1023px — the site's own phone-and-tablet boundary. It is exactly
+   where the header swaps its inline nav rail for the hamburger drawer, so the
+   stacked CTAs now change over on the same line as the rest of the chrome
+   rather than at a breakpoint of their own. (This started at 700px, the phone
+   breakpoint .mc-hero uses; the owner asked for tablets too.)
 
    :has(> .btn ~ .btn) restricts all of this to containers holding TWO OR MORE
    buttons, which is the point -- "the same length" is a relationship between
@@ -82,7 +85,7 @@
    full width, including a pagination "Next" arrow on the dispensary-marketing
    page. Single buttons are now byte-for-byte unchanged from before this rule.
    ============================================================================ */
-@media (max-width: 700px) {
+@media (max-width: 1023px) {
   .mc-actions:has(> .btn ~ .btn) {
     flex-direction: column;
     flex-wrap: nowrap;
