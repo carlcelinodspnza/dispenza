@@ -325,16 +325,15 @@
              ============================================================ -->
         <!-- shadow-intensity is 0 on purpose: the coin must read as FLOATING,
              and a contact shadow implies a surface underneath it. -->
-        <model-viewer class="mc-coin" src="assets/3d/dispenza-coin.glb"
-                      alt="The Dispenza challenge coin: a hexagonal enamel and polished metal token carrying the Dispenza mark."
-                      camera-orbit="90deg 90deg 2.75m" field-of-view="22deg"
-                      poster="assets/3d/coin-poster.webp"
-                      environment-image="assets/3d/studio-lensshine.hdr"
-                      exposure="1.15" tone-mapping="neutral"
-                      shadow-intensity="0"
-                      disable-zoom disable-pan disable-tap
-                      interaction-prompt="none" camera-controls="false"
-                      loading="eager"></model-viewer>
+        <!-- The coin is now a STATIC image. It was a live <model-viewer> scene until
+     2026-08-21; measured, that scene was 4.67 MB of a 5.54 MB page (86%) —
+     coin.glb 2.93 MB + the model-viewer runtime 935 KB + an HDR 524 KB + the
+     Draco decoder 286 KB. It renders from assets/3d/coin-poster.webp (57 KB),
+     the still of this same coin that .mc-coin already carried as a background
+     in dispenza-structural.css. hero-coin-pose.js still drives the idle float:
+     it works through CSS custom properties and never touched model-viewer.
+     The comment block above still describes the old 3D setup. -->
+        <div class="mc-coin" role="img" aria-label="The Dispenza challenge coin: a hexagonal enamel and polished metal token carrying the Dispenza mark."></div>
 
         <!-- No SVG fallback coin any more. A hand-drawn parametric coin used to
              sit behind the model for the no-WebGL path; the owner retired that
@@ -386,7 +385,6 @@
      WebGL exists: without that guard model-viewer throws an uncaught TypeError
      on a machine with 3D disabled, which is a real user path and the whole
      reason the SVG coin is still here. -->
-<script src="_design/hero/hero-coin3d.js"></script>
 <!-- smoke LAST: it measures the token's placed position, so the coaster must
      have drawn at least once before it looks. -->
 <!-- ONE SMOKE ENGINE, TWO FIELDS. The physics used to be duplicated between the
