@@ -122,3 +122,35 @@
   .mc-hero__pin { --hero-chrome-top: 74px; }
   .mc-hero__content { top: calc(50% + var(--hero-chrome-top) / 2); }
 }
+
+/* ============================================================================
+   FIGURES ON PHONES — unit at full size, centred                  2026-08-24
+   ----------------------------------------------------------------------------
+   Owner: "BLN" matches the number's size on mobile, and the figures centre.
+
+   .mc-figure__u ships at --ds-step-micro (12px) against the number's
+   --ds-step-metric (38px), which is the desktop treatment where the figures sit
+   in a tight 4-column row. Stacked full width on a phone there is room for the
+   unit to read at the same weight as the number. `inherit` takes it from
+   .mc-figure__n rather than restating a value, so it tracks the metric step if
+   that token ever moves.
+
+   padding-inline:0 matters for the centring to be true: at this width the
+   figure already has border-left:0 and padding-left:0 (from the stacking rule)
+   but KEEPS padding-right:24px, so text-align:center alone would sit 12px left
+   of the real centre.
+   ============================================================================ */
+@media (max-width: 700px) {
+  .mc-figure {
+    text-align: center;
+    padding-inline: 0;
+  }
+  .mc-figure__u {
+    font-size: inherit;
+    /* .16em of tracking is applied AFTER the final N as well, which at 38px is
+       a 6px gap the eye reads as part of the line -- it pushes "1.2 BLN" about
+       3px left of true centre. Pulling it back makes the centring optical
+       rather than merely mathematical. */
+    margin-right: -.16em;
+  }
+}
