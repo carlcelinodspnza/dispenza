@@ -114,14 +114,17 @@
    TOTAL is unchanged -- that is fixed by (pin - copy) on a 100vh pin -- this
    only stops the header from eating one side of it.
 
-   74px is measured, not guessed, and is constant at 360/375/390/430/700.
-   Phones only; the same imbalance exists on tablet and desktop but was not in
-   scope here.
+   74px is measured, not guessed: the header is 60px tall at a 14px offset, and
+   that is constant at 360/390/700/768/1024/1280/1440/1920. It is position:fixed
+   and stays on screen through scroll at every one of those widths, so the
+   offset never goes stale.
+
+   Now unmediated — the owner asked for tablet and desktop too. Before:
+   203/277 at 768, 186/260 at 1440. The correction is the same at every width
+   because the header's footprint is.
    ============================================================================ */
-@media (max-width: 700px) {
-  .mc-hero__pin { --hero-chrome-top: 74px; }
-  .mc-hero__content { top: calc(50% + var(--hero-chrome-top) / 2); }
-}
+.mc-hero__pin { --hero-chrome-top: 74px; }
+.mc-hero__content { top: calc(50% + var(--hero-chrome-top) / 2); }
 
 /* ============================================================================
    FIGURES ON PHONES — unit at full size, centred                  2026-08-24
@@ -153,4 +156,50 @@
        rather than merely mathematical. */
     margin-right: -.16em;
   }
+}
+
+/* ============================================================================
+   INFLUENCE HIGHLIGHTS HEADING — two lines, centred        2026-08-24
+   ----------------------------------------------------------------------------
+   Owner: "Influence Highlights" on two lines and centred.
+
+   It already wraps to two lines on its own at 390 and 414, but the type scales
+   with the viewport and it snaps back to ONE line from 430px up (measured: 2
+   lines at 390/414, 1 line at 430/480/540/600/660/700/768/834). So a width
+   rule would not do it -- the break has to be explicit, and .mc-head-break
+   follows the conditional-break pattern the hero lead already uses
+   (.mc-lede-break: display:none, flipped to inline inside a media query).
+
+   Applied to 1023px, the phone-and-tablet boundary already used for the CTAs,
+   because the flip sits at 430 -- scoping this to phones only would have left
+   it on one line on exactly the widths the owner was looking at.
+
+   The eyebrow centres with it: centring the heading alone would leave "THE
+   NUMBERS" hanging off the left edge above it.
+   ============================================================================ */
+.mc-head-break { display: none; }
+
+@media (max-width: 1023px) {
+  .mc-head-break { display: inline; }
+  #influence .mc-eyebrow,
+  #influence .mc-head--statement { text-align: center; }
+}
+
+/* ============================================================================
+   MAP: CLOSE THE WHITE GAP ON PHONES                              2026-08-24
+   ----------------------------------------------------------------------------
+   192px of empty white sat between the purple sales band and the map at 390px,
+   and it was TWO stacked 96px values, not one:
+
+     .container--full:has(.mc-salesband) + .container  padding-top: 96px
+     .mc-results__map                                  margin-top:  96px
+
+   Both resolve to --ds-space-2xl, a rhythm chosen for desktop; doubled up on a
+   390px screen it reads as a blank panel. Dropped to --ds-space-lg (40px) each
+   on phones, so the gap closes from 192px to 80px. Left alone above 700px,
+   where the section has the width to carry the original rhythm.
+   ============================================================================ */
+@media (max-width: 700px) {
+  .container--full:has(.mc-salesband) + .container { padding-top: var(--ds-space-lg); }
+  .mc-results__map { margin-top: var(--ds-space-lg); }
 }
