@@ -38,6 +38,8 @@ would remove the whole `_design` tree and the page index.
 ## Motion
 
 Reveals, counters and parallax are in `_design/page-effects.js`. The drifting smoke fields
-run on `_design/smoke-engine.js` with per-section emitters; the hero's 3D coin loads
-`model-viewer` from `_design/vendor/`. Everything honours `prefers-reduced-motion`, and the
+run on `_design/smoke-engine.js` with per-section emitters; the hero's plume is anchored to
+`.mc-hero__content`, so it sits behind the headline. The hero once carried a 3D `model-viewer`
+coin — it was 86% of the page weight and has been removed along with its runtime, Draco decoder
+and HDR. Everything honours `prefers-reduced-motion`, and the
 reveal layer fails open — with scripting off, nothing is hidden.

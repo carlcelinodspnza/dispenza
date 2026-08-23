@@ -333,8 +333,6 @@
      in dispenza-structural.css. hero-coin-pose.js still drives the idle float:
      it works through CSS custom properties and never touched model-viewer.
      The comment block above still describes the old 3D setup. -->
-        <div class="mc-coin" role="img" aria-label="The Dispenza challenge coin: a hexagonal enamel and polished metal token carrying the Dispenza mark."></div>
-
         <!-- No SVG fallback coin any more. A hand-drawn parametric coin used to
              sit behind the model for the no-WebGL path; the owner retired that
              object outright ("this version of the coin should no longer exist"),
@@ -373,7 +371,6 @@
 <!-- Loaded AFTER the section so the svg elements they fill already exist in the
      DOM; no DOMContentLoaded wrapper is needed and none is used. -->
 <script src="_design/hero/hero-field.js"></script>
-<script src="_design/hero/hero-coin-pose.js"></script>
 <!-- Loaded IMMEDIATELY (owner). The earlier deferral was a workaround for a
      typing stall whose real cause turned out to be elsewhere: the pose engine was
      writing the pose as CSS custom properties on .mc-hero every frame, which
