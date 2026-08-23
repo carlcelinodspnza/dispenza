@@ -51,3 +51,44 @@
 @media (max-width: 700px)  { .mc-hero { height: 140vh; } }
 /* preserved: the source collapses the track entirely when motion is reduced */
 @media (prefers-reduced-motion: reduce) { .mc-hero { height: 100vh; } }
+
+/* ============================================================================
+   CTA BUTTONS ON PHONES — stacked, centred, equal length          2026-08-24
+   ----------------------------------------------------------------------------
+   Owner: every CTA group stacks on mobile, one per line, all the same length.
+
+   .mc-actions is the whole job. A sweep of all 27 pages at 390px for any
+   container holding two or more button-like children found exactly four group
+   types, and the other two already comply: .drawer-cta (the nav drawer) is a
+   grid at 290/290, and .ct-doors is stacked at 342/342. Every non-conforming
+   group was .mc-actions in one of its variants -- bare, .is-in and .tc-close --
+   which between them cover the 2-button CTAs (12 pages), the 3-button closing
+   links (thank-you) and the 4-button vCard actions (6 people pages). Because
+   this file is shared by all 27 pages, one rule reaches the whole site.
+
+   width:min(100%, 360px) is what makes them equal: .btn is inline-flex, so it
+   otherwise sizes to its label -- that is why they read as 189/146/129/167 on
+   the vCard pages. The 360px cap stops them stretching near the breakpoint,
+   and .btn already sets justify-content:center, so labels stay centred.
+
+   Scoped to 700px, the site's own phone breakpoint (the one .mc-hero uses).
+   The nav does not go to a drawer until 1023px, so tablets between 701 and
+   1023 keep their side-by-side row, where there is ample width for it.
+
+   :has(> .btn ~ .btn) restricts all of this to containers holding TWO OR MORE
+   buttons, which is the point -- "the same length" is a relationship between
+   buttons, so a lone button has nothing to match. Without the guard the rule
+   also caught 42 single-button .mc-actions across the site and stretched them
+   full width, including a pagination "Next" arrow on the dispensary-marketing
+   page. Single buttons are now byte-for-byte unchanged from before this rule.
+   ============================================================================ */
+@media (max-width: 700px) {
+  .mc-actions:has(> .btn ~ .btn) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  .mc-actions:has(> .btn ~ .btn) > .btn {
+    width: min(100%, 360px);
+  }
+}
