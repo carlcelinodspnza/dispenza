@@ -284,3 +284,60 @@
 @media (max-width: 1080px) {
   .cs-fan { --cs-fan-plate: 118px; }
 }
+
+/* ============================================================================
+   TOUCH TARGETS — 44px minimum on touch pointers            2026-08-24
+   ----------------------------------------------------------------------------
+   Audited every focusable element across all 27 pages at 390px with touch
+   emulation. .btn came out 42px (14px padding + 12px line-height + 2px border),
+   2px under the 44x44 minimum in WCAG 2.5.5 and Apple's HIG, and it was not
+   alone -- the icon buttons and the footer links were short too:
+
+     .btn                 42px    ~130 instances, all 27 pages
+     .rail__burger        42x42   27 pages
+     .mc-deck__btn        40x40
+     .drawer-close        38x38
+     .rail__logo          131x34
+     .f-links > a         32px    footer nav, 5 per page
+     .f-contact > a       23px    footer phone + email
+
+   Gated on `pointer: coarse` rather than width alone, because this is about the
+   input device, not the viewport: a touch laptop at 1440 needs the bigger
+   target and a mouse user at 900 does not. The width arm is kept as a second
+   condition so a narrow desktop window still gets it. Verified both arms
+   resolve independently -- Playwright with hasTouch reports pointer:coarse at
+   both 390 and 1440, and pointer:fine with it off.
+
+   min-height rather than padding: .btn is inline-flex and the icon buttons are
+   flex/grid with their content already centred, so the box grows without
+   disturbing the label. The two footer link groups get display:flex to gain
+   the same centring, since they ship as display:block.
+
+   NOT changed: inline links inside prose (phone, email and URL links in body
+   copy, 19-23px) are explicitly exempt from the target-size rule, and the 1x1
+   .ad-choice__input radios are visually-hidden controls whose <label> is the
+   real target.
+   ============================================================================ */
+@media (pointer: coarse), (max-width: 1023px) {
+  .btn { min-height: 44px; }
+
+  .rail__burger,
+  .drawer-close,
+  .mc-deck__btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .rail__logo { min-height: 44px; }
+
+  .f-links > a,
+  .f-contact > a {
+    min-height: 44px;
+    /* min-width matters for the short labels: "Home" renders 41px wide, and the
+       rule is 44 in BOTH axes. The longer links already exceed it, so this only
+       pads out the one that does not. */
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+  }
+}
