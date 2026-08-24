@@ -341,3 +341,35 @@
     align-items: center;
   }
 }
+
+/* ============================================================================
+   TABBED DOC SECTION — tighter lead-in, and a tab that clears its border
+                                                                    2026-08-24
+   ----------------------------------------------------------------------------
+   1. SPACE ABOVE THE PANEL HEADING. Two different sources depending on layout,
+      so both are addressed or the gap only shrinks at one breakpoint:
+        stacked (<=1023px)  .row.tc-doc__grid row-gap: 64px  -> the rail sits
+                            above the body, and that gap is the whole distance
+                            from the tab row down to "01".
+        two-column (>=1024) .col.tc-doc__body padding-top: 96px (--ds-space-2xl)
+                            offsets the body from the rail's first tab.
+      Both go to --ds-space-lg (40px). Scoped to min-width:1024px on the second
+      one on purpose: an unmediated rule would beat the existing
+      `@media (max-width:1023px) .col.tc-doc__body{padding-top:0}` that sits
+      earlier in this file and would ADD 40px of space back on phones.
+
+   2. THE TAB LABEL RAN INTO ITS OWN BORDER. .tc-tabs__link ships
+      `padding: 14px 0 14px 24px` -- no right padding at all -- so "(Digital)"
+      ended 4px from the rail's right edge at 1440 and 0px at 900. Giving it a
+      matching right padding both restores the breathing room and pulls the
+      wrap point in, which is what puts "(Digital)" on its own line.
+   ============================================================================ */
+@media (max-width: 1023px) {
+  .row.tc-doc__grid { row-gap: var(--ds-space-lg); }
+}
+
+@media (min-width: 1024px) {
+  .col.tc-doc__body { padding-top: var(--ds-space-lg); }
+}
+
+.tc-tabs__link { padding-right: var(--ds-space-md); }
