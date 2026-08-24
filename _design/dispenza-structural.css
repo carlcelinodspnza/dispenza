@@ -239,6 +239,13 @@
      176px fallback. */
   .mc-cases { --mc-case-band-h: 150px; }
 
+  /* The four *-open.webp banners were recomposited so each logo sits at the
+     horizontal centre of the artwork (originals kept in cases/_original/). The
+     band shows a cover-cropped slice of that image, so the crop has to be
+     centred too -- left it at the inherited `left center` and the centred logo
+     would be cut off on the right, which is the mirror of the old problem. */
+  .mc-case__art--open { object-position: center; }
+
   .mc-case { height: var(--mc-case-band-h, 176px); }
   .mc-case.is-open { height: auto; }
   .mc-case.is-open .mc-case__tab {
