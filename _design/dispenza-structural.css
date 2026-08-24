@@ -149,12 +149,20 @@
     padding-inline: 0;
   }
   .mc-figure__u {
+    /* .16em of tracking was chosen for 12px type. Scaled to the number's 38px
+       it becomes a 6px gap between letters and "BLN" stops reading as a word --
+       it reads as B, L, N. Compared .16/.10/.07/.05/.03/0em at the real size:
+       .16 and .10 are visibly three letters, 0 closes the LN pair up too far,
+       and .05 holds together as a unit while keeping the label's character.
+
+       --u-track drives BOTH properties so they cannot drift apart. The negative
+       margin cancels the tracking applied AFTER the final N, which the eye
+       reads as part of the line and which otherwise pushes "1.2 BLN" off centre
+       by half of it. */
+    --u-track: .05em;
     font-size: inherit;
-    /* .16em of tracking is applied AFTER the final N as well, which at 38px is
-       a 6px gap the eye reads as part of the line -- it pushes "1.2 BLN" about
-       3px left of true centre. Pulling it back makes the centring optical
-       rather than merely mathematical. */
-    margin-right: -.16em;
+    letter-spacing: var(--u-track);
+    margin-right: calc(var(--u-track) * -1);
   }
 }
 
