@@ -373,3 +373,41 @@
 }
 
 .tc-tabs__link { padding-right: var(--ds-space-md); }
+
+/* ============================================================================
+   WEB-DESIGN PAGE — the two client collages read larger        2026-08-24
+   ----------------------------------------------------------------------------
+   1. THE HEAD COLLAGE bleeds right instead of taking width from the copy.
+      Its media column and the h1 share one grid, and the h1 carries an explicit
+      break ("WEB DESIGN &" / "DEVELOPMENT"), so "DEVELOPMENT" needs ~490px to
+      hold its line. Measured against media width at 1440:
+
+          44%  img 472px   h1 col 536px   2 lines   <- shipped
+          46%  img 493px   h1 col 515px   2 lines   <- ceiling
+          48%  img 515px   h1 col 493px   3 lines
+          50%  img 536px   h1 col 472px   4 lines
+
+      So taking column width buys 4.5% before the headline reflows to three
+      lines and then four. Bleeding the wrapper into the page margin instead
+      grows the image ~34% and leaves the h1 untouched, which is what
+      .mc-results__bleed already does elsewhere on this site.
+
+      The bleed is clamped twice: max(0px, ...) so it is zero once the container
+      fills the viewport and can never cause horizontal overflow, and min(160px,
+      ...) so it stops before the image outruns its 856px native width on very
+      wide screens.
+
+   2. THE SPLIT COLLAGE has no headline competing with it -- just body copy --
+      so it takes column share directly, 1fr to 1.5fr, with the gap tightened
+      from --ds-space-xl to --ds-space-lg to give both sides some of it back.
+   ============================================================================ */
+@media (min-width: 1024px) {
+  .tc-head__media--wide {
+    margin-right: calc(-1 * min(160px, max(0px, (100vw - var(--ds-container-max)) / 2)));
+  }
+
+  .wd-split {
+    column-gap: var(--ds-space-lg);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  }
+}
