@@ -434,3 +434,34 @@
 .tc-head__grid--media:has(> .tc-head__media--wide) .tc-head__title {
   font-size: max(34px, min(4.4vw, 60px));
 }
+
+/* ============================================================================
+   ADS HEAD: ALIGN THE BILLBOARD'S TIP WITH THE TITLE'S CAP LINE   2026-08-24
+   ----------------------------------------------------------------------------
+   The image BOX already aligns with the title box exactly -- measured 0px delta
+   at 1024/1120/1280/1440. The visual misalignment is two bits of internal
+   whitespace nobody can see:
+
+     - the artwork carries 46px of transparent padding above the billboard,
+       which is 5.75% of its 800px height, so it scales with the render:
+       38px of empty space at 1440, 33 at 1280, 29 at 1120, 27 at 1024.
+     - the title has ~9px of leading above its cap line (constant, because the
+       font size is capped at 60px above ~1364px).
+
+   Net shift to bring the billboard's tip onto the cap line: 29 / 24 / 20 / 19px
+   at those widths. `calc(-6% + 9px)` reproduces that, because a percentage
+   margin on the img resolves against its containing block's WIDTH, the img is
+   square, and width:100% makes that equal to the rendered height. So the 6%
+   term tracks the artwork's padding at every size and the 9px cancels the
+   title's leading -- no per-breakpoint values.
+
+   Scoped by filename on purpose: 46px of top padding is a property of THIS
+   file, not of the wide-head pattern, and another page's head artwork has its
+   own. Scoped to min-width:1024px because below that the head stacks and the
+   title is above the image, so there is nothing to align to.
+   ============================================================================ */
+@media (min-width: 1024px) {
+  .tc-head__media--wide img[src$="dispenza-desktop-graphic-designs.webp"] {
+    margin-top: calc(-6% + 9px);
+  }
+}
