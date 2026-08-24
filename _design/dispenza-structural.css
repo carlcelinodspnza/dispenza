@@ -203,3 +203,40 @@
   .container--full:has(.mc-salesband) + .container { padding-top: var(--ds-space-lg); }
   .mc-results__map { margin-top: var(--ds-space-lg); }
 }
+
+/* ============================================================================
+   BENCHMARK ACCORDION ON PHONES/TABLET — collapse the dead space   2026-08-24
+   ----------------------------------------------------------------------------
+   The accordion is horizontal on desktop: a closed card is narrow, and its
+   panel (min-width 380px) is clipped HORIZONTALLY by the card's overflow:hidden.
+   Below 900px .mc-cases turns into a column and the cards go full width, so
+   there is nothing left to clip against -- the panel keeps its full 253px of
+   height at opacity:0. Every CLOSED card was therefore a 176px banner sitting
+   on ~274px of blank, and the four cards stacked to 1872px of mostly nothing.
+
+   Three fixes, all scoped to the column layout:
+
+   1. A closed card is exactly its banner. The panel is still in the DOM and
+      still in the accessibility tree -- it is CLIPPED by the card, which is the
+      same mechanism the desktop layout uses and what the accordion's own script
+      comment requires ("only ever CLIPPED by their card, never removed").
+   2. An open card is height:auto, so it ends where its numbers end. It was
+      pinned to --mc-case-h (450px) against ~350px of content, which is the
+      empty band under the open card's last row.
+   3. The open card's banner matches the closed ones. .mc-case.is-open
+      .mc-case__tab sets aspect-ratio:722/205 UNMEDIATED, and at 3 classes it
+      outranks the @media (max-width:900px) .mc-case__tab height rule -- so the
+      open banner rendered 97px tall while every closed banner was 176px. That
+      is the squashed banner on the open card.
+
+   900px, not 700 or 1023: this component switches to a column at 900px, which
+   is where the clipping stops working.
+   ============================================================================ */
+@media (max-width: 900px) {
+  .mc-case { height: var(--mc-case-band-h, 176px); }
+  .mc-case.is-open { height: auto; }
+  .mc-case.is-open .mc-case__tab {
+    height: var(--mc-case-band-h, 176px);
+    aspect-ratio: auto;
+  }
+}
