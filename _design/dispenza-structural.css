@@ -233,6 +233,12 @@
    is where the clipping stops working.
    ============================================================================ */
 @media (max-width: 900px) {
+  /* The existing rule reads height:var(--mc-case-band-h,176px) and never defines
+     the variable, so setting it here resizes the band from one place and the
+     card height below follows it automatically. 150px is a 15% reduction on the
+     176px fallback. */
+  .mc-cases { --mc-case-band-h: 150px; }
+
   .mc-case { height: var(--mc-case-band-h, 176px); }
   .mc-case.is-open { height: auto; }
   .mc-case.is-open .mc-case__tab {
