@@ -465,3 +465,211 @@
     margin-top: calc(-6% + 9px);
   }
 }
+
+/* ============================================================================
+   REQUEST-A-DEMO MODAL — the 8-step wizard the clone did not capture
+                                                                    2026-08-25
+   ----------------------------------------------------------------------------
+   The source site opens a "Popup - Conversion Popup" dialog from the HEADER's
+   "Request a Demo" button (href="#sgp_2"). The clone captured that popup's
+   CONTENT — all eight questions survive as a flat form on contact.html, same
+   field names — but not the modal or its stepping. This is that layer, rebuilt
+   in this site's own design system rather than copied from the source's chrome.
+
+   Built here, not in the source's image: our surface/accent tokens, our .btn
+   for the controls, --ds-r-surface for the panel, --ds-z-modal for the layer.
+   The source's decorative hexagons are echoed with a soft accent glow rather
+   than reproduced, so nothing depends on artwork we do not own.
+
+   Controls are >=44px per reference_touch_target_sizing_rule, and the choice
+   pills grow with min-height rather than padding so their labels stay centred.
+   ============================================================================ */
+.dm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--ds-z-modal);
+  display: grid;
+  place-items: center;
+  padding: var(--ds-space-md);
+  background: color-mix(in srgb, #000 72%, transparent);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity var(--ds-dur) var(--ds-ease-out);
+}
+.dm-backdrop.is-open { opacity: 1; }
+
+.dm-dialog {
+  position: relative;
+  box-sizing: border-box;
+  width: min(100%, 720px);
+  max-height: min(88vh, 760px);
+  overflow: auto;
+  padding: var(--ds-space-lg);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-surface);
+  color: var(--ds-ink-on-dark);
+  font-family: var(--ds-font-body);
+  background:
+    radial-gradient(120% 90% at 100% 0%,
+      color-mix(in srgb, var(--ds-primary) 42%, transparent) 0%,
+      transparent 62%),
+    linear-gradient(158deg,
+      color-mix(in srgb, var(--ds-accent-deep) 82%, var(--ds-primary)) 0%,
+      var(--ds-bg-surface) 74%);
+  box-shadow: 0 40px 90px -20px #000c, 0 0 0 1px #ffffff0f inset;
+  transform: translateY(10px) scale(.985);
+  transition: transform var(--ds-dur) var(--ds-ease-out);
+}
+.dm-backdrop.is-open .dm-dialog { transform: none; }
+
+.dm-close {
+  position: absolute;
+  top: var(--ds-space-md);
+  right: var(--ds-space-md);
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-pill);
+  background: #0006;
+  color: var(--ds-ink-on-dark);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--ds-dur-fast) var(--ds-ease-out);
+}
+.dm-close:hover { background: #000a; }
+
+.dm-title {
+  margin: 0 56px 0 0;
+  font-family: var(--ds-font-display);
+  font-size: max(22px, min(2.4vw, 30px));
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--ds-ink-heading);
+}
+.dm-count {
+  margin: var(--ds-space-md) 0 var(--ds-space-xs);
+  font-family: var(--ds-font-display);
+  font-size: var(--ds-step-body);
+  font-weight: 600;
+  color: var(--ds-ink-on-dark);
+}
+.dm-progress {
+  height: 6px;
+  border-radius: var(--ds-r-pill);
+  background: #ffffff2e;
+  overflow: hidden;
+}
+.dm-progress__fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ds-accent-light);
+  transition: width var(--ds-dur) var(--ds-ease-out);
+}
+
+.dm-step { display: none; margin: 0; padding: 0; border: 0; }
+.dm-step.is-active { display: block; }
+.dm-legend {
+  margin: var(--ds-space-lg) 0 var(--ds-space-md);
+  padding: 0;
+  font-family: var(--ds-font-display);
+  font-size: max(19px, min(2vw, 24px));
+  font-weight: 600;
+  color: var(--ds-ink-heading);
+}
+
+.dm-choices { display: flex; flex-wrap: wrap; gap: var(--ds-space-sm); }
+.dm-choice { position: relative; }
+.dm-choice input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.dm-choice span {
+  display: grid;
+  place-items: center;
+  min-height: 44px;
+  padding: var(--ds-space-xs) var(--ds-space-md);
+  border: 1px solid var(--ds-ink-on-dark);
+  border-radius: var(--ds-r-pill);
+  font-size: var(--ds-step-body);
+  transition: background var(--ds-dur-fast) var(--ds-ease-out),
+              border-color var(--ds-dur-fast) var(--ds-ease-out);
+}
+.dm-choice input:checked + span {
+  background: var(--ds-primary);
+  border-color: var(--ds-primary);
+}
+.dm-choice input:focus-visible + span {
+  outline: 2px solid var(--ds-accent-light);
+  outline-offset: 3px;
+}
+
+.dm-field { display: block; }
+.dm-input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  padding: var(--ds-space-sm) var(--ds-space-md);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-control);
+  background: #00000059;
+  color: var(--ds-ink-on-dark);
+  font-family: var(--ds-font-body);
+  font-size: var(--ds-step-body);
+}
+.dm-input::placeholder { color: var(--ds-ink-soft); }
+.dm-input:focus-visible {
+  outline: 2px solid var(--ds-accent-light);
+  outline-offset: 2px;
+}
+.dm-input[aria-invalid="true"] { border-color: #ff6b6b; }
+
+.dm-error {
+  margin: var(--ds-space-xs) 0 0;
+  min-height: 1.2em;
+  font-size: var(--ds-step-micro);
+  color: #ff9a9a;
+}
+
+.dm-nav {
+  display: flex;
+  gap: var(--ds-space-sm);
+  justify-content: flex-end;
+  margin-top: var(--ds-space-lg);
+}
+.dm-nav .btn { min-height: 44px; }
+
+/* .btn sets display:inline-flex, and an AUTHOR display beats the [hidden]
+   attribute's UA display:none -- so hidden buttons render unless this says
+   otherwise. Written for every control in the nav, not just Prev: the
+   asymmetry shipped SUBMIT visible on step 1 while el.hidden read true. */
+.dm-nav .btn[hidden] { display: none; }
+
+/* honeypot — off-screen, never display:none (bots skip hidden fields) */
+.dm-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@media (max-width: 560px) {
+  .dm-dialog { padding: var(--ds-space-md); }
+  .dm-nav { justify-content: stretch; }
+  .dm-nav .btn { flex: 1 1 0; }
+  .dm-choices { flex-direction: column; }
+  .dm-choice span { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-backdrop,
+  .dm-dialog,
+  .dm-progress__fill { transition: none; }
+}
