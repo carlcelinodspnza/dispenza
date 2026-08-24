@@ -411,3 +411,26 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
   }
 }
+
+/* ============================================================================
+   WIDE-MEDIA HEAD: STOP THE TITLE BREAKING MID-WORD              2026-08-24
+   ----------------------------------------------------------------------------
+   The wide-media head sizes its title at max(34px, min(4.4vw, 64px)) against a
+   536px copy column (the column is constant above 1120px, since the container
+   caps at 1120). "ADVERTISEMENT" on ads-design.html is the longest single word
+   any of these titles carries, and it needs 552px at 4.4vw/1440 -- 16px more
+   than it has. .tc-head__title inherits overflow-wrap:break-word, so instead of
+   overflowing it SPLIT: "ADVERTISEMEN / T DESIGN".
+
+   Capping at 60px keeps the longest word intact with room to spare, including
+   at 1920 where 4.4vw would otherwise hit the old 64px ceiling and break just
+   as badly. The vw term is untouched, so nothing below ~1364px changes at all.
+
+   Chosen over the alternative of narrowing the media column, which would have
+   cost the image ~180px of the width this exists to give it, and over a
+   per-page override, since the constraint is the shared 536px column rather
+   than anything specific to this page.
+   ============================================================================ */
+.tc-head__grid--media:has(> .tc-head__media--wide) .tc-head__title {
+  font-size: max(34px, min(4.4vw, 60px));
+}
