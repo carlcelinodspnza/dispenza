@@ -245,12 +245,12 @@
     <div class="container">
       <div class="row tc-doc__grid">
           <div class="col tc-doc__rail">
-            <nav class="tc-rail tc-rail--tabs" aria-label="Platforms" data-tabs>
-              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="ingtab-1" role="tab" aria-controls="ingpanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Point of Sale (POS)</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="ingtab-2" role="tab" aria-controls="ingpanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Marketing Technologies</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="ingtab-3" role="tab" aria-controls="ingpanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Menu and POS</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="ingtab-4" role="tab" aria-controls="ingpanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Menu Platforms</span></button></li>
+            <nav class="tc-rail tc-rail--guide" aria-label="Platforms" data-guide-root>
+              <ul class="tc-rail__list">
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="ingtab-1" href="#ingpanel-1" data-guide="1"><span class="tc-tabs__n">01</span><span>Point of Sale (POS)</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="ingtab-2" href="#ingpanel-2" data-guide="2"><span class="tc-tabs__n">02</span><span>Marketing Technologies</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="ingtab-3" href="#ingpanel-3" data-guide="3"><span class="tc-tabs__n">03</span><span>Menu and POS</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="ingtab-4" href="#ingpanel-4" data-guide="4"><span class="tc-tabs__n">04</span><span>Menu Platforms</span></a></li>
               </ul>
             </nav>
           </div>
@@ -296,7 +296,7 @@
                  reads that h4 as a group label sitting OVER the POS and menu pair,
                  which would move it above "Point of Sale (POS)"; the served HTML puts
                  it third. Source order wins; the owner can re-order it. -->
-                          <div class="tc-tabs__panel" id="ingpanel-1" role="tabpanel" aria-labelledby="ingtab-1">
+                          <div class="tc-tabs__panel" id="ingpanel-1" tabindex="-1" aria-labelledby="ingtab-1">
                 <figure class="tc-tabs__fig">
               <img src="assets/in-pages/dispensary-menu-pos.webp"
                    alt="dispensary menu pos" width="585" height="346" loading="lazy" decoding="async">
@@ -304,7 +304,7 @@
                 <p class="tc-tabs__pn" aria-hidden="true">01</p>
                 <h3 class="tc-tabs__t">Point of Sale (POS)</h3>
               </div>
-              <div class="tc-tabs__panel" id="ingpanel-2" role="tabpanel" aria-labelledby="ingtab-2">
+              <div class="tc-tabs__panel" id="ingpanel-2" tabindex="-1" aria-labelledby="ingtab-2">
                 <figure class="tc-tabs__fig">
               <img src="assets/in-pages/dispenza-dispensaries-marketing.webp"
                    alt="dispenza dispensaries marketing" width="592" height="350" loading="lazy" decoding="async">
@@ -312,7 +312,7 @@
                 <p class="tc-tabs__pn" aria-hidden="true">02</p>
                 <h3 class="tc-tabs__t">Marketing Technologies</h3>
               </div>
-              <div class="tc-tabs__panel" id="ingpanel-3" role="tabpanel" aria-labelledby="ingtab-3">
+              <div class="tc-tabs__panel" id="ingpanel-3" tabindex="-1" aria-labelledby="ingtab-3">
                 <figure class="tc-tabs__fig">
               <img src="assets/in-pages/dispenza-menu-platform.webp"
                    alt="dispenza menu platform" width="750" height="506" loading="lazy" decoding="async">
@@ -320,7 +320,7 @@
                 <p class="tc-tabs__pn" aria-hidden="true">03</p>
                 <h4 class="tc-tabs__t">Menu and POS</h4>
               </div>
-              <div class="tc-tabs__panel" id="ingpanel-4" role="tabpanel" aria-labelledby="ingtab-4">
+              <div class="tc-tabs__panel" id="ingpanel-4" tabindex="-1" aria-labelledby="ingtab-4">
                 <figure class="tc-tabs__fig">
               <img src="assets/in-pages/dispensary-menu-platform.webp"
                    alt="dispensary menu platform" width="605" height="622" loading="lazy" decoding="async">
@@ -407,7 +407,7 @@
     </div>
   </section>
 
-  <script src="_design/doc-tabs.js" defer></script>
+  <script src="_design/doc-guide.js" defer></script>
 
 </main>
 

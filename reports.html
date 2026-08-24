@@ -245,12 +245,12 @@
              landmark is named with aria-labelledby pointing at the page's OWN
              title element, so even the accessible name is a source string. -->
         <div class="col tc-doc__rail">
-          <nav class="tc-rail tc-rail--tabs" aria-label="Sections" data-tabs>
-              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="rptab-1" role="tab" aria-controls="rppanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Performance Marketing Reports</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="rptab-2" role="tab" aria-controls="rppanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Search Performance Reports</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="rptab-3" role="tab" aria-controls="rppanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Backlink Analysis Reports</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="rptab-4" role="tab" aria-controls="rppanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Website Traffic Reports</span></button></li>
+          <nav class="tc-rail tc-rail--guide" aria-label="Sections" data-guide-root>
+              <ul class="tc-rail__list">
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="rptab-1" href="#rppanel-1" data-guide="1"><span class="tc-tabs__n">01</span><span>Performance Marketing Reports</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="rptab-2" href="#rppanel-2" data-guide="2"><span class="tc-tabs__n">02</span><span>Search Performance Reports</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="rptab-3" href="#rppanel-3" data-guide="3"><span class="tc-tabs__n">03</span><span>Backlink Analysis Reports</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="rptab-4" href="#rppanel-4" data-guide="4"><span class="tc-tabs__n">04</span><span>Website Traffic Reports</span></a></li>
               </ul>
             </nav>
         </div>
@@ -260,7 +260,7 @@
              visibly one list. -->
         <div class="col tc-doc__body">
 
-                        <div class="tc-tabs__panel" id="rppanel-1" role="tabpanel" aria-labelledby="rptab-1">
+                        <div class="tc-tabs__panel" id="rppanel-1" tabindex="-1" aria-labelledby="rptab-1">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-reports-performance-marketing-reports.webp"
                        alt="A dark glass report panel with metric arcs and a rising curve"
@@ -279,7 +279,7 @@
             </figure>
           
               </div>
-              <div class="tc-tabs__panel" id="rppanel-2" role="tabpanel" aria-labelledby="rptab-2">
+              <div class="tc-tabs__panel" id="rppanel-2" tabindex="-1" aria-labelledby="rptab-2">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-reports-search-performance-reports.webp"
                        alt="A magnifier over a ranked stack of glowing bars"
@@ -298,7 +298,7 @@
             </figure>
           
               </div>
-              <div class="tc-tabs__panel" id="rppanel-3" role="tabpanel" aria-labelledby="rptab-3">
+              <div class="tc-tabs__panel" id="rppanel-3" tabindex="-1" aria-labelledby="rptab-3">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-reports-backlink-analysis-reports.webp"
                        alt="A web of connected nodes converging on one bright hub"
@@ -317,7 +317,7 @@
             </figure>
           
               </div>
-              <div class="tc-tabs__panel" id="rppanel-4" role="tabpanel" aria-labelledby="rptab-4">
+              <div class="tc-tabs__panel" id="rppanel-4" tabindex="-1" aria-labelledby="rptab-4">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-reports-website-traffic-reports.webp"
                        alt="Streams of light particles flowing toward one destination"
@@ -360,7 +360,7 @@
     </div>
   </section>
 
-  <script src="_design/doc-tabs.js" defer></script>
+  <script src="_design/doc-guide.js" defer></script>
 
 </main>
 

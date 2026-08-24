@@ -251,15 +251,15 @@
              element, so even the accessible name is a source string. No [data-reveal]
              anywhere in here. -->
         <div class="col tc-doc__rail">
-          <nav class="tc-rail tc-rail--tabs" aria-label="Sections" data-tabs>
-              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-1" role="tab" aria-controls="cspanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Performance Marketing</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-2" role="tab" aria-controls="cspanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Web Design &amp; Development</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-3" role="tab" aria-controls="cspanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Conversion Rate Optimization</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-4" role="tab" aria-controls="cspanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Branding &amp; Package Design</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-5" role="tab" aria-controls="cspanel-5" aria-selected="false" data-tab="5"><span class="tc-tabs__n">05</span><span>Advertisement Design</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-6" role="tab" aria-controls="cspanel-6" aria-selected="false" data-tab="6"><span class="tc-tabs__n">06</span><span>Integrations</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="cstab-7" role="tab" aria-controls="cspanel-7" aria-selected="false" data-tab="7"><span class="tc-tabs__n">07</span><span>Consulting on Additional Topics</span></button></li>
+          <nav class="tc-rail tc-rail--guide" aria-label="Sections" data-guide-root>
+              <ul class="tc-rail__list">
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="cstab-1" href="#cspanel-1" data-guide="1"><span class="tc-tabs__n">01</span><span>Performance Marketing</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="cstab-2" href="#cspanel-2" data-guide="2"><span class="tc-tabs__n">02</span><span>Web Design &amp; Development</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="cstab-3" href="#cspanel-3" data-guide="3"><span class="tc-tabs__n">03</span><span>Conversion Rate Optimization</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="cstab-4" href="#cspanel-4" data-guide="4"><span class="tc-tabs__n">04</span><span>Branding &amp; Package Design</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="cstab-5" href="#cspanel-5" data-guide="5"><span class="tc-tabs__n">05</span><span>Advertisement Design</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="cstab-6" href="#cspanel-6" data-guide="6"><span class="tc-tabs__n">06</span><span>Integrations</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="cstab-7" href="#cspanel-7" data-guide="7"><span class="tc-tabs__n">07</span><span>Consulting on Additional Topics</span></a></li>
               </ul>
             </nav>
         </div>
@@ -269,7 +269,7 @@
              list. -->
         <div class="col tc-doc__body">
 
-                        <div class="tc-tabs__panel" id="cspanel-1" role="tabpanel" aria-labelledby="cstab-1">
+                        <div class="tc-tabs__panel" id="cspanel-1" tabindex="-1" aria-labelledby="cstab-1">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-consulting-performance-marketing.webp"
                        alt="A light beam striking a single raised target ring"
@@ -296,7 +296,7 @@
             </figure>
           
               </div>
-              <div class="tc-tabs__panel" id="cspanel-2" role="tabpanel" aria-labelledby="cstab-2">
+              <div class="tc-tabs__panel" id="cspanel-2" tabindex="-1" aria-labelledby="cstab-2">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-consulting-web-design-development.webp"
                        alt="A wireframe page structure assembling from floating rectangles"
@@ -318,7 +318,7 @@
             </figure>
           
               </div>
-              <div class="tc-tabs__panel" id="cspanel-3" role="tabpanel" aria-labelledby="cstab-3">
+              <div class="tc-tabs__panel" id="cspanel-3" tabindex="-1" aria-labelledby="cstab-3">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-consulting-conversion-rate-optimization.webp"
                        alt="A narrowing funnel of light converging to one bright point"
@@ -337,7 +337,7 @@
             </figure>
           
               </div>
-              <div class="tc-tabs__panel" id="cspanel-4" role="tabpanel" aria-labelledby="cstab-4">
+              <div class="tc-tabs__panel" id="cspanel-4" tabindex="-1" aria-labelledby="cstab-4">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-consulting-branding-package-design.webp"
                        alt="A blank package beside an abstract brand mark"
@@ -361,7 +361,7 @@
             </figure>
           
               </div>
-              <div class="tc-tabs__panel" id="cspanel-5" role="tabpanel" aria-labelledby="cstab-5">
+              <div class="tc-tabs__panel" id="cspanel-5" tabindex="-1" aria-labelledby="cstab-5">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-consulting-advertisement-design.webp"
                        alt="Blank advertisement frames of varied sizes at depth"
@@ -380,7 +380,7 @@
             </figure>
           
               </div>
-              <div class="tc-tabs__panel" id="cspanel-6" role="tabpanel" aria-labelledby="cstab-6">
+              <div class="tc-tabs__panel" id="cspanel-6" tabindex="-1" aria-labelledby="cstab-6">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-consulting-integrations.webp"
                        alt="Two geometric halves sliding together, the seam glowing"
@@ -403,7 +403,7 @@
             </figure>
           
               </div>
-              <div class="tc-tabs__panel" id="cspanel-7" role="tabpanel" aria-labelledby="cstab-7">
+              <div class="tc-tabs__panel" id="cspanel-7" tabindex="-1" aria-labelledby="cstab-7">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-consulting-additional-topics.webp"
                        alt="Abstract tokens arranged on a round table surface"
@@ -539,7 +539,7 @@
     </div>
   </section>
 
-  <script src="_design/doc-tabs.js" defer></script>
+  <script src="_design/doc-guide.js" defer></script>
 
 </main>
 

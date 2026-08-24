@@ -8762,7 +8762,7 @@ a.hw-cell__value:focus-visible{
    token window. One panel at a time removes the pressure entirely - the copy holds
    --ds-measure at ~60 characters and the image gets the width instead.
 
-   BEHAVIOUR LIVES IN _design/doc-tabs.js, linked per page. The markup ships every
+   BEHAVIOUR LIVES IN _design/doc-guide.js, linked per page. The markup ships every
    panel VISIBLE and the script applies the hiding, so a page whose script fails
    degrades to a readable stack rather than to one panel and four dead rail items.
    =========================================================================== */

@@ -260,11 +260,11 @@
              rail; R3 takes the shallowest rank below it (h2); R5's three-entry
              floor is met exactly. -->
         <div class="col tc-doc__rail">
-          <nav class="tc-rail tc-rail--tabs" aria-label="Sections" data-tabs>
-              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="bgdtab-1" role="tab" aria-controls="bgdpanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Brand Creation (Digital)</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="bgdtab-2" role="tab" aria-controls="bgdpanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Package Design</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="bgdtab-3" role="tab" aria-controls="bgdpanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Merchandise Design</span></button></li>
+          <nav class="tc-rail tc-rail--guide" aria-label="Sections" data-guide-root>
+              <ul class="tc-rail__list">
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="bgdtab-1" href="#bgdpanel-1" data-guide="1"><span class="tc-tabs__n">01</span><span>Brand Creation (Digital)</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="bgdtab-2" href="#bgdpanel-2" data-guide="2"><span class="tc-tabs__n">02</span><span>Package Design</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="bgdtab-3" href="#bgdpanel-3" data-guide="3"><span class="tc-tabs__n">03</span><span>Merchandise Design</span></a></li>
               </ul>
             </nav>
         </div>
@@ -273,7 +273,7 @@
              back to it with a tick. -->
         <div class="col tc-doc__body">
 
-                        <div class="tc-tabs__panel" id="bgdpanel-1" role="tabpanel" aria-labelledby="bgdtab-1">
+                        <div class="tc-tabs__panel" id="bgdpanel-1" tabindex="-1" aria-labelledby="bgdtab-1">
                 <p class="tc-tabs__pn" aria-hidden="true">01</p>
                 <h2 class="tc-tabs__t" data-reveal>Brand Creation (Digital)</h2>
 
@@ -336,7 +336,7 @@
             </div>
           
               </div>
-              <div class="tc-tabs__panel tc-tabs__panel--two-up" id="bgdpanel-2" role="tabpanel" aria-labelledby="bgdtab-2">
+              <div class="tc-tabs__panel tc-tabs__panel--two-up" id="bgdpanel-2" tabindex="-1" aria-labelledby="bgdtab-2">
                 <!-- Owner-supplied product shot, REPLACED 2026-08-21. The previous art was a
                      cut-out DERIVED here by removing a white plate, and its alpha came back
                      purely binary - 0.00% partially-transparent pixels - so every edge was a
@@ -384,7 +384,7 @@
             </div>
           
               </div>
-              <div class="tc-tabs__panel tc-tabs__panel--two-up" id="bgdpanel-3" role="tabpanel" aria-labelledby="bgdtab-3">
+              <div class="tc-tabs__panel tc-tabs__panel--two-up" id="bgdpanel-3" tabindex="-1" aria-labelledby="bgdtab-3">
                 <!-- MERCHANDISE, REPLACED 2026-08-21 with the owner's branded kit. The outgoing art
                      was a generic studio photo of BLANK apparel; this is real Dspnza merchandise.
                      It is also a genuine RGBA CUT-OUT (1.98% of pixels carry partial alpha), where
@@ -452,7 +452,7 @@
     </div>
   </section>
 
-  <script src="_design/doc-tabs.js" defer></script>
+  <script src="_design/doc-guide.js" defer></script>
 
 </main>
 

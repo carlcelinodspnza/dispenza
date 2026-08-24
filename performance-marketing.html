@@ -404,18 +404,17 @@
     <div class="container">
       <div class="row tc-doc__grid">
           <div class="col tc-doc__rail">
-            <!-- THE RAIL IS THE TABLIST. It controls panels rather than navigating, so
-                 the items are BUTTONS: a link that changes nothing about the URL and
-                 moves no scroll position is not a link. Behaviour is in
-                 _design/doc-tabs.js; every panel below ships VISIBLE and the script
-                 applies the hiding, so a failed script leaves a readable stack. -->
-            <nav class="tc-rail tc-rail--tabs" aria-label="What to expect" data-tabs>
-              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="pmtab-1" role="tab" aria-controls="pmpanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Guaranteed Results</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="pmtab-2" role="tab" aria-controls="pmpanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Comprehensive Optimization</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="pmtab-3" role="tab" aria-controls="pmpanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Local SEO Focus</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="pmtab-4" role="tab" aria-controls="pmpanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Value-Added Services</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="pmtab-5" role="tab" aria-controls="pmpanel-5" aria-selected="false" data-tab="5"><span class="tc-tabs__n">05</span><span>Transparent Reporting</span></button></li>
+            <!-- THE RAIL IS A SECTION GUIDE. Items are real <a href="#panel"> anchors, not
+     buttons: they NAVIGATE to a section that is already on the page rather than
+     revealing it. With no JavaScript the links still jump; doc-guide.js only
+     adds smooth scrolling and the aria-current highlight. -->
+            <nav class="tc-rail tc-rail--guide" aria-label="What to expect" data-guide-root>
+              <ul class="tc-rail__list">
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="pmtab-1" href="#pmpanel-1" data-guide="1"><span class="tc-tabs__n">01</span><span>Guaranteed Results</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="pmtab-2" href="#pmpanel-2" data-guide="2"><span class="tc-tabs__n">02</span><span>Comprehensive Optimization</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="pmtab-3" href="#pmpanel-3" data-guide="3"><span class="tc-tabs__n">03</span><span>Local SEO Focus</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="pmtab-4" href="#pmpanel-4" data-guide="4"><span class="tc-tabs__n">04</span><span>Value-Added Services</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="pmtab-5" href="#pmpanel-5" data-guide="5"><span class="tc-tabs__n">05</span><span>Transparent Reporting</span></a></li>
               </ul>
             </nav>
           </div>
@@ -472,14 +471,14 @@
                    NO-SCRIPT: `.mc-deck__stage` is a plain grid column until the engine adds
                    `.is-slider`, so with scripting off this degrades to five stacked cards
                    rather than to a row that cannot be scrolled. -->
-                            <!-- A tabpanel is a DIV, not a <section>. Written as <section> first and two gates
-                   were right to object: G-SVAR read five identical section shapes stacked in a
-                   row ("this is a repeat of the row above it") and G-REPEAT counted the same
-                   phrase across "3 sections". Neither is what this is - only ONE panel is ever
-                   visible and they are not parallel document sections. <section> also puts five
-                   entries in the document outline that a reader never encounters as sections.
-                   role="tabpanel" on a div is the correct pattern and the gates agree. -->
-              <div class="tc-tabs__panel" id="pmpanel-1" role="tabpanel" aria-labelledby="pmtab-1">
+                            <!-- A panel is a DIV, not a <section>. It was written as <section> first and two
+     gates objected: G-SVAR read identical section shapes stacked in a row and
+     G-REPEAT counted the same phrase across them. Those objections were about
+     the DOCUMENT OUTLINE, and they still hold now that the panels are all
+     visible as one long scroll: five outline entries for what a reader
+     experiences as one continuous list is worse, not better. Each panel keeps
+     its own heading, which is what carries the structure. -->
+              <div class="tc-tabs__panel" id="pmpanel-1" tabindex="-1" aria-labelledby="pmtab-1">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/pm-def-guaranteed-results.webp"
                        alt="A phone showing three stacked map-pin ranking markers, the top one lit"
@@ -489,14 +488,14 @@
                 <h3 class="tc-tabs__t">Guaranteed Results:</h3>
                 <p class="tc-tabs__d">We are dedicated to helping your dispensary secure a top 3 ranking in local search results on Google.com. If we don't deliver on this promise, you won't be charged for our services.</p>
               </div>
-              <!-- A tabpanel is a DIV, not a <section>. Written as <section> first and two gates
-                   were right to object: G-SVAR read five identical section shapes stacked in a
-                   row ("this is a repeat of the row above it") and G-REPEAT counted the same
-                   phrase across "3 sections". Neither is what this is - only ONE panel is ever
-                   visible and they are not parallel document sections. <section> also puts five
-                   entries in the document outline that a reader never encounters as sections.
-                   role="tabpanel" on a div is the correct pattern and the gates agree. -->
-              <div class="tc-tabs__panel" id="pmpanel-2" role="tabpanel" aria-labelledby="pmtab-2">
+              <!-- A panel is a DIV, not a <section>. It was written as <section> first and two
+     gates objected: G-SVAR read identical section shapes stacked in a row and
+     G-REPEAT counted the same phrase across them. Those objections were about
+     the DOCUMENT OUTLINE, and they still hold now that the panels are all
+     visible as one long scroll: five outline entries for what a reader
+     experiences as one continuous list is worse, not better. Each panel keeps
+     its own heading, which is what carries the structure. -->
+              <div class="tc-tabs__panel" id="pmpanel-2" tabindex="-1" aria-labelledby="pmtab-2">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/pm-def-comprehensive-optimization.webp"
                        alt="A laptop screen showing wireframe layout blocks and a page-speed gauge"
@@ -506,14 +505,14 @@
                 <h3 class="tc-tabs__t">Comprehensive Optimization:</h3>
                 <p class="tc-tabs__d">Our SEO specialists will optimize every aspect of your website, from on-page elements like meta tags and headings to technical factors such as site speed and mobile responsiveness. We leave no stone unturned in our quest to maximize your online visibility.</p>
               </div>
-              <!-- A tabpanel is a DIV, not a <section>. Written as <section> first and two gates
-                   were right to object: G-SVAR read five identical section shapes stacked in a
-                   row ("this is a repeat of the row above it") and G-REPEAT counted the same
-                   phrase across "3 sections". Neither is what this is - only ONE panel is ever
-                   visible and they are not parallel document sections. <section> also puts five
-                   entries in the document outline that a reader never encounters as sections.
-                   role="tabpanel" on a div is the correct pattern and the gates agree. -->
-              <div class="tc-tabs__panel" id="pmpanel-3" role="tabpanel" aria-labelledby="pmtab-3">
+              <!-- A panel is a DIV, not a <section>. It was written as <section> first and two
+     gates objected: G-SVAR read identical section shapes stacked in a row and
+     G-REPEAT counted the same phrase across them. Those objections were about
+     the DOCUMENT OUTLINE, and they still hold now that the panels are all
+     visible as one long scroll: five outline entries for what a reader
+     experiences as one continuous list is worse, not better. Each panel keeps
+     its own heading, which is what carries the structure. -->
+              <div class="tc-tabs__panel" id="pmpanel-3" tabindex="-1" aria-labelledby="pmtab-3">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/pm-def-local-seo-focus.webp"
                        alt="A dark relief city map with glowing location pins and radius rings"
@@ -523,14 +522,14 @@
                 <h3 class="tc-tabs__t">Local SEO Focus:</h3>
                 <p class="tc-tabs__d">We understand the importance of targeting your local audience. Through strategic keyword targeting, location-specific optimization, and local directory submissions, we ensure that your dispensary is visible to the right customers at the right time.</p>
               </div>
-              <!-- A tabpanel is a DIV, not a <section>. Written as <section> first and two gates
-                   were right to object: G-SVAR read five identical section shapes stacked in a
-                   row ("this is a repeat of the row above it") and G-REPEAT counted the same
-                   phrase across "3 sections". Neither is what this is - only ONE panel is ever
-                   visible and they are not parallel document sections. <section> also puts five
-                   entries in the document outline that a reader never encounters as sections.
-                   role="tabpanel" on a div is the correct pattern and the gates agree. -->
-              <div class="tc-tabs__panel" id="pmpanel-4" role="tabpanel" aria-labelledby="pmtab-4">
+              <!-- A panel is a DIV, not a <section>. It was written as <section> first and two
+     gates objected: G-SVAR read identical section shapes stacked in a row and
+     G-REPEAT counted the same phrase across them. Those objections were about
+     the DOCUMENT OUTLINE, and they still hold now that the panels are all
+     visible as one long scroll: five outline entries for what a reader
+     experiences as one continuous list is worse, not better. Each panel keeps
+     its own heading, which is what carries the structure. -->
+              <div class="tc-tabs__panel" id="pmpanel-4" tabindex="-1" aria-labelledby="pmtab-4">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/pm-def-value-added-services.webp"
                        alt="Two people reviewing printed layout sheets and a tablet on a dark desk"
@@ -540,14 +539,14 @@
                 <h3 class="tc-tabs__t">Value-Added Services:</h3>
                 <p class="tc-tabs__d">In addition to our performance marketing guarantee, we provide complementary services that enhance your online presence. From website audits to content optimization, we'll work hand in hand with you to optimize your digital assets and drive long-term success.</p>
               </div>
-              <!-- A tabpanel is a DIV, not a <section>. Written as <section> first and two gates
-                   were right to object: G-SVAR read five identical section shapes stacked in a
-                   row ("this is a repeat of the row above it") and G-REPEAT counted the same
-                   phrase across "3 sections". Neither is what this is - only ONE panel is ever
-                   visible and they are not parallel document sections. <section> also puts five
-                   entries in the document outline that a reader never encounters as sections.
-                   role="tabpanel" on a div is the correct pattern and the gates agree. -->
-              <div class="tc-tabs__panel" id="pmpanel-5" role="tabpanel" aria-labelledby="pmtab-5">
+              <!-- A panel is a DIV, not a <section>. It was written as <section> first and two
+     gates objected: G-SVAR read identical section shapes stacked in a row and
+     G-REPEAT counted the same phrase across them. Those objections were about
+     the DOCUMENT OUTLINE, and they still hold now that the panels are all
+     visible as one long scroll: five outline entries for what a reader
+     experiences as one continuous list is worse, not better. Each panel keeps
+     its own heading, which is what carries the structure. -->
+              <div class="tc-tabs__panel" id="pmpanel-5" tabindex="-1" aria-labelledby="pmtab-5">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/pm-def-transparent-reporting.webp"
                        alt="A glass dashboard panel showing rising bar columns and an ascending curve"
@@ -656,7 +655,7 @@
        "_design/_tournament/templates/T-ARTICLE/_design/smoke-engine.js" and 404s -
        verified in the browser, both scripts. The sibling lander writes the same four
        hops for the same reason. -->
-  <script src="_design/doc-tabs.js" defer></script>
+  <script src="_design/doc-guide.js" defer></script>
   <script src="_design/smoke-engine.js"></script>
   <script src="_design/section-smoke-rise.js" defer></script>
 

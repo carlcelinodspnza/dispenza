@@ -277,18 +277,18 @@
     <div class="container">
       <div class="row tc-doc__grid">
           <div class="col tc-doc__rail">
-            <!-- THE RAIL IS THE TABLIST. Items are BUTTONS, not links: they control a panel
-                 rather than navigate. Behaviour is _design/doc-tabs.js; every panel ships
-                 VISIBLE and the script applies the hiding, so a failed script degrades to a
-                 readable stack rather than to one panel and N dead rail items. -->
-            <nav class="tc-rail tc-rail--tabs" aria-label="What this includes" data-tabs>
-              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-1" role="tab" aria-controls="cropanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Data-Driven Decision Making</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-2" role="tab" aria-controls="cropanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Continuous Enhancements</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-3" role="tab" aria-controls="cropanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Industry Expertise</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-4" role="tab" aria-controls="cropanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Proven Results</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-5" role="tab" aria-controls="cropanel-5" aria-selected="false" data-tab="5"><span class="tc-tabs__n">05</span><span>Comprehensive Approach</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="crotab-6" role="tab" aria-controls="cropanel-6" aria-selected="false" data-tab="6"><span class="tc-tabs__n">06</span><span>Continuous Monitoring</span></button></li>
+            <!-- THE RAIL IS A SECTION GUIDE. Items are real <a href="#panel"> anchors, not
+     buttons: they NAVIGATE to a section that is already on the page rather than
+     revealing it. With no JavaScript the links still jump; doc-guide.js only
+     adds smooth scrolling and the aria-current highlight. -->
+            <nav class="tc-rail tc-rail--guide" aria-label="What this includes" data-guide-root>
+              <ul class="tc-rail__list">
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="crotab-1" href="#cropanel-1" data-guide="1"><span class="tc-tabs__n">01</span><span>Data-Driven Decision Making</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="crotab-2" href="#cropanel-2" data-guide="2"><span class="tc-tabs__n">02</span><span>Continuous Enhancements</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="crotab-3" href="#cropanel-3" data-guide="3"><span class="tc-tabs__n">03</span><span>Industry Expertise</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="crotab-4" href="#cropanel-4" data-guide="4"><span class="tc-tabs__n">04</span><span>Proven Results</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="crotab-5" href="#cropanel-5" data-guide="5"><span class="tc-tabs__n">05</span><span>Comprehensive Approach</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="crotab-6" href="#cropanel-6" data-guide="6"><span class="tc-tabs__n">06</span><span>Continuous Monitoring</span></a></li>
               </ul>
             </nav>
           </div>
@@ -349,7 +349,7 @@
             <!-- SIX CARDS, ONE SOURCE CARD PER BLOCK. Title and body are one pair and
                  never split. Card 2 restates the SAME 90-day cadence the opening
                  paragraph states - one claim said twice, not two different cadences. -->
-                          <div class="tc-tabs__panel" id="cropanel-1" role="tabpanel" aria-labelledby="crotab-1">
+                          <div class="tc-tabs__panel" id="cropanel-1" tabindex="-1" aria-labelledby="crotab-1">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-conversion-rate-optimization-data-driven-decision-making.webp"
                        alt="Connected bright nodes among faint data points on a dark surface"
@@ -359,7 +359,7 @@
                 <h3 class="tc-tabs__t">Data-Driven Decision Making:</h3>
                 <p class="tc-tabs__d">Our CRO strategies are based on in-depth data analysis, allowing us to make informed decisions that lead to tangible improvements in conversion rates.</p>
               </div>
-              <div class="tc-tabs__panel" id="cropanel-2" role="tabpanel" aria-labelledby="crotab-2">
+              <div class="tc-tabs__panel" id="cropanel-2" tabindex="-1" aria-labelledby="crotab-2">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-conversion-rate-optimization-continuous-enhancements.webp"
                        alt="An ascending staircase of translucent slabs receding into haze"
@@ -369,7 +369,7 @@
                 <h3 class="tc-tabs__t">Continuous Enhancements:</h3>
                 <p class="tc-tabs__d">We don't stop at the initial website development. We proactively enhance our clients' websites every 90 days to address any potential roadblocks and optimize the user experience.</p>
               </div>
-              <div class="tc-tabs__panel" id="cropanel-3" role="tabpanel" aria-labelledby="crotab-3">
+              <div class="tc-tabs__panel" id="cropanel-3" tabindex="-1" aria-labelledby="crotab-3">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-conversion-rate-optimization-industry-expertise.webp"
                        alt="A magnifying lens over an abstract topographic surface"
@@ -379,7 +379,7 @@
                 <h3 class="tc-tabs__t">Industry Expertise:</h3>
                 <p class="tc-tabs__d">With our extensive experience in the cannabis industry, we understand the unique challenges and opportunities that dispensaries face. Our strategies are tailored specifically to this niche market, ensuring optimal results.</p>
               </div>
-              <div class="tc-tabs__panel" id="cropanel-4" role="tabpanel" aria-labelledby="crotab-4">
+              <div class="tc-tabs__panel" id="cropanel-4" tabindex="-1" aria-labelledby="crotab-4">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-conversion-rate-optimization-proven-results.webp"
                        alt="A tall light column rising above shorter ones on a reflective plane"
@@ -389,7 +389,7 @@
                 <h3 class="tc-tabs__t">Proven Results:</h3>
                 <p class="tc-tabs__d">Our track record speaks for itself. We have achieved exceptional conversion rates for our clients, outperforming competitors and helping them maximize their return on investment.</p>
               </div>
-              <div class="tc-tabs__panel" id="cropanel-5" role="tabpanel" aria-labelledby="crotab-5">
+              <div class="tc-tabs__panel" id="cropanel-5" tabindex="-1" aria-labelledby="crotab-5">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-conversion-rate-optimization-comprehensive-approach.webp"
                        alt="Interlocking geometric rings forming one continuous loop"
@@ -399,7 +399,7 @@
                 <h3 class="tc-tabs__t">Comprehensive Approach:</h3>
                 <p class="tc-tabs__d">Our CRO services cover all aspects of the customer journey, from initial website interaction to final conversion. We optimize each touchpoint to provide a seamless and compelling user experience.</p>
               </div>
-              <div class="tc-tabs__panel" id="cropanel-6" role="tabpanel" aria-labelledby="crotab-6">
+              <div class="tc-tabs__panel" id="cropanel-6" tabindex="-1" aria-labelledby="crotab-6">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-conversion-rate-optimization-continuous-monitoring.webp"
                        alt="A radar sweep across a subtle grid with glowing tracked points"
@@ -506,8 +506,8 @@
     </div>
   </section>
 
-  <!-- the tablist engine, carrier-relative so promote rebases it to _design/ -->
-  <script src="_design/doc-tabs.js" defer></script>
+  <!-- the section-guide engine, carrier-relative so promote rebases it to _design/ -->
+  <script src="_design/doc-guide.js" defer></script>
 
 </main>
 

@@ -249,18 +249,18 @@
     <div class="container">
       <div class="row tc-doc__grid">
           <div class="col tc-doc__rail">
-            <!-- THE RAIL IS THE TABLIST. Items are BUTTONS, not links: they control a panel
-                 rather than navigate. Behaviour is _design/doc-tabs.js; every panel ships
-                 VISIBLE and the script applies the hiding, so a failed script degrades to a
-                 readable stack rather than to one panel and N dead rail items. -->
-            <nav class="tc-rail tc-rail--tabs" aria-label="What this includes" data-tabs>
-              <ul class="tc-rail__list" role="tablist" aria-orientation="vertical">
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-1" role="tab" aria-controls="adpanel-1" aria-selected="true" data-tab="1"><span class="tc-tabs__n">01</span><span>Customized Ad Designs</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-2" role="tab" aria-controls="adpanel-2" aria-selected="false" data-tab="2"><span class="tc-tabs__n">02</span><span>Engaging Visuals</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-3" role="tab" aria-controls="adpanel-3" aria-selected="false" data-tab="3"><span class="tc-tabs__n">03</span><span>Persuasive Ad Copy</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-4" role="tab" aria-controls="adpanel-4" aria-selected="false" data-tab="4"><span class="tc-tabs__n">04</span><span>Multiple Ad Formats</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-5" role="tab" aria-controls="adpanel-5" aria-selected="false" data-tab="5"><span class="tc-tabs__n">05</span><span>Consistency and Branding</span></button></li>
-                <li class="tc-rail__item" role="presentation"><button class="tc-rail__link tc-tabs__link" type="button" id="adtab-6" role="tab" aria-controls="adpanel-6" aria-selected="false" data-tab="6"><span class="tc-tabs__n">06</span><span>Unlimited Revisions</span></button></li>
+            <!-- THE RAIL IS A SECTION GUIDE. Items are real <a href="#panel"> anchors, not
+     buttons: they NAVIGATE to a section that is already on the page rather than
+     revealing it. With no JavaScript the links still jump; doc-guide.js only
+     adds smooth scrolling and the aria-current highlight. -->
+            <nav class="tc-rail tc-rail--guide" aria-label="What this includes" data-guide-root>
+              <ul class="tc-rail__list">
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="adtab-1" href="#adpanel-1" data-guide="1"><span class="tc-tabs__n">01</span><span>Customized Ad Designs</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="adtab-2" href="#adpanel-2" data-guide="2"><span class="tc-tabs__n">02</span><span>Engaging Visuals</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="adtab-3" href="#adpanel-3" data-guide="3"><span class="tc-tabs__n">03</span><span>Persuasive Ad Copy</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="adtab-4" href="#adpanel-4" data-guide="4"><span class="tc-tabs__n">04</span><span>Multiple Ad Formats</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="adtab-5" href="#adpanel-5" data-guide="5"><span class="tc-tabs__n">05</span><span>Consistency and Branding</span></a></li>
+                <li class="tc-rail__item"><a class="tc-rail__link tc-tabs__link" id="adtab-6" href="#adpanel-6" data-guide="6"><span class="tc-tabs__n">06</span><span>Unlimited Revisions</span></a></li>
               </ul>
             </nav>
           </div>
@@ -295,7 +295,7 @@
                  locked sheets, so a class for it would render unstyled. -->
             <h2 class="tc-sec__h" data-reveal>Here's what our advertisement design service includes:</h2>
 
-                          <div class="tc-tabs__panel" id="adpanel-1" role="tabpanel" aria-labelledby="adtab-1">
+                          <div class="tc-tabs__panel" id="adpanel-1" tabindex="-1" aria-labelledby="adtab-1">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-ads-design-customized-ad-designs.webp"
                        alt="Blank advertisement frames of different sizes floating in dark space"
@@ -305,7 +305,7 @@
                 <h3 class="tc-tabs__t">Customized Ad Designs</h3>
                 <p class="tc-tabs__d">We create custom ad designs that align with your brand identity and objectives, ensuring that your ads stand out from the competition.</p>
               </div>
-              <div class="tc-tabs__panel" id="adpanel-2" role="tabpanel" aria-labelledby="adtab-2">
+              <div class="tc-tabs__panel" id="adpanel-2" tabindex="-1" aria-labelledby="adtab-2">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-ads-design-engaging-visuals.webp"
                        alt="A burst of violet light shards radiating from a dark centre"
@@ -315,7 +315,7 @@
                 <h3 class="tc-tabs__t">Engaging Visuals</h3>
                 <p class="tc-tabs__d">Our designers will craft visually stunning graphics that capture attention and convey your message effectively.</p>
               </div>
-              <div class="tc-tabs__panel" id="adpanel-3" role="tabpanel" aria-labelledby="adtab-3">
+              <div class="tc-tabs__panel" id="adpanel-3" tabindex="-1" aria-labelledby="adtab-3">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-ads-design-persuasive-ad-copy.webp"
                        alt="A stylus resting on a blank card on a dark desk"
@@ -325,7 +325,7 @@
                 <h3 class="tc-tabs__t">Persuasive Ad Copy</h3>
                 <p class="tc-tabs__d">We understand the power of persuasive copywriting. Our team will develop compelling ad copy that drives action and encourages users to engage with your brand.</p>
               </div>
-              <div class="tc-tabs__panel" id="adpanel-4" role="tabpanel" aria-labelledby="adtab-4">
+              <div class="tc-tabs__panel" id="adpanel-4" tabindex="-1" aria-labelledby="adtab-4">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-ads-design-multiple-ad-formats.webp"
                        alt="A grid of blank rectangles in many aspect ratios at varying depth"
@@ -335,7 +335,7 @@
                 <h3 class="tc-tabs__t">Multiple Ad Formats</h3>
                 <p class="tc-tabs__d">From social media ads to display ads and beyond, we have expertise in creating ad designs for various platforms and formats.</p>
               </div>
-              <div class="tc-tabs__panel" id="adpanel-5" role="tabpanel" aria-labelledby="adtab-5">
+              <div class="tc-tabs__panel" id="adpanel-5" tabindex="-1" aria-labelledby="adtab-5">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-ads-design-consistency-and-branding.webp"
                        alt="Three identical geometric brand marks aligned in a row"
@@ -345,7 +345,7 @@
                 <h3 class="tc-tabs__t">Consistency and Branding</h3>
                 <p class="tc-tabs__d">We ensure that your advertisements maintain consistency with your overall brand image, helping to reinforce brand recognition and trust.</p>
               </div>
-              <div class="tc-tabs__panel" id="adpanel-6" role="tabpanel" aria-labelledby="adtab-6">
+              <div class="tc-tabs__panel" id="adpanel-6" tabindex="-1" aria-labelledby="adtab-6">
                 <figure class="tc-tabs__fig">
                   <img src="assets/in-pages/svc-ads-design-unlimited-revisions.webp"
                        alt="Circular arrows looping around a dark glossy sphere"
@@ -362,8 +362,8 @@
     </div>
   </section>
 
-  <!-- the tablist engine, carrier-relative so promote rebases it to _design/ -->
-  <script src="_design/doc-tabs.js" defer></script>
+  <!-- the section-guide engine, carrier-relative so promote rebases it to _design/ -->
+  <script src="_design/doc-guide.js" defer></script>
 
 </main>
 

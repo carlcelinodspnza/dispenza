@@ -839,3 +839,37 @@
   .dm-cal { padding: 6px; }
   .dm-day { min-height: 44px; }
 }
+
+/* ============================================================================
+   SERVICE-PAGE RAIL: TABS -> SECTION GUIDE OVER A LONG SCROLL     2026-08-25
+   ----------------------------------------------------------------------------
+   The rail used to be a tablist that showed one panel at a time. Every panel is
+   now on the page and the rail navigates between them, so the active state is
+   no longer "which tab is selected" but "which section you are reading" —
+   aria-current, not aria-selected. The two old selectors are left in place
+   rather than deleted, so nothing depends on which attribute a given build
+   emits.
+
+   scroll-margin-top keeps a jumped-to heading clear of the 74px fixed header;
+   without it the anchor lands with the heading tucked underneath the chrome.
+   ============================================================================ */
+.tc-tabs__link[aria-current="true"] { color: var(--ds-ink-on-dark); }
+.tc-rail__item:has(> .tc-tabs__link[aria-current="true"]) {
+  box-shadow: inset 2px 0 0 var(--ds-accent);
+}
+
+.tc-tabs__panel { scroll-margin-top: 96px; }
+.tc-tabs__panel:focus { outline: none; }        /* focused only to move the caret */
+.tc-tabs__panel:focus-visible {
+  outline: 2px solid var(--ds-accent-light);
+  outline-offset: 4px;
+}
+
+/* The rail tracks the reader down a long section, so it should stay in view. */
+@media (min-width: 1024px) {
+  .tc-doc__rail .tc-rail--guide { position: sticky; top: 96px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
