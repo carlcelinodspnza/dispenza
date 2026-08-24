@@ -253,3 +253,26 @@
     aspect-ratio: auto;
   }
 }
+
+/* ============================================================================
+   CASE-STUDY FAN CARDS — client logo at the desktop size on small screens
+                                                                    2026-08-24
+   ----------------------------------------------------------------------------
+   .cs-fan__logo is capped by max-height:calc(var(--cs-fan-plate) - space-xs*2),
+   so the plate variable is what sizes it. Desktop sets 118px and gets a 114px
+   logo, 37% of the 307px card. Below 1080px the plate drops to 72px, and below
+   560px to 80px, which rendered the logo at 57-64px -- 20-22% of a card of much
+   the same width. That is the "too small" the owner flagged: not a scaling
+   artefact but a deliberate step-down that overshot.
+
+   Restoring the desktop plate below 1080px gives 102px at 390 (35% of card) and
+   105px at 768 (31%), against desktop's 37% -- the same treatment rather than a
+   new one. Measured across 80/100/110/118/130 to land on it; 130 would match
+   desktop's absolute 114px but overshoot the proportion at 39%.
+
+   Cost is ~38px of extra card height, which is worth it for a client logo that
+   is the only branding on the card.
+   ============================================================================ */
+@media (max-width: 1080px) {
+  .cs-fan { --cs-fan-plate: 118px; }
+}
