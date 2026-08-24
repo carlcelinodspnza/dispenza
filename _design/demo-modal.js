@@ -45,6 +45,20 @@
       options: ['Select an option...', 'As soon as possible', 'Choose Date & Time'] }
   ];
 
+  /* Business-hours slots. The source loads its availability over AJAX, so the
+     real list is not in the page and this is OUR default, not a captured fact —
+     change SLOTS (or feed it from an endpoint) when real availability exists. */
+  var SLOTS = ['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
+               '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM',
+               '4:00 PM', '4:30 PM'];
+  var DOW = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+  var MONTHS = ['January','February','March','April','May','June','July',
+                'August','September','October','November','December'];
+
+  var view = null;        /* first day of the month on screen */
+  var pickedDate = null;  /* Date */
+  var pickedTime = null;  /* string */
+
   var FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
   var root = null;      /* the backdrop, built lazily */
@@ -82,6 +96,125 @@
            (step.placeholder ? ' placeholder="' + esc(step.placeholder) + '"' : '') + '>';
   }
 
+  function schedMarkup() {
+    return '<div class="dm-sched" hidden>' +
+             '<p class="dm-sched__summary" data-empty="true">No date or time picked yet</p>' +
+             '<div class="dm-sched__grid">' +
+               '<div class="dm-cal">' +
+                 '<div class="dm-cal__head">' +
+                   '<button type="button" class="dm-cal__nav" data-mv="-1" aria-label="Previous month">&lsaquo;</button>' +
+                   '<span class="dm-cal__month" aria-live="polite"></span>' +
+                   '<button type="button" class="dm-cal__nav" data-mv="1" aria-label="Next month">&rsaquo;</button>' +
+                 '</div>' +
+                 '<div class="dm-cal__dow" aria-hidden="true">' +
+                   DOW.map(function (d) { return '<span>' + d + '</span>'; }).join('') +
+                 '</div>' +
+                 '<div class="dm-cal__days" role="group" aria-label="Choose a date"></div>' +
+               '</div>' +
+               '<div class="dm-times" role="group" aria-label="Choose a time"></div>' +
+             '</div>' +
+             '<input type="hidden" name="preferred_datetime" value="">' +
+           '</div>';
+  }
+
+  function sameDay(a, b) {
+    return a && b && a.getFullYear() === b.getFullYear() &&
+           a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  }
+  function startOfDay(d) { var x = new Date(d); x.setHours(0, 0, 0, 0); return x; }
+
+  function renderCal() {
+    var days = root.querySelector('.dm-cal__days');
+    var today = startOfDay(new Date());
+    root.querySelector('.dm-cal__month').textContent =
+      MONTHS[view.getMonth()] + ' ' + view.getFullYear();
+    /* never navigate to a month entirely in the past */
+    root.querySelector('.dm-cal__nav[data-mv="-1"]').disabled =
+      (view.getFullYear() === today.getFullYear() && view.getMonth() === today.getMonth());
+
+    var first = new Date(view.getFullYear(), view.getMonth(), 1);
+    var total = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
+    var html = '';
+    for (var p = 0; p < first.getDay(); p++) {
+      html += '<button type="button" class="dm-day dm-day--pad" tabindex="-1" disabled aria-hidden="true"></button>';
+    }
+    for (var d = 1; d <= total; d++) {
+      var date = new Date(view.getFullYear(), view.getMonth(), d);
+      var past = date < today;
+      var cls = 'dm-day' + (sameDay(date, today) ? ' dm-day--today' : '');
+      html += '<button type="button" class="' + cls + '" data-d="' + d + '"' +
+              (past ? ' disabled' : '') +
+              ' aria-pressed="' + (sameDay(date, pickedDate) ? 'true' : 'false') + '"' +
+              ' aria-label="' + MONTHS[view.getMonth()] + ' ' + d + ', ' + view.getFullYear() + '">' +
+              d + '</button>';
+    }
+    days.innerHTML = html;
+  }
+
+  function renderTimes() {
+    var box = root.querySelector('.dm-times');
+    if (!pickedDate) { box.innerHTML = ''; return; }
+    box.innerHTML = SLOTS.map(function (t) {
+      return '<button type="button" class="dm-time" data-t="' + t + '" aria-pressed="' +
+             (t === pickedTime ? 'true' : 'false') + '">' + t + '</button>';
+    }).join('');
+  }
+
+  function syncSched() {
+    var sum = root.querySelector('.dm-sched__summary');
+    var hidden = root.querySelector('input[name="preferred_datetime"]');
+    /* Clear a stale validation message the moment the user satisfies it —
+       otherwise "Pick a time to continue." stays on screen under a chosen
+       time, which reads as the form still being wrong. */
+    var err = root.querySelector('#dm-err-' + (STEPS.length - 1));
+    if (err && pickedDate && pickedTime) { err.textContent = ''; }
+    if (pickedDate && pickedTime) {
+      var label = MONTHS[pickedDate.getMonth()] + ' ' + pickedDate.getDate() + ', ' +
+                  pickedDate.getFullYear() + ' at ' + pickedTime;
+      sum.textContent = label;
+      sum.setAttribute('data-empty', 'false');
+      hidden.value = label;
+    } else {
+      sum.textContent = pickedDate ? 'Now pick a time' : 'No date or time picked yet';
+      sum.setAttribute('data-empty', 'true');
+      hidden.value = '';
+    }
+  }
+
+  function wireSched() {
+    var sched = root.querySelector('.dm-sched');
+    var select = form.querySelector('[name="time_to_talk"]');
+
+    select.addEventListener('change', function () {
+      var on = select.value === 'Choose Date & Time';
+      sched.hidden = !on;
+      sched.classList.toggle('is-open', on);
+      if (on && !view) { view = startOfDay(new Date()); renderCal(); renderTimes(); syncSched(); }
+      if (!on) { pickedDate = pickedTime = null; syncSched(); renderTimes(); }
+    });
+
+    sched.addEventListener('click', function (e) {
+      var nav = e.target.closest('.dm-cal__nav');
+      if (nav) {
+        view = new Date(view.getFullYear(), view.getMonth() + Number(nav.dataset.mv), 1);
+        renderCal();
+        return;
+      }
+      var day = e.target.closest('.dm-day');
+      if (day && !day.disabled) {
+        pickedDate = new Date(view.getFullYear(), view.getMonth(), Number(day.dataset.d));
+        pickedTime = null;
+        renderCal(); renderTimes(); syncSched();
+        return;
+      }
+      var time = e.target.closest('.dm-time');
+      if (time) {
+        pickedTime = time.dataset.t;
+        renderTimes(); syncSched();
+      }
+    });
+  }
+
   function build() {
     root = document.createElement('div');
     root.className = 'dm-backdrop';
@@ -95,6 +228,7 @@
                  esc(s.legend) + (s.required ? ' *' : '') +
                '</label></legend>' +
                fieldMarkup(s, i) +
+               (s.name === 'time_to_talk' ? schedMarkup() : '') +
                '<p class="dm-error" id="dm-err-' + i + '" role="alert"></p>' +
              '</fieldset>';
     }).join('');
@@ -131,6 +265,8 @@
     form.addEventListener('submit', function (e) {
       if (!validate(idx)) { e.preventDefault(); }
     });
+    wireSched();
+
     /* Enter should advance rather than submit, except on the last step. */
     form.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' && idx < STEPS.length - 1) {
@@ -171,6 +307,13 @@
       control.setAttribute('aria-invalid', 'true');
       focusStep(i);
       return false;
+    }
+
+    if (step.name === 'time_to_talk' && val === 'Choose Date & Time') {
+      if (!pickedDate || !pickedTime) {
+        err.textContent = !pickedDate ? 'Pick a date, then a time.' : 'Pick a time to continue.';
+        return false;
+      }
     }
 
     err.textContent = '';
