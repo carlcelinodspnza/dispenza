@@ -1381,3 +1381,38 @@
    ============================================================================ */
 .ct-door{justify-content:center}
 .ct-door__label{flex:0 1 auto;min-width:0;text-align:center}
+
+/* ============================================================================
+   HERO MEDIA — NEUTRAL LIFT, NO PURPLE (owner, 2026-08-25)
+
+   The glow is --ds-shadow-lift, applied by .tc-lift:hover/:focus-within. Its
+   far layer is 0 34px 76px -16px #8d3fe85c = rgba(141,63,232,.36) -- the accent
+   at 36%. Measured on the CRO hero: rest state box-shadow is "none", hover is
+   the two-layer lift, so the glow appears ONLY while pointing at or tabbing
+   into the media. That is why it does not show in a plain page render.
+
+   Only the --bare hero receives it. The two --float heroes and the --drift one
+   already override .tc-lift:hover to box-shadow:none, so this rule changes CRO
+   and web-design and leaves those alone.
+
+   The far layer is kept but made NEUTRAL rather than deleted: dropping it
+   outright would flatten the hover to a tight 20px shadow and lose the sense of
+   the panel rising. Same geometry, black instead of accent.
+   ============================================================================ */
+.tc-head__media.tc-lift:hover,
+.tc-head__media.tc-lift:focus-within{box-shadow:0 6px 20px #0000008a,0 34px 76px -16px #00000066}
+
+/* The --float heroes carry the same purple by a DIFFERENT mechanism, and it is
+   worse there: not a hover box-shadow but a drop-shadow FILTER on the image,
+   present at REST. branding-graphic-design and performance-marketing therefore
+   show an accent glow permanently, without anyone pointing at them.
+
+   It was nearly missed. A regex looking for rgb(141,63,232) reported both pages
+   clean; the computed value is actually color(srgb 0.552941 0.247059 0.909804),
+   the same colour in the modern syntax. Checked the raw values rather than a
+   boolean, which is the only reason it surfaced.
+
+   Same geometry, neutral colour, at rest and on hover. */
+.tc-head__media--float img{filter:drop-shadow(0 26px 34px #0000008c) drop-shadow(0 4px 10px #00000059)}
+.tc-head__media--float.tc-lift:hover img,
+.tc-head__media--float.tc-lift:focus-within img{filter:drop-shadow(0 34px 42px #0000009e) drop-shadow(0 6px 14px #00000073)}
