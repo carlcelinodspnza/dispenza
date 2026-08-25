@@ -1111,7 +1111,17 @@
   color:var(--ds-ink-soft);line-height:1.5}
 .ct-anyrep .btn{margin-left:auto}
 @media (max-width:600px){
-  .ct-anyrep{flex-direction:column;align-items:flex-start}
+  /* flex-basis IS AXIS-RELATIVE, and that is the whole bug this fixes. The
+     paragraph carries flex:1 1 24ch, written for the ROW layout where 24ch
+     means "at least 24 characters wide". Switching to flex-direction:column
+     re-points the basis at the VERTICAL axis, so 24ch became a 220px minimum
+     HEIGHT: the paragraph rendered 260x221 for two lines of text and the card
+     opened a ~180px dead gap above the button. Measured, not guessed --
+     computed flex read "1 1 220.635px".
+     flex:0 1 auto lets it size to its content again. */
+  .ct-anyrep{flex-direction:column;align-items:stretch;gap:var(--ds-space-sm);
+    padding:var(--ds-space-md)}
+  .ct-anyrep__p{flex:0 1 auto}
   .ct-anyrep .btn{margin-left:0;width:100%;justify-content:center}
 }
 
@@ -1435,3 +1445,37 @@
    touched -- it is ambient, not a hover response. */
 .tc-head__media--float.tc-lift:hover img,
 .tc-head__media--float.tc-lift:focus-within img{filter:drop-shadow(0 26px 34px #0000008c) drop-shadow(0 4px 10px #00000059)}
+
+/* ============================================================================
+   MOBILE — RECLAIM NESTED PADDING (owner, 2026-08-25: "ensure proper spacing,
+   padding is implemented, and all spaces are utilized")
+
+   Measured at 390px before changing anything. The page gutter is a consistent
+   24px, which is right. The problem is padding STACKING inside it:
+
+     .cs-fan__stage (+24) then .cs-fan__card (+28) on top of the 24px gutter
+     put text at a 77px inset -- 236px of usable width on a 390px screen, 60%.
+     .mc-case__panel added +26 (50px inset), .hz-panel/.hz-plate +24 (49px).
+
+   A card nested inside a padded stage does not need the stage's padding too:
+   the stage's job is to inset the CARD from the screen edge, and the page
+   gutter already does that. So the stage's inline padding goes to zero on
+   phones and the card keeps its own, reduced.
+
+   Vertical padding is deliberately NOT touched -- it is doing real work
+   separating stacked content, and the complaint was about horizontal space.
+   ============================================================================ */
+@media (max-width:600px){
+  /* the doubly-nested case: stage stops insetting, card keeps a tighter pad */
+  .cs-fan__stage,.cs-fan__inner{padding-inline:0}
+  .cs-fan__card{padding-inline:var(--ds-space-sm)}
+  /* single-nested cards: 24-26px -> 14px, recovering 20-24px of line width */
+  .mc-case__panel{--mc-case-pad:var(--ds-space-sm)}
+  .hz-plans--plated .hz-plate,
+  .hz-plans--plated .hz-panel{padding-inline:var(--ds-space-sm)}
+  .mc-result{padding-inline:var(--ds-space-sm)}
+  /* the anyrep card was already reduced to --ds-space-md above when its column
+     layout was fixed; 24+24 still put its text at a 48px inset, so it joins the
+     same 14px treatment as every other single-nested card. */
+  .ct-anyrep{padding-inline:var(--ds-space-sm)}
+}
