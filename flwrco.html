@@ -19,10 +19,10 @@
 <!-- FONTS: SELF-HOSTED. C6 section 3 records the live site CDN-loading Google Fonts on all 32
      pages despite a complete local corpus, and shipping a malformed format("font_weight")
      first source that 404s. Both defects are fixed here: no network request, correct sources. -->
-<link rel="stylesheet" href="_design/dispenza-fonts.css">
+<link rel="stylesheet" href="_design/dispenza-fonts.css?v=329ff56f">
 <link rel="stylesheet" href="_design/dispenza-tokens.css?v=bf07bcdb">
 <link rel="stylesheet" href="_design/dispenza-chrome.css?v=c338a3e6">
-<link rel="stylesheet" href="_design/dispenza-structural.css?v=47f33a0f">
+<link rel="stylesheet" href="_design/dispenza-structural.css?v=063d0c7b">
 
 </head>
 <body class="site-body">
@@ -519,9 +519,9 @@
      field runs. hex-field.js takes no defer and no DOMContentLoaded wrapper either:
      it measures after window LOAD, because the field's height is the sum of two real
      page regions and is not final until webfonts and the footer imagery settle. -->
-<script src="_design/smoke-engine.js"></script>
-<script src="_design/section-smoke-rise.js" defer></script>
-<script src="_design/hex-field.js"></script>
+<script src="_design/smoke-engine.js?v=b02cdb26"></script>
+<script src="_design/section-smoke-rise.js?v=57f20db3" defer></script>
+<script src="_design/hex-field.js?v=ac608a36"></script>
 
 </main>
 
@@ -574,7 +574,7 @@
      The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
      INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
      fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
-<script src="_design/page-effects.js" defer></script>
-<script src="_design/demo-modal.js" defer></script>
+<script src="_design/page-effects.js?v=7d995b36" defer></script>
+<script src="_design/demo-modal.js?v=388bd913" defer></script>
 </body>
 </html>
