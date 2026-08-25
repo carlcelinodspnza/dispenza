@@ -1233,3 +1233,25 @@
    subject filling the frame, which is what the reference actually does.
    ============================================================================ */
 .ct-rep__shot img{aspect-ratio:9/16}
+
+/* ============================================================================
+   REP CARD — CONTROL PINNED TO THE FLOOR (2026-08-25)
+
+   Coty McGowan's card ships without a role line, because his job title is not
+   known and inventing one for a named person is not an option. That left his
+   SELECT REP button 21px higher than the other four -- measured, not guessed:
+   button tops read 1324 / 1324 / 1303 / 1324 / 1324.
+
+   Reserving the missing line with an empty <p> would fix the pixels and leave a
+   meaningless element for a screen reader to walk. Pinning the control to the
+   card floor instead makes the row independent of whether any given card has a
+   role at all, so this cannot regress when the next rep is added or edited.
+
+   >=768 only: below that the card is a horizontal thumb-and-text row and its
+   control is already in flow beside the name.
+   ============================================================================ */
+@media (min-width:768px){
+  .ct-rep{display:flex;flex-direction:column}
+  .ct-rep__id{display:flex;flex-direction:column;flex:1 1 auto}
+  .ct-rep__id .btn{margin-top:auto}
+}
