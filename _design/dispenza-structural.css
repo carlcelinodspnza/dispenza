@@ -1588,3 +1588,31 @@
   .bw-legal dl dd > a:only-child{display:inline-flex;align-items:center;min-height:44px}
   dl dd > a:only-child{display:inline-flex;align-items:center;min-height:44px}
 }
+
+/* ============================================================================
+   REP BENCH — TWO UP ON WIDE PHONES / SMALL TABLETS (owner: "still lots of
+   space")
+
+   The horizontal thumb-and-text card ran as a SINGLE column all the way to
+   767px. Measured across the range, the empty space to the right of the text
+   grows with the viewport because the text never gets longer:
+
+       390 ->  39px (12%)      620 -> 173px (30%)
+       500 -> 103px (23%)      767 -> 258px (36%)
+
+   At 390 that is ordinary ragged-right. At 767 more than a third of the card is
+   blank. The layout is not wrong, it is just being asked to fill a width it was
+   never designed for -- so it gets two columns from 600px, which puts each card
+   back around the ~350px width where it was measured to work.
+   ============================================================================ */
+@media (min-width:600px) and (max-width:767px){
+  .ct-reps{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--ds-space-md)}
+}
+/* Between 430 and 599 two columns would squeeze "Director of Client Relations"
+   into three lines, so the single column stays -- but the CARD stops stretching.
+   Capping it and centring turns a lopsided 27% hole on the right into symmetric
+   margins, which reads as an intentional measure rather than a layout that ran
+   out of content. */
+@media (min-width:430px) and (max-width:599px){
+  .ct-reps{max-width:360px;margin-inline:auto}
+}
