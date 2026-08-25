@@ -651,14 +651,39 @@
                strings are untouched. -->
           <article class="tc-sec" id="contact-office">
             <div class="tc-vcard" data-reveal>
-              <dl class="tc-rows">
+              <!-- ONE LINE WITH ICON LABELS, 2026-08-25 on owner instruction. The two
+                   rows and the rules above/below/between them are gone; the pair now
+                   sits on a single line.
+                   STILL A <dl>, AND THE LABELS STILL EXIST. The icon replaces the
+                   label VISUALLY only — "Office Address" and "Office Phone" remain in
+                   the markup, visually hidden, so the definition-list semantics and
+                   the screen-reader announcement are unchanged. An icon alone would
+                   have deleted the label for anyone not looking at it.
+                   The <svg> lives INSIDE the <dt> on purpose: a dl's row div may
+                   contain only dt/dd, so an svg placed beside them would be invalid.
+                   The dt IS the label, and the icon is that label's visual form.
+                   Icons are inline SVG, not image files: two 18px glyphs as assets
+                   would be two more requests for what is ~200 bytes of path data, and
+                   stroke:currentColor-adjacent tokens let them take the accent. -->
+              <dl class="tc-rows tc-rows--inline">
                 <div class="tc-rows__row">
-                  <dt class="tc-rows__k">Office Address</dt>
+                  <dt class="tc-rows__k">
+                    <svg class="tc-rows__ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M12 21.5s6.75-5.9 6.75-10.75a6.75 6.75 0 1 0-13.5 0C5.25 15.6 12 21.5 12 21.5Z"/>
+                      <circle cx="12" cy="10.5" r="2.5"/>
+                    </svg>
+                    <span class="ds-vh">Office Address</span>
+                  </dt>
                   <!-- F8: "Suite 110" here, "Suite 110 B" in the chrome footer. Both ship. -->
                   <dd class="tc-rows__v">6905 W Charleston Blvd, Suite 110, Las Vegas, NV 89117</dd>
                 </div>
                 <div class="tc-rows__row">
-                  <dt class="tc-rows__k">Office Phone</dt>
+                  <dt class="tc-rows__k">
+                    <svg class="tc-rows__ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M6.6 3.5h3l1.5 3.75-1.9 1.15a10.5 10.5 0 0 0 4.4 4.4l1.15-1.9L18.5 12.4v3a2 2 0 0 1-2.2 2A14.5 14.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2Z"/>
+                    </svg>
+                    <span class="ds-vh">Office Phone</span>
+                  </dt>
                   <!-- The source href is tel:+1 (702) 420-7272 - spaces and brackets
                        inside a tel: URI. The VISIBLE string is untouched; the href is
                        normalised to the digits, which is what the six team pages
@@ -679,17 +704,15 @@
                published price ladder or to the named results. NEITHER LABEL IS
                INVENTED FOR THIS PAGE: both are the chrome's own route labels,
                already shipped on all 27 pages. -->
-          <!-- THE CARRIED RELATED-PAGES LINE (F12). Three strings the source hid
-               and the build shows. Both anchors pointed at THIS page on the source
-               - /request-a-demo and /contact, i.e. a visible self-link loop - so
-               the brief repoints them at the two sections that actually answer
-               them: the demo request lands on the booking module, the contact ask
-               lands on the two doors. The wording is untouched. -->
-          <p class="ct-related" data-reveal>
-            <span class="ct-related__label">Related Pages:</span>
-            <a class="ct-related__link" href="#contact-book">Request a Demo Consultation</a>
-            <a class="ct-related__link" href="#contact-talk">Contact Dispenza for Marketing Solutions</a>
-          </p>
+          <!-- THE CARRIED RELATED-PAGES LINE (F12) WAS REMOVED 2026-08-25 on owner
+               instruction, together with the rule above it (that hairline was
+               .ct-related's own border-top, so it left with the element).
+               WHY IT WAS ALWAYS WRONG, recorded so it is not re-added: both anchors
+               pointed at THIS page on the source -- /request-a-demo and /contact --
+               a visible self-link loop, which the build carried over as in-page
+               anchors. Measured before removal, they scrolled BACKWARDS 1,645px and
+               2,011px respectively: a "Related Pages" block whose only two entries
+               were the page you were already reading. -->
 
           <div class="mc-actions tc-close" data-reveal>
             <a class="btn btn--ghost" href="how-it-works.html">How It Works</a>

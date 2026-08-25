@@ -1135,3 +1135,66 @@
 @media (pointer: coarse), (max-width: 1023px){
   .tc-rows__v a{display:inline-flex;align-items:center;min-height:44px}
 }
+
+/* ============================================================================
+   OFFICE BLOCK — ONE LINE, ICON-LABELLED (owner, 2026-08-25)
+
+   Was a two-row <dl> with a rule above, below and between the rows. Now both
+   pairs sit on one line, the rules are gone, and an 18px glyph stands in for
+   each label.
+
+   Scoped to the --inline MODIFIER, not to .tc-rows, because .tc-rows also ships
+   on eleven other pages (18 linked value rows in total) that still want the
+   stacked, ruled treatment. Only contact.html carries the modifier.
+
+   .ds-vh is added here because this build had NO visually-hidden utility at all
+   and now needs one: the icons replace the labels VISUALLY, and without a
+   hidden text label "Office Address" and "Office Phone" would simply cease to
+   exist for anyone using a screen reader. The clip-path/1px pattern is used
+   rather than display:none precisely because display:none is not announced.
+   ============================================================================ */
+.ds-vh{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;border:0}
+
+.tc-rows--inline{display:flex;flex-wrap:wrap;align-items:center;
+  gap:var(--ds-space-sm) var(--ds-space-xl);margin-top:var(--ds-space-md)}
+/* kill the row rules: border-top on every row and border-bottom on the last are
+   what drew the three hairlines the owner asked to remove. */
+.tc-rows--inline .tc-rows__row,
+.tc-rows--inline .tc-rows__row:last-child{border:0;padding:0;display:flex;
+  align-items:center;gap:10px;flex-wrap:nowrap}
+/* the mobile rule further up sets .tc-rows__k{flex:100%}, which would push each
+   value onto its own line and undo the whole change. Overridden for this variant. */
+.tc-rows--inline .tc-rows__k{flex:none;min-width:0;margin:0;display:flex;align-items:center}
+.tc-rows--inline .tc-rows__v{flex:0 1 auto;min-width:0}
+.tc-rows__ico{display:block;width:18px;height:18px;flex:none;fill:none;
+  stroke:var(--ds-accent-ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* On a narrow screen one line is a lie — the address alone is 52 characters — so
+   the pair wraps to two rows. Still no rules, still icon-labelled. */
+@media (max-width:719px){
+  .tc-rows--inline{gap:var(--ds-space-sm) 0;flex-direction:column;align-items:flex-start}
+}
+
+/* ============================================================================
+   CONTACT — DOORS AND OFFICE LINE RUN THE FULL BODY WIDTH (owner, 2026-08-25)
+
+   Both were capped at max-width:var(--ds-measure) — min(68ch, 640px) — while
+   .ct-reps and .ct-anyrep beside them run the body's full 1072px. Measured:
+   doors 640px vs reps 1072px on the same left edge, which is the mismatch the
+   owner is looking at.
+
+   --ds-measure is the READING measure, and it earns its keep on prose: 68ch is
+   roughly the line length past which the eye starts losing its place returning
+   to the next line. Neither of these is prose. The doors are two cards with a
+   two-word label each, and the office line is a labelled address and a phone
+   number. Capping them buys nothing and costs alignment with everything else in
+   the column.
+
+   .ct-doors is contact.html only, so lifting it there affects nothing else.
+   .tc-vcard is NOT — it ships on eleven team pages that keep the measure — so
+   that lift is scoped to #contact-office. Widening it is also what puts the
+   address and the phone on ONE line: at 640px the pair needed ~665px and wrapped.
+   ============================================================================ */
+.ct-doors{max-width:none}
+#contact-office .tc-vcard{max-width:none}
