@@ -1360,3 +1360,24 @@
    on all 26 pages.
    ============================================================================ */
 #contact-close-doc{padding-bottom:var(--ds-space-lg)}
+
+/* ============================================================================
+   CONTACT DOORS — CENTRE THE ICON + LABEL GROUP (owner, 2026-08-25)
+
+   The group sat hard against the card's left edge with the rest of the card
+   empty. A naive box measurement said it was "centred" (inner padding 25/25),
+   which was misleading: the label carried flex:1 1 auto, so it GREW to fill the
+   remaining width and its right edge did reach the card's padding. The text
+   inside that stretched box was still left-aligned, so what a reader sees is a
+   left-hugging group.
+
+   So growth is the thing to remove, not just alignment. flex:0 1 auto sizes the
+   label to its content while KEEPING flex-shrink:1 -- shrink is what lets it
+   wrap its own text on a phone instead of overflowing, which is the behaviour
+   the nowrap row depends on. min-width:0 stays for the same reason.
+
+   text-align:center matters only on phone, where the label is two lines; at the
+   wider widths it is a single line and the property has nothing to do.
+   ============================================================================ */
+.ct-door{justify-content:center}
+.ct-door__label{flex:0 1 auto;min-width:0;text-align:center}
