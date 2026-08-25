@@ -1346,3 +1346,17 @@
 .ct-door{flex-direction:row;align-items:center;gap:var(--ds-space-md);flex-wrap:nowrap}
 .ct-door__ico{flex:none}
 .ct-door__label{flex:1 1 auto;min-width:0}
+
+/* ============================================================================
+   CONTACT CLOSE — TIGHTER TAIL (owner, 2026-08-25)
+
+   With the two outbound buttons removed, the office line is the page's last
+   content and sat 64px above the footer -- .mc-section's own --ds-rhythm
+   padding, which is sized for a section that ends on a block of content, not on
+   a single line of text.
+
+   Scoped to #contact-close-doc. .mc-section is the site's whole section rhythm;
+   changing it globally to fix one page's tail would move every section boundary
+   on all 26 pages.
+   ============================================================================ */
+#contact-close-doc{padding-bottom:var(--ds-space-lg)}
