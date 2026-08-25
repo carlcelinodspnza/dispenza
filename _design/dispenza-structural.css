@@ -1320,7 +1320,39 @@
    ============================================================================ */
 .tc-rows--inline{justify-content:center}
 @media (max-width:719px){
+  /* MEASURED PROBLEM: as a flex row the <dd> grew to the full 342px, so the
+     address centred INSIDE that box and drifted 17px from a pin pinned to the
+     far left; and align-items:center centred the 18px icon against the whole
+     TWO-LINE block, so it sat below the line it labels.
+
+     An inline approach (dt inline-flex + dd inline) fixed the drift but made
+     the SOURCE WHITESPACE between the tags render as a space, giving two rows
+     inconsistent 12px and 18px gaps; collapsing that with font-size:0 then
+     broke the vertical alignment it had just achieved. Measured each time --
+     none of this was visible without reading the numbers.
+
+     Flex is the deterministic answer, with two corrections to the original:
+       justify-content:center + the value NOT growing, so the pair centres as a
+       unit and the icon stays beside the text;
+       align-items:flex-start + a margin on the icon, so it centres on the FIRST
+       line rather than on a two-line block. */
   .tc-rows--inline{align-items:center;text-align:center}
+  .tc-rows--inline .tc-rows__row{justify-content:center;align-items:flex-start;
+    gap:8px;max-width:100%}
+  /* text-align:left on the VALUE while the row itself stays centred: the
+     address wraps to two lines, and centring them inside the dd inset the first
+     line ~8px from its own left edge, which read as the pin drifting away.
+     Left-aligning makes line 1 start flush at the dd edge, so the measured
+     icon-to-text gap equals the flex gap. The pair is still centred as a unit
+     by the row's justify-content. */
+  .tc-rows--inline .tc-rows__v{flex:0 1 auto;min-width:0;text-align:left}
+  .tc-rows--inline .tc-rows__ico{margin-top:5px}
+  /* the phone value is an <a> with min-height:44px from the tap-target rule, so
+     its box is 44px tall and flex-start would hang the icon at its top. Centre
+     the icon on that box for this row only. */
+  .tc-rows--inline .tc-rows__row:has(.tc-rows__v a){align-items:center}
+  .tc-rows--inline .tc-rows__row:has(.tc-rows__v a) .tc-rows__ico{margin-top:0}
+}
 }
 
 /* Phone keeps the horizontal thumb-and-text row, so it is NOT centred — but the
@@ -1504,4 +1536,25 @@
   .ct-reps .ct-rep{gap:var(--ds-space-sm)}
   .ct-reps .ct-rep__shot{flex:0 0 42%;max-width:42%}
   .ct-reps .ct-rep__id{flex:1 1 auto;min-width:0}
+}
+
+/* ============================================================================
+   CONTACT — SECTION SEPARATION ON PHONES (owner: "these texts are too close to
+   the Send a message card")
+
+   Measured: at 390px the eyebrow of #contact-book-doc began at EXACTLY the
+   bottom of the last door -- a 0px gap, so "Conversion Page / BOOK YOUR DEMO"
+   butted against the card. Desktop was fine at 40px, which is why it never
+   showed up in the wide renders.
+
+   The cause is the site-wide .mc-section + .mc-section rule zeroing padding-top
+   so consecutive dark sections read as one surface. That is right for the
+   background and wrong for the copy, and on desktop a body padding rule happens
+   to restore the gap; on phones it does not.
+
+   Restored on the two boundaries that lost it, scoped to this page so the
+   site-wide seam behaviour is untouched.
+   ============================================================================ */
+@media (max-width:767px){
+  #contact-book-doc,#contact-close-doc{padding-top:var(--ds-space-lg)}
 }

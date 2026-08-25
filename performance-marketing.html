@@ -21,8 +21,8 @@
      first source that 404s. Both defects are fixed here: no network request, correct sources. -->
 <link rel="stylesheet" href="_design/dispenza-fonts.css?v=4f436d86">
 <link rel="stylesheet" href="_design/dispenza-tokens.css?v=bf07bcdb">
-<link rel="stylesheet" href="_design/dispenza-chrome.css?v=c338a3e6">
-<link rel="stylesheet" href="_design/dispenza-structural.css?v=f0259995">
+<link rel="stylesheet" href="_design/dispenza-chrome.css?v=e8079614">
+<link rel="stylesheet" href="_design/dispenza-structural.css?v=3e58c357">
 
 </head>
 <body class="site-body">
@@ -40,9 +40,9 @@
 
       <nav class="rail__nav" aria-label="Primary">
         <ul class="rail__list">
-          <li><a class="rail__link" href="index.html" aria-current="page">Home</a></li>
+          <li><a class="rail__link" href="index.html">Home</a></li>
           <li class="rail__group">
-            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services">
+            <button class="rail__link rail__trigger" type="button" data-panel="panel-services" aria-expanded="false" aria-controls="panel-services" data-section-current>
               Services
               <svg class="rail__caret" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M1.5 3.5 5 7l3.5-3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </button>
@@ -98,7 +98,7 @@
 
         <div class="panel__grid panel__grid--services svc-list">
           <a class="panel__item svc-row" href="performance-marketing.html"
-             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary.">
+             data-n="01" data-title="Performance marketing" data-desc="Paid and organic demand for a licensed dispensary." aria-current="page">
             <span class="svc-row__num" aria-hidden="true">01</span>
             <span>
               <span class="panel__title">Performance marketing</span>
@@ -182,7 +182,7 @@
 
   <nav class="drawer-nav" aria-label="Mobile">
     <ul>
-      <li><a class="drawer-link" href="index.html" aria-current="page">Home</a></li>
+      <li><a class="drawer-link" href="index.html">Home</a></li>
       <li>
         <button class="acc-trigger" type="button" data-acc="acc-services" aria-expanded="false" aria-controls="acc-services">
           Services
