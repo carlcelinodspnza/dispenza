@@ -1652,8 +1652,19 @@
    nav AND a next button" and dropping the position would have quietly lost half
    of that. It is one line to remove if it is not wanted.
    ============================================================================ */
-.svc-pager{max-width:var(--ds-container-max);margin:var(--ds-space-2xl) auto 0;
-  padding:0 var(--ds-space-md) var(--ds-space-2xl)}
+/* Measured before changing: the visible gap ABOVE the pager was 160px -- the
+   doc section's own 64px padding-bottom PLUS this block's 96px margin-top, which
+   is the part worth cutting since the section padding is shared site-wide.
+
+   BELOW, padding-bottom is ZERO on purpose. The .site-footer already contributes
+   96px of its own padding-top, and every other page on the site measures exactly
+   96px from its last visible content to the footer card -- index, contact,
+   case-studies and how-it-works all check out at 96. Any padding here is added
+   ON TOP of that, so the first attempt at 40px left the service pages 40px
+   looser than the rest of the site rather than tighter. Zero puts them on the
+   same rhythm as everything else. */
+.svc-pager{max-width:var(--ds-container-max);margin:var(--ds-space-md) auto 0;
+  padding:0 var(--ds-space-md) 0}
 .svc-pager__top{display:flex;align-items:center;justify-content:space-between;gap:16px;
   flex-wrap:wrap;margin-bottom:10px}
 .svc-pager__prev{display:inline-flex;align-items:center;gap:6px;min-height:44px;
@@ -1686,7 +1697,7 @@
   font-size:20px;line-height:1;box-shadow:0 8px 18px -6px #8d3fe87a}
 
 @media (max-width:719px){
-  .svc-pager{padding-bottom:var(--ds-space-xl)}
+  .svc-pager{margin-top:var(--ds-space-sm);padding-bottom:0}
   .svc-pager__bar{padding:18px 20px;gap:16px}
   .svc-pager__t{font-size:19px}
   .svc-pager__go{width:44px;height:44px;font-size:18px}
