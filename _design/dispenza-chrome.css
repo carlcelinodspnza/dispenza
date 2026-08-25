@@ -60,7 +60,12 @@
    ============================================================================ */
 
 /* --- the shell: gradient + the site's own hex field at a whisper ----------- */
-.rail-panel--services{position:relative;
+/* NO position here: the base .rail-panel is position:absolute (it is a dropdown).
+   Overriding it to relative put the hidden panel back in normal flow, which grew
+   the position:fixed .rail-shell to 637px and made it blanket -- and swallow every
+   pointer event over -- the top of every page. absolute already gives ::before its
+   containing block, so no position declaration is needed at all. */
+.rail-panel--services{
   background:linear-gradient(168deg,#26282f 0%,#1a1b20 46%,#141519 100%)}
 /* border-radius:inherit on the LAYER rather than overflow:hidden on the panel --
    the panel is a positioned dropdown and clipping it risks cutting something
