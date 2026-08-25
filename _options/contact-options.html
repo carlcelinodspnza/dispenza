@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Contact — booking layout options</title>
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+<style>
+/* Everything is scoped co-* so nothing here can reach the live page.
+   Field labels, store-type options, select options, the SUBMIT string, both rep
+   names, the email atom and the address are VERBATIM from contact.html. The lede
+   lines, the rep role label and option D's "No preference" card are mockup filler
+   written for this review — see the provenance box at the top of the page. */
+body{background:var(--ds-bg-surface);color:var(--ds-ink)}
+.co-wrap{max-width:1140px;margin:0 auto;padding:40px 24px 120px}
+.co-k{display:inline-block;margin:0 0 6px;font-family:var(--ds-font-display);font-size:11.5px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ds-accent-light)}
+.co-t{margin:0 0 8px;font-family:var(--ds-font-display);font-size:27px;font-weight:800;letter-spacing:-.02em;color:#fff}
+.co-why{margin:0 0 6px;font-family:var(--ds-font-body);font-size:14.5px;color:var(--ds-ink-soft);max-width:78ch;line-height:1.6}
+.co-kills{margin:10px 0 26px;padding:12px 16px;border-left:2px solid var(--ds-accent);background:#8d3fe80f;
+  font-family:var(--ds-font-body);font-size:13.5px;color:#d9d4e2;max-width:78ch;border-radius:0 8px 8px 0}
+.co-kills b{color:#fff}
+.co-opt{margin:70px 0 0;padding-top:30px;border-top:1px solid var(--ds-line)}
+.co-stage{border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);background:var(--ds-bg-warm);padding:30px}
+
+/* ---------- shared form atoms (styled once, used by all four) ---------- */
+.co-f{display:grid;gap:13px}
+.co-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.co-lab{display:block;margin:0 0 5px;font-family:var(--ds-font-body);font-size:12px;color:var(--ds-ink-soft)}
+.co-in{width:100%;padding:11px 13px;border:1px solid var(--ds-line);border-radius:var(--ds-r-control);
+  background:#0e0f12;color:#fff;font-family:var(--ds-font-body);font-size:14px;min-height:44px}
+.co-in:focus{outline:2px solid var(--ds-accent-light);outline-offset:1px;border-color:transparent}
+.co-seg{display:flex;gap:8px;flex-wrap:wrap}
+.co-seg span{padding:9px 14px;border:1px solid var(--ds-line);border-radius:var(--ds-r-pill);font-family:var(--ds-font-body);
+  font-size:13px;color:var(--ds-ink-soft);min-height:44px;display:inline-flex;align-items:center}
+.co-seg span.on{border-color:var(--ds-accent);background:#8d3fe824;color:#fff}
+.co-sub{margin-top:4px;padding:14px 22px;border:0;border-radius:var(--ds-r-pill);background:var(--ds-accent);color:#fff;
+  font-family:var(--ds-font-display);font-size:13px;font-weight:700;letter-spacing:.1em;min-height:48px;cursor:pointer}
+.co-h{margin:0;font-family:var(--ds-font-display);font-size:23px;font-weight:800;letter-spacing:-.01em;color:#fff;text-transform:uppercase}
+.co-lede{margin:8px 0 0;font-family:var(--ds-font-body);font-size:14px;color:var(--ds-ink-soft);line-height:1.6}
+.co-mini{font-family:var(--ds-font-display);font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-ink-soft)}
+
+/* ---------- A · SPLIT ---------- */
+.coA{display:grid;grid-template-columns:0.85fr 1.15fr;gap:34px;align-items:start}
+.coA__aside{position:sticky;top:24px}
+.coA__facts{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:12px}
+.coA__facts li{font-family:var(--ds-font-body);font-size:13.5px;color:var(--ds-ink-soft)}
+.coA__facts b{display:block;color:#fff;font-size:13.5px}
+.coA__reps{display:flex;gap:10px;margin:22px 0 0}
+.coA__rep{display:flex;align-items:center;gap:9px;padding:7px 12px 7px 7px;border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-pill);font-family:var(--ds-font-body);font-size:12.5px;color:#fff;min-height:44px}
+.coA__av{width:30px;height:30px;border-radius:50%;background:linear-gradient(140deg,var(--ds-accent),var(--ds-accent-deep));flex:none}
+
+/* ---------- B · FORM-FIRST ---------- */
+.coB__top{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  padding-bottom:18px;margin-bottom:22px;border-bottom:1px solid var(--ds-line)}
+.coB__strip{margin:24px 0 0;padding:16px 18px;border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);
+  background:#0e0f12;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.coB__strip .co-mini{margin-right:2px}
+.coB__chip{display:inline-flex;align-items:center;gap:8px;padding:6px 13px 6px 6px;border:1px solid var(--ds-line);
+  border-radius:var(--ds-r-pill);font-family:var(--ds-font-body);font-size:12.5px;color:#fff;min-height:44px}
+
+/* ---------- C · STEPPED ---------- */
+.coC{display:grid;grid-template-columns:190px 1fr;gap:32px;align-items:start}
+.coC__rail{display:grid;gap:2px;margin:0;padding:0;list-style:none;border-left:1px solid var(--ds-line)}
+.coC__rail li{padding:11px 0 11px 16px;margin-left:-1px;border-left:2px solid transparent;
+  font-family:var(--ds-font-body);font-size:13px;color:var(--ds-ink-soft)}
+.coC__rail li.on{border-left-color:var(--ds-accent);color:#fff;font-weight:600}
+.coC__rail em{display:block;font-style:normal;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--ds-font-display);color:var(--ds-ink-soft);margin-bottom:2px}
+.coC__bar{height:3px;border-radius:3px;background:#ffffff14;margin:0 0 22px;overflow:hidden}
+.coC__bar i{display:block;height:100%;width:34%;background:linear-gradient(90deg,var(--ds-accent),var(--ds-accent-light))}
+
+/* ---------- D · REP-LED ---------- */
+.coD__pick{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 0 22px}
+.coD__card{padding:16px;border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);background:#0e0f12;
+  display:flex;flex-direction:column;gap:9px;min-height:44px}
+.coD__card.on{border-color:var(--ds-accent);background:#8d3fe81f;box-shadow:0 0 0 1px var(--ds-accent) inset}
+.coD__av{width:44px;height:44px;border-radius:50%;background:linear-gradient(140deg,var(--ds-accent),var(--ds-accent-deep))}
+.coD__card.any .coD__av{background:#ffffff1a;display:flex;align-items:center;justify-content:center;
+  font-family:var(--ds-font-display);font-weight:800;color:var(--ds-ink-soft);font-size:16px}
+.coD__nm{font-family:var(--ds-font-display);font-size:14px;font-weight:700;color:#fff}
+.coD__ro{font-family:var(--ds-font-body);font-size:12px;color:var(--ds-ink-soft)}
+
+@media (max-width:860px){
+  .coA,.coC{grid-template-columns:1fr}
+  .coA__aside{position:static}
+  .coD__pick{grid-template-columns:1fr}
+  .co-row{grid-template-columns:1fr}
+  .co-stage{padding:20px}
+}
+</style>
+</head>
+<body>
+<div class="co-wrap">
+  <p class="co-k">Review page</p>
+  <h1 class="co-t" style="font-size:32px">Contact — four booking layouts</h1>
+  <p class="co-why">Four ways to lay out the booking area, each aimed at a different part of what is
+    currently redundant. Nothing here is wired to the live page.</p>
+
+  <div class="co-kills" style="border-left-color:#c9a227;background:#c9a2270f">
+    <b>What is real copy and what is not.</b> <b>Verbatim from contact.html:</b> every field label
+    ("First Name *", "What is your website URL &quot;www.&quot; *", …), all three store-type options,
+    all three select options, the SUBMIT string, both rep names, the email atom
+    <code>hello@dispenza.com</code> and the Las Vegas address. <b>Written by me for these mockups and
+    NOT owner-approved copy:</b> the lede lines under each heading ("Tell us about the store…",
+    "Six fields. We'll come back with a time.", "Pick who you'd like to talk to…"), the rep role
+    label "Dispensary marketing", and option D's "No preference / We'll assign the next available"
+    card. Treat those as layout filler — they need your wording before anything ships.
+    <b>One flag:</b> the address appears on the live page in two conflicting forms — "Suite 110" and
+    "Suite 110&nbsp;B" — which build note F8 raised and is still an open owner question. I used
+    "Suite 110" here; it is not a ruling on which is correct.
+  </div>
+
+  <div class="co-kills" style="margin-bottom:0">
+    <b>Measured on the live page today.</b> Page is 3,119px tall. The first form field sits at
+    y=1,416px — <b>1.6 viewports down</b>, on a page whose only job is that form. Four headings run
+    before any mechanism appears: <b>CONTACT US → LET'S TALK → "Let's Talk About Your Dispensary
+    Marketing Needs" → BOOK YOUR DEMO</b>. There are four same-page jump links, and two of them
+    scroll <b>backwards</b> — "Request a Demo Consultation" travels −1,645px and "Contact Dispenza
+    for Marketing Solutions" −2,011px, i.e. the "Related Pages" block links to the page you are
+    already on. "Select Rep" appears three times, and choosing a rep <b>navigates away</b> to
+    sergio.html / thomas.html, abandoning the form — two conversion paths competing inside one
+    section.
+  </div>
+
+  <!-- ============================ A ============================ -->
+  <section class="co-opt">
+    <p class="co-k">Option A</p>
+    <h2 class="co-t">Split — pitch left, form right</h2>
+    <p class="co-why">The form moves up beside the copy instead of below it. The two "doors" collapse
+      into plain contact facts, and the reps become a small "or ask for one of them" line rather than
+      a section with its own heading and its own buttons.</p>
+    <p class="co-kills">Kills: the form is on screen at the section's first pixel, so <b>every one of
+      the four jump links has nothing left to do</b>. Removes one heading level and the three
+      "Select Rep" repetitions.</p>
+    <div class="co-stage">
+      <div class="coA">
+        <div class="coA__aside">
+          <h3 class="co-h">Book your demo</h3>
+          <p class="co-lede">Tell us about the store and we'll bring numbers from dispensaries your
+            size. No deck, no discovery call before the call.</p>
+          <ul class="coA__facts">
+            <li><b>hello@dispenza.com</b>Email us directly</li>
+            <li><b>6905 W Charleston Blvd, Suite 110</b>Las Vegas, NV 89117</li>
+          </ul>
+          <div class="coA__reps">
+            <span class="coA__rep"><span class="coA__av"></span>Sergio Ruiz</span>
+            <span class="coA__rep"><span class="coA__av"></span>Thomas Robinson</span>
+          </div>
+          <p class="co-lede" style="font-size:12.5px;margin-top:10px">Ask for a rep by name in the form —
+            you stay on this page.</p>
+        </div>
+        <form class="co-f" onsubmit="return false">
+          <div><span class="co-lab">Select Store Type</span>
+            <div class="co-seg"><span class="on">Retail Only</span><span>Delivery Only</span><span>Retail &amp; Delivery</span></div>
+          </div>
+          <div class="co-row">
+            <div><label class="co-lab">First Name *</label><input class="co-in"></div>
+            <div><label class="co-lab">Last Name</label><input class="co-in"></div>
+          </div>
+          <div><label class="co-lab">Dispensary Name *</label><input class="co-in"></div>
+          <div class="co-row">
+            <div><label class="co-lab">What is your email? *</label><input class="co-in" type="email"></div>
+            <div><label class="co-lab">What is your phone number? *</label><input class="co-in" type="tel"></div>
+          </div>
+          <div><label class="co-lab">What is your website URL "www." *</label><input class="co-in"></div>
+          <div><label class="co-lab">When would you like to talk? *</label>
+            <select class="co-in"><option>Select an option...</option><option>As soon as possible</option><option>Choose Date &amp; Time</option></select></div>
+          <button class="co-sub" type="submit">SUBMIT</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ B ============================ -->
+  <section class="co-opt">
+    <p class="co-k">Option B</p>
+    <h2 class="co-t">Form-first — the form is the section</h2>
+    <p class="co-why">One heading, then the fields. The reps drop to a single strip underneath, framed
+      as an alternative rather than a competing step. The shortest of the four and the least to read
+      before acting.</p>
+    <p class="co-kills">Kills: three of the four headings, the "BOOK NOW" button that jumped 519px to a
+      form already on screen, and the separate SELECT A REP block.</p>
+    <div class="co-stage">
+      <div class="coB__top">
+        <div>
+          <h3 class="co-h">Book your demo</h3>
+          <p class="co-lede">Six fields. We'll come back with a time.</p>
+        </div>
+        <p class="co-lede" style="margin:0;font-size:12.5px">Prefer email? <b style="color:#fff">hello@dispenza.com</b></p>
+      </div>
+      <form class="co-f" onsubmit="return false">
+        <div><span class="co-lab">Select Store Type</span>
+          <div class="co-seg"><span class="on">Retail Only</span><span>Delivery Only</span><span>Retail &amp; Delivery</span></div>
+        </div>
+        <div class="co-row">
+          <div><label class="co-lab">First Name *</label><input class="co-in"></div>
+          <div><label class="co-lab">Last Name</label><input class="co-in"></div>
+        </div>
+        <div class="co-row">
+          <div><label class="co-lab">Dispensary Name *</label><input class="co-in"></div>
+          <div><label class="co-lab">What is your website URL "www." *</label><input class="co-in"></div>
+        </div>
+        <div class="co-row">
+          <div><label class="co-lab">What is your email? *</label><input class="co-in" type="email"></div>
+          <div><label class="co-lab">What is your phone number? *</label><input class="co-in" type="tel"></div>
+        </div>
+        <div><label class="co-lab">When would you like to talk? *</label>
+          <select class="co-in"><option>Select an option...</option><option>As soon as possible</option><option>Choose Date &amp; Time</option></select></div>
+        <button class="co-sub" type="submit">SUBMIT</button>
+      </form>
+      <div class="coB__strip">
+        <span class="co-mini">Rather talk to a person?</span>
+        <span class="coB__chip"><span class="coA__av"></span>Sergio Ruiz</span>
+        <span class="coB__chip"><span class="coA__av"></span>Thomas Robinson</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ C ============================ -->
+  <section class="co-opt">
+    <p class="co-k">Option C</p>
+    <h2 class="co-t">Stepped — three groups, one at a time</h2>
+    <p class="co-why">The same seven fields, split into three short groups with a rail that says where
+      you are. Same grammar as the Request-a-Demo popup already built for this site, so the two read
+      as one system.</p>
+    <p class="co-kills">Kills the "wall of eight fields" objection and shortens the visible section to
+      roughly one screen. Note this is the only option that <b>adds</b> interaction cost — three
+      clicks instead of one scroll.</p>
+    <div class="co-stage">
+      <div class="coC">
+        <div>
+          <p class="co-mini" style="margin:0 0 12px">Step 1 of 3</p>
+          <ul class="coC__rail">
+            <li class="on"><em>Step 1</em>The store</li>
+            <li><em>Step 2</em>You</li>
+            <li><em>Step 3</em>The time</li>
+          </ul>
+        </div>
+        <div>
+          <div class="coC__bar"><i></i></div>
+          <h3 class="co-h" style="font-size:19px">Tell us about the store</h3>
+          <p class="co-lede" style="margin-bottom:20px">Two answers, then your details.</p>
+          <form class="co-f" onsubmit="return false">
+            <div><span class="co-lab">Select Store Type</span>
+              <div class="co-seg"><span class="on">Retail Only</span><span>Delivery Only</span><span>Retail &amp; Delivery</span></div>
+            </div>
+            <div><label class="co-lab">Dispensary Name *</label><input class="co-in"></div>
+            <div><label class="co-lab">What is your website URL "www." *</label><input class="co-in"></div>
+            <button class="co-sub" type="submit" style="justify-self:start;padding-inline:34px">CONTINUE</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ D ============================ -->
+  <section class="co-opt">
+    <p class="co-k">Option D</p>
+    <h2 class="co-t">Rep-led — choosing a rep is the first field</h2>
+    <p class="co-why">The rep choice stops being a separate section that sends you to another page and
+      becomes the form's first question. "No preference" is the default, so nobody is forced to pick.</p>
+    <p class="co-kills">Kills the redundancy the other three only reduce: <b>the two competing
+      conversion paths</b>. Today, choosing a rep navigates to sergio.html / thomas.html and abandons
+      the form. Here it fills a field and you keep going.</p>
+    <div class="co-stage">
+      <h3 class="co-h">Book your demo</h3>
+      <p class="co-lede" style="margin-bottom:20px">Pick who you'd like to talk to, or leave it to us.</p>
+      <div class="coD__pick">
+        <div class="coD__card on"><span class="coD__av"></span><span class="coD__nm">Sergio Ruiz</span><span class="coD__ro">Dispensary marketing</span></div>
+        <div class="coD__card"><span class="coD__av"></span><span class="coD__nm">Thomas Robinson</span><span class="coD__ro">Dispensary marketing</span></div>
+        <div class="coD__card any"><span class="coD__av">?</span><span class="coD__nm">No preference</span><span class="coD__ro">We'll assign the next available</span></div>
+      </div>
+      <form class="co-f" onsubmit="return false">
+        <div><span class="co-lab">Select Store Type</span>
+          <div class="co-seg"><span class="on">Retail Only</span><span>Delivery Only</span><span>Retail &amp; Delivery</span></div>
+        </div>
+        <div class="co-row">
+          <div><label class="co-lab">First Name *</label><input class="co-in"></div>
+          <div><label class="co-lab">Last Name</label><input class="co-in"></div>
+        </div>
+        <div class="co-row">
+          <div><label class="co-lab">Dispensary Name *</label><input class="co-in"></div>
+          <div><label class="co-lab">What is your website URL "www." *</label><input class="co-in"></div>
+        </div>
+        <div class="co-row">
+          <div><label class="co-lab">What is your email? *</label><input class="co-in" type="email"></div>
+          <div><label class="co-lab">What is your phone number? *</label><input class="co-in" type="tel"></div>
+        </div>
+        <div><label class="co-lab">When would you like to talk? *</label>
+          <select class="co-in"><option>Select an option...</option><option>As soon as possible</option><option>Choose Date &amp; Time</option></select></div>
+        <button class="co-sub" type="submit">SUBMIT</button>
+      </form>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
