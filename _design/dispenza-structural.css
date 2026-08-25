@@ -1686,28 +1686,37 @@
 .svc-pager__pos{font-family:var(--ds-font-body);font-size:12.5px;color:var(--ds-ink-soft);white-space:nowrap}
 .svc-pager__pos b{font-family:var(--ds-font-display);color:var(--ds-ink-heading);font-weight:700}
 
-.svc-pager__bar{display:flex;align-items:center;justify-content:space-between;gap:24px;
-  padding:22px 26px;border-radius:var(--ds-r-surface);border:1px solid #8d3fe84d;text-decoration:none;
+/* COMPACT LIST ROW (owner, 2026-08-26): "make the container height look more shorter
+   and compact, because I want it to look like a list of next pages." The 48px circle
+   that used to sit on the right set the height floor -- 48px + 44px of padding meant the
+   bar could never measure less than 92px however small the type got -- so it is gone from
+   the markup and its rules are deleted below. With it removed the label moves ONTO the
+   title's line (see .svc-pager__id) and the padding drops, which is what turns this from a
+   card into a row. */
+.svc-pager__bar{display:flex;align-items:center;gap:24px;
+  padding:13px 20px;border-radius:var(--ds-r-surface);border:1px solid #8d3fe84d;text-decoration:none;
   background:linear-gradient(100deg,#8d3fe81f 0%,#8d3fe80a 46%,#0000 100%);
   transition:border-color var(--ds-dur-fast) var(--ds-ease-out),background var(--ds-dur-fast) var(--ds-ease-out)}
 .svc-pager__bar:hover{border-color:var(--ds-accent);
   background:linear-gradient(100deg,#8d3fe833 0%,#8d3fe814 46%,#0000 100%)}
 .svc-pager__bar:focus-visible{outline:2px solid var(--ds-accent-light);outline-offset:2px}
-.svc-pager__id{min-width:0}
-.svc-pager__lbl{display:block;font-family:var(--ds-font-display);font-size:10.5px;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);margin-bottom:6px}
-.svc-pager__t{font-family:var(--ds-font-display);font-size:23px;font-weight:800;
+/* the eyebrow, the title and the number all sit on ONE baseline now. Stacked, the
+   eyebrow cost 13px of its own line plus a 6px margin before the title even started. */
+.svc-pager__id{min-width:0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.svc-pager__lbl{flex:none;font-family:var(--ds-font-display);font-size:10.5px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink)}
+.svc-pager__t{font-family:var(--ds-font-display);font-size:19px;font-weight:800;
   color:var(--ds-ink-heading);letter-spacing:-.015em}
 .svc-pager__n{font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.12em;
-  color:var(--ds-accent-ink);margin-left:12px}
-/* flex:none so the circle cannot be squashed by a long service title */
-.svc-pager__go{flex:none;display:inline-flex;align-items:center;justify-content:center;
-  width:48px;height:48px;border-radius:50%;background:var(--ds-accent);color:var(--ds-ink-on-dark);
-  font-size:20px;line-height:1;box-shadow:0 8px 18px -6px #8d3fe87a}
+  color:var(--ds-accent-ink)}
 
 @media (max-width:719px){
   .svc-pager{margin-top:var(--ds-space-sm);padding-bottom:0}
-  .svc-pager__bar{padding:18px 20px;gap:16px}
-  .svc-pager__t{font-size:19px}
-  .svc-pager__go{width:44px;height:44px;font-size:18px}
+  .svc-pager__bar{padding:11px 16px;gap:10px}
+  /* the eyebrow cannot share the title's line at phone widths -- the longest title
+     ("Conversion rate optimization") already fills the row on its own -- so it wraps.
+     Keeping the ROW gap at the desktop 12px would rebuild the stacked card this change
+     exists to remove, so only the column gap survives the wrap. */
+  .svc-pager__id{gap:1px 10px}
+  .svc-pager__t{font-size:17px}
 }
