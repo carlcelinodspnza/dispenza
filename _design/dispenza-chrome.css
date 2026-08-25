@@ -75,20 +75,25 @@
 .rail-panel--services>*{position:relative}
 
 /* --- the preview card, from treatment C ----------------------------------- */
-/* align-self:start + min-height:0 stop the card STRETCHING to match the list
-   beside it. Measured before the change: the list is 433px, the card's own
-   content is 242px, and the difference showed as 191px of dead space between
-   the description and the PREVIEW footer -- 44% of the card. Filling that void
-   with a larger watermark was tried and rejected: it hid the gap rather than
-   removing it. The card now sizes to its content and the remaining space is
-   ordinary column whitespace outside the card, not a hole inside it. */
-.rail-panel--services .svc-preview{position:relative;overflow:hidden;align-self:start;min-height:0;
+/* HEIGHT REVERTED 2026-08-25 on owner instruction. Shrinking the card to its
+   content (align-self:start) removed the 191px void but the owner preferred the
+   taller card, and the short version also pulled the PREVIEW divider up hard
+   against the description -- the divider rides margin-top:auto, so it only sits
+   clear of the copy when the card has room to give it. Letting the card stretch
+   to the list again fixes both complaints at once.
+
+   The watermark numeral is enlarged to suit: at 150px it was sized for the 242px
+   card and left the tall card's middle genuinely empty. At 260px it occupies the
+   lower half, so the height reads as deliberate rather than as a hole. */
+.rail-panel--services .svc-preview{position:relative;overflow:hidden;
   background:linear-gradient(160deg,#3a1170 0%,#1d0940 100%);border-color:#ffffff1f}
+/* extra breathing room above the rule, on top of the base padding-top */
+.rail-panel--services .svc-preview__slot{margin-top:auto;padding-top:var(--ds-space-lg)}
 .rail-panel--services .svc-preview>*{position:relative}
 /* the watermark numeral. content:attr(data-ghost) is set by page-effects.js as
    the hovered row changes, so it tracks the preview instead of being frozen. */
 .rail-panel--services .svc-preview::after{content:attr(data-ghost);position:absolute;
-  right:-6px;bottom:-34px;font-family:var(--ds-font-display);font-size:150px;font-weight:800;
+  right:-14px;bottom:-58px;font-family:var(--ds-font-display);font-size:260px;font-weight:800;
   line-height:.8;letter-spacing:-.05em;color:#ffffff0f;pointer-events:none}
 
 /* --- rows: accent spine, accent numeral, arrow ---------------------------- */
