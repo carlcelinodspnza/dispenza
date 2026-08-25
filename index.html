@@ -1129,20 +1129,53 @@
 
     <div class="row">
       <div class="col">
-        <div class="hz-plans">
+        <!-- ══ PLANS ROW — "PLATED" TREATMENT ══ REBUILT 2026-08-25 on owner instruction
+             ("let's go with E, but let's elevate the design. It currently looks flat").
+
+             WHAT THIS REPLACES, PRECISELY. The row that stood here was a deep-purple
+             glass shell wrapping a white .hz-panel laid out as a two-column grid (identity
+             left, a 2-up feature list right), 775px tall. The owner called it bland. The
+             chosen replacement was concept E, "dense duo" — but E as first rendered was
+             flat white cards on .mc-section--light, whose background token resolves to
+             --ds-bg-light: #fff, i.e. PURE WHITE on PURE WHITE. That is why E read flat,
+             and it is not fixable by tuning a border; the lift has to come from shadow,
+             tint or a filled surface.
+
+             SO: E's compactness, plus a filled PLATE carrying the identity and the figure.
+             The plate restores the luminance step the old shell had — and borrows the dark
+             surface the rest of the site already runs on — while keeping the single-column
+             panel that made E short. The old shell's own colour is retained as the Pro
+             plate's gradient, so this reads as the same family, not a new one.
+
+             STRUCTURE CHANGE, NOT A COPY CHANGE. The module lines were <li> reading
+             "<em>SEO Pro</em> INCLUDED" (3 on Pro, 5 on Enterprise); they become a chip row so
+             the eye gets the differentiator first (11 of the 13 feature lines are
+             IDENTICAL between the two plans — only the modules actually differ). The
+             per-line word "INCLUDED" is therefore stated ONCE, by the group's own label
+             and aria-label, instead of being repeated nine times. Every other string —
+             the badges, the taglines, the figures, /Mo, the per-location add-on and all
+             the feature lines — is carried over verbatim.
+
+             .hz-extras KEEPS ITS SEPARATE SEMANTICS. It is a distinct list with its own
+             aria-label ("Added to the package") and a + marker rather than a tick, so the
+             "added on top" claim is not silently merged into the main feature list. -->
+        <div class="hz-plans hz-plans--plated">
         <article class="hz-plan" data-reveal>
-          <p class="hz-badge">Most Popular!</p>
+          <div class="hz-plate">
+            <p class="hz-badge">Most Popular!</p>
+            <h3 class="hz-name">MARKETING <em>Pro</em></h3>
+            <p class="hz-price">$4,200<span class="hz-unit">/Mo</span></p>
+            <p class="hz-sub">Guaranteed results</p>
+            <p class="hz-add">+$3,000/Additional Location</p>
+          </div>
           <div class="hz-panel">
-            <div class="hz-id">
-              <h3 class="hz-name">MARKETING <em>Pro</em></h3>
-              <p class="hz-sub">Guaranteed results</p>
-              <p class="hz-price">$4,200<span class="hz-unit">/Mo</span></p>
-              <p class="hz-add">+$3,000/Additional Location</p>
-            </div>
+            <p class="hz-modlabel" id="hz-mods-pro">Modules included</p>
+            <ul class="hz-mods" aria-labelledby="hz-mods-pro">
+              <li class="hz-chip">SEO Pro</li>
+              <li class="hz-chip">WEB Plus</li>
+              <li class="hz-chip">Web Graphics</li>
+            </ul>
             <ul class="hz-list">
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">SEO Pro</em> INCLUDED</span></li>
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">WEB Plus</em> INCLUDED</span></li>
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">Web Graphics</em> INCLUDED</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly Strategy Sessions</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting & Attribution</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
@@ -1150,26 +1183,29 @@
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Technology & Integrations Support</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
             </ul>
+            <ul class="hz-extras" aria-label="Added to the package">
+            <li class="hz-plusli"><span class="hz-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+            </ul>
           </div>
-          <ul class="hz-extras" aria-label="Added to the package">
-          <li class="hz-plusli"><span class="hz-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
-          </ul>
         </article>
         <article class="hz-plan hz-plan--full" data-reveal>
-          <p class="hz-badge">Full Suite</p>
+          <div class="hz-plate">
+            <p class="hz-badge">Full Suite</p>
+            <h3 class="hz-name">ENTERPRISE</h3>
+            <p class="hz-price">$6,500<span class="hz-unit">/Mo</span></p>
+            <p class="hz-sub">Guaranteed Results + Boost your retention</p>
+            <p class="hz-add">+$3,000/Additional Location</p>
+          </div>
           <div class="hz-panel">
-            <div class="hz-id">
-              <h3 class="hz-name">ENTERPRISE</h3>
-              <p class="hz-sub">Guaranteed Results + Boost your retention</p>
-              <p class="hz-price">$6,500<span class="hz-unit">/Mo</span></p>
-              <p class="hz-add">+$3,000/Additional Location</p>
-            </div>
+            <p class="hz-modlabel" id="hz-mods-ent">Modules included</p>
+            <ul class="hz-mods" aria-labelledby="hz-mods-ent">
+              <li class="hz-chip">SEO Pro</li>
+              <li class="hz-chip">WEB Pro</li>
+              <li class="hz-chip">CREATIVE Pro</li>
+              <li class="hz-chip">OUTREACH Email</li>
+              <li class="hz-chip">OUTREACH SMS</li>
+            </ul>
             <ul class="hz-list">
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">SEO Pro</em> INCLUDED</span></li>
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">WEB Pro</em> INCLUDED</span></li>
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">CREATIVE Pro</em> INCLUDED</span></li>
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">OUTREACH Email</em> INCLUDED</span></li>
-            <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span><em class="hz-mod">OUTREACH SMS</em> INCLUDED</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Review Management</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Monthly + Quarterly Advanced Reporting & Attribution</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Dedicated Campaign Strategist</span></li>
@@ -1177,11 +1213,11 @@
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Technology & Integrations Support</span></li>
             <li class="hz-li"><span class="hz-tick" aria-hidden="true"></span><span>Semi-Exclusivity</span></li>
             </ul>
+            <ul class="hz-extras" aria-label="Added to the package">
+            <li class="hz-plusli"><span class="hz-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
+            <li class="hz-plusli"><span class="hz-plus" aria-hidden="true"></span><span>Includes all A La Carte Upgrades</span></li>
+            </ul>
           </div>
-          <ul class="hz-extras" aria-label="Added to the package">
-          <li class="hz-plusli"><span class="hz-plus" aria-hidden="true"></span><span>Performance Benchmarks</span></li>
-          <li class="hz-plusli"><span class="hz-plus" aria-hidden="true"></span><span>Includes all A La Carte Upgrades</span></li>
-          </ul>
         </article>
         </div>
         <div class="hz-cta">

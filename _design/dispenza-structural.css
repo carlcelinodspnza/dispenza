@@ -898,3 +898,103 @@
 .tc-tabs__panel + .tc-tabs__panel {
   margin-top: clamp(72px, 7vw, 112px);
 }
+
+/* ============================================================================
+   PLANS ROW — "PLATED" (owner, 2026-08-25: "go with E, but elevate the design.
+   It currently looks flat.")
+
+   Scoped to .hz-plans--plated so every rule below is a sibling of the rules it
+   supersedes rather than a rewrite of them: the block is APPENDED, so at equal
+   specificity source order decides and these win, including over the mobile
+   @media rules further up (a media query carries no specificity of its own).
+   The superseded .hz-* rules are left in place untouched — this file is 150K of
+   minified single-line CSS and surgery inside it is how you break four other
+   sections to fix one. They are dead weight, logged for the legacy sweep.
+
+   The elevation is deliberately NOT "add a box-shadow". On a pure-white section
+   a white card cannot separate from its ground no matter how the border is
+   tuned, so the identity block becomes a FILLED plate: the accent gradient for
+   Pro, near-black for Enterprise. That does three jobs at once — it restores the
+   luminance step, it makes the two plans distinguishable before a word is read,
+   and it gives the figure a ground dark enough to carry real weight.
+   ============================================================================ */
+
+.hz-plans--plated{grid-template-columns:1fr 1fr;gap:22px;align-items:stretch;margin-top:var(--ds-space-lg)}
+
+/* The card is now a FRAME: no padding, clipped corners, the plate runs edge to
+   edge inside it. backdrop-filter is explicitly cleared — the old shell was
+   glass, and a stale blur behind an opaque plate costs a compositor layer for
+   nothing. */
+.hz-plans--plated>.hz-plan{display:flex;flex-direction:column;padding:0;overflow:hidden;
+  border-radius:18px;background:#fff;border:1px solid #00000012;
+  box-shadow:0 2px 4px #00000008,0 14px 34px -18px #00000026;
+  -webkit-backdrop-filter:none;backdrop-filter:none}
+.hz-plans--plated>.hz-plan--full{border-color:#00000014;box-shadow:0 2px 4px #00000008,0 16px 38px -18px #0000002e}
+
+.hz-plate{position:relative;padding:22px 24px;color:var(--ds-ink-on-dark);
+  background:linear-gradient(150deg,var(--ds-accent) 0%,var(--ds-accent-deep) 100%)}
+/* LITERAL, not var(--ds-bg-surface): .mc-section--light REMAPS that token to
+   --ds-bg-light (#fff), so the token form resolved to a gradient into WHITE
+   inside this section. Caught by reading the computed backgroundImage. */
+.hz-plan--full .hz-plate{background:linear-gradient(150deg,#2b2d35 0%,#15161a 100%)}
+/* hairline seam so the plate meets the white panel on a defined edge */
+.hz-plate:after{content:"";position:absolute;inset:auto 0 0;height:1px;background:#ffffff1f}
+
+/* badge rides the plate's top-right; the name is held clear of it rather than
+   relying on the string staying short. */
+.hz-plans--plated .hz-badge{position:absolute;top:20px;right:24px;margin:0;padding:5px 11px;
+  border-radius:var(--ds-r-pill);background:#ffffff29;color:#fff;font-size:10px;line-height:1.4;
+  letter-spacing:.14em;text-align:right}
+.hz-plans--plated .hz-name{color:#fff;font-size:15px;letter-spacing:.02em;opacity:.9;
+  max-width:calc(100% - 130px)}
+.hz-plans--plated .hz-price{margin:8px 0 0;font-size:38px;font-weight:800;letter-spacing:-.035em;color:#fff}
+.hz-plans--plated .hz-unit{font-family:var(--ds-font-display);font-size:.4em;font-weight:700;
+  letter-spacing:0;color:#ffffffb8;margin-left:.05em}
+.hz-plans--plated .hz-sub{margin:9px 0 0;font-size:12px;font-weight:600;color:#ffffffd6}
+.hz-plans--plated .hz-add{margin:4px 0 0;font-size:12px;color:#ffffffa8}
+
+/* panel: was a two-column grid, now a single column — that reflow is most of
+   where E's height saving came from. */
+/* flex column, not block: the cards are stretched to a common height, so the
+   shorter plan (Pro, 10 lines vs Enterprise's 13) was left with dead space under
+   its last item. Making the panel a column lets .hz-extras take margin-top:auto
+   and sit on the card floor, which also puts the two divider rules on the SAME
+   baseline across the row instead of at two arbitrary heights. */
+/* gap:0 IS LOAD-BEARING. The superseded .hz-panel rule sets gap:var(--ds-space-lg)
+   (40px). That was inert while this was display:block, and switching to flex
+   ACTIVATED it — 3 gaps x 40px added exactly 120px of phantom height to both
+   cards. Rhythm here comes from each child's own margin, not from a container gap. */
+.hz-plans--plated .hz-panel{display:flex;flex-direction:column;gap:0;padding:20px 24px 22px;
+  background:#0000;border-radius:0;flex:1 1 auto}
+
+/* the modules are the ONLY real difference between the two plans (11 of 13
+   feature lines are identical), so they lead the panel as chips. */
+.hz-modlabel{margin:0 0 9px;font-family:var(--ds-font-display);font-size:9.5px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-ink-soft-light)}
+.hz-mods{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 16px;padding:0;list-style:none}
+.hz-chip{padding:5px 10px;border-radius:7px;border:1px solid #8d3fe840;background:#8d3fe80f;
+  color:#6a24b8;font-family:var(--ds-font-display);font-size:10.5px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;line-height:1.3}
+
+.hz-plans--plated .hz-list{columns:1;border-left:0;border-top:0;padding:0;margin:0}
+.hz-plans--plated .hz-li{font-size:13.5px;color:var(--ds-ink);margin:0 0 7px}
+.hz-plans--plated .hz-tick{border-left-color:var(--ds-accent);border-bottom-color:var(--ds-accent)}
+
+/* .hz-extras keeps its separate identity — it is a different claim ("added to
+   the package") with its own aria-label, so it gets its own rule above the fold
+   of the card rather than being folded into .hz-list. It used to sit on the
+   purple shell in white; on the white panel it takes ink. */
+.hz-plans--plated .hz-extras{display:flex;flex-direction:column;flex-wrap:nowrap;gap:7px;
+  margin:16px 0 0;padding:14px 0 0;border-top:1px solid #00000012;margin-top:auto}
+.hz-plans--plated .hz-plusli{font-size:13.5px;font-weight:600;color:var(--ds-ink);align-items:flex-start}
+.hz-plans--plated .hz-plus{margin-top:.34em}
+.hz-plans--plated .hz-plus:before,.hz-plans--plated .hz-plus:after{background:var(--ds-accent)}
+
+@media (max-width:860px){
+  .hz-plans--plated{grid-template-columns:1fr;gap:18px}
+  /* badge back into normal flow — it is the plate's first child, so it simply sits
+     above the name and cannot overlap it. max-width alone did NOT fix this: it
+     narrows the name box but the wrapped second line still ran under the badge. */
+  .hz-plans--plated .hz-badge{position:static;display:inline-block;margin:0 0 10px;text-align:left}
+  .hz-plans--plated .hz-name{max-width:none}
+}
