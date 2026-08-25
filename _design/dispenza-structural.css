@@ -1320,3 +1320,29 @@
   .ct-reps .ct-rep__role{margin-top:6px}
   .ct-reps .ct-rep .btn{margin-top:var(--ds-space-md)}
 }
+
+/* ============================================================================
+   CONTACT DOORS — ICON BESIDE THE LABEL (owner, 2026-08-25)
+
+   The door was a stacked column: 48px icon, then "Click here to", then a
+   two-line label. The lead-in is gone from the markup and the remaining two
+   children now sit on one row.
+
+   The label's <br> went with it. That break existed to balance a narrow stacked
+   card; on a row the phrase is one line, and the cards have run the full body
+   width since the --ds-measure cap was lifted, so there is room for it. A SPACE
+   replaced the <br> rather than nothing -- "REQUEST" and "A DEMO" are separate
+   text nodes either side of a <strong>, and removing the break without a space
+   would have printed "REQUESTA DEMO".
+
+   flex-wrap is NOWRAP, and that is deliberate. With wrap allowed the phone case
+   FAILED the brief: at 390 the label needs 292px against 222px of free row, so
+   the whole label jumped to a second flex line and the icon ended up stacked
+   above the text again -- exactly the arrangement being removed. nowrap plus
+   min-width:0 makes the label shrink and wrap ITS OWN text instead, so the icon
+   stays beside it at every width. min-width:0 is required: a flex item's default
+   min-width:auto refuses to shrink below its content and would overflow.
+   ============================================================================ */
+.ct-door{flex-direction:row;align-items:center;gap:var(--ds-space-md);flex-wrap:nowrap}
+.ct-door__ico{flex:none}
+.ct-door__label{flex:1 1 auto;min-width:0}
