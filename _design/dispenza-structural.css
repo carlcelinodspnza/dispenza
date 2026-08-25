@@ -1051,3 +1051,22 @@
     box-shadow:0 4px 10px #0000000f,0 28px 62px -18px #00000042}
   .hz-plans--plated>.hz-plan--full:hover{box-shadow:0 4px 10px #0000000f,0 28px 62px -18px #0000004f}
 }
+
+/* ============================================================================
+   SELECT A REP — column count follows the number of reps (owner, 2026-08-25)
+
+   The >=768px rule hardcodes grid-template-columns:repeat(3,minmax(0,1fr)),
+   which was right while there were three reps. Adam Brenzi's card was removed,
+   and three fixed tracks over two cards leaves an EMPTY third column — the two
+   remaining reps bunch to the left with a dead gap beside them.
+
+   A quantity query rather than a hardcoded 2, so putting a third rep back
+   restores three columns with no CSS edit. `:last-child:nth-child(2)` matches
+   only when the last item is also the second, i.e. exactly two items. Where
+   :has() is unsupported this simply falls through to the three-column rule —
+   the pre-existing behaviour, not a worse one.
+   ============================================================================ */
+@media (min-width:768px){
+  .ct-reps:has(> .ct-rep:last-child:nth-child(2)){grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ct-reps:has(> .ct-rep:last-child:nth-child(1)){grid-template-columns:minmax(0,1fr)}
+}
