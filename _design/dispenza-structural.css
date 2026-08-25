@@ -1558,3 +1558,33 @@
 @media (max-width:767px){
   #contact-book-doc,#contact-close-doc{padding-top:var(--ds-space-lg)}
 }
+
+/* ============================================================================
+   TOUCH TARGETS — privacy-policy's contents list and contact values
+   (found by the mobile sweep, 2026-08-25)
+
+   Eight real failures at 390px, distinguished from two genuine exemptions by
+   asking whether the anchor is ALONE in its parent rather than by guessing from
+   its container:
+
+     .bw-toc__link  342x18  -- a table-of-CONTENTS list. Each link is the whole
+       content of its <li>, so it is a discrete control a thumb has to hit, not a
+       link inside a sentence. The earlier sweep's "is it inside <p> or <li>"
+       heuristic wrongly cleared these as prose; being in an <li> is what makes
+       them navigation.
+     dd > a  187x22 / 116x22 / 150x22 -- the legal contact block's email, phone
+       and site values. Same shape as the office line already fixed via
+       .tc-rows__v a: the value cell IS the control.
+
+   The two links left alone are genuinely inline -- "www.Dispenza.com" mid
+   sentence inside a <p> -- where enlarging would break the paragraph. That is
+   the documented exemption.
+
+   min-height grows the box around an already-centred label rather than moving
+   it; width is untouched since only the vertical axis was failing.
+   ============================================================================ */
+@media (pointer: coarse), (max-width: 1023px){
+  .bw-toc__link{display:flex;align-items:center;min-height:44px}
+  .bw-legal dl dd > a:only-child{display:inline-flex;align-items:center;min-height:44px}
+  dl dd > a:only-child{display:inline-flex;align-items:center;min-height:44px}
+}
