@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="_design/dispenza-fonts.css?v=4f436d86">
 <link rel="stylesheet" href="_design/dispenza-tokens.css?v=bf07bcdb">
 <link rel="stylesheet" href="_design/dispenza-chrome.css?v=b8712c7f">
-<link rel="stylesheet" href="_design/dispenza-structural.css?v=ab249482">
+<link rel="stylesheet" href="_design/dispenza-structural.css?v=500f2a71">
 
 </head>
 <body class="site-body">
@@ -49,12 +49,6 @@
           </li>
           <li><a class="rail__link" href="case-studies.html">Results</a></li>
           <li><a class="rail__link" href="contact.html" aria-current="page">Contact</a></li>
-          <li>
-            <a class="rail__link" href="https://dispenza.com/login" rel="noopener">
-              Login
-              <svg class="rail__ext" viewBox="0 0 10 10" fill="none" aria-hidden="true" focusable="false"><path d="M3 7 7 3M3.6 3H7v3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </li>
         </ul>
       </nav>
 
@@ -203,7 +197,6 @@
       </li>
       <li><a class="drawer-link" href="case-studies.html">Results</a></li>
       <li><a class="drawer-link" href="contact.html" aria-current="page">Contact</a></li>
-      <li><a class="drawer-link" href="https://dispenza.com/login" rel="noopener">Login</a></li>
     </ul>
   </nav>
 
@@ -550,11 +543,15 @@
                  this build and were simply never listed here. Each role string is
                  taken from that person's OWN page <title>, so no job title is
                  invented. Sergio and Thomas gain the same role line for parity. -->
-            <!-- SERGIO'S AND THOMAS'S "Select Rep" CONTROLS REMOVED 2026-08-25 on
-                 owner instruction. Their bio pages (sergio.html, thomas.html) are
-                 untouched and still reachable from _contents.html; only the control
-                 on this row is gone, so those two cards are now identification
-                 rather than a route. -->
+            <!-- EVERY "Select Rep" CONTROL IS NOW REMOVED, 2026-08-25 on owner
+                 instruction — Sergio and Thomas first, then James, Nick and Coty.
+                 The five bio pages are untouched and still reachable from
+                 _contents.html; only the controls on this row are gone, so the
+                 bench is identification rather than a route.
+                 THE BOOKING PATH IS UNAFFECTED: Coty's button was the row's
+                 data-demo-open hook, but the "No preference?" block below still
+                 carries one, so the Request a Demo modal is still reachable from
+                 this page. That was checked, not assumed. -->
             <ul class="ct-reps" data-reveal>
               <li class="ct-rep">
                 <figure class="ct-rep__shot tc-lift" data-media-in>
@@ -573,7 +570,6 @@
                 <div class="ct-rep__id">
                   <h4 class="ct-rep__name">James Compton</h4>
                   <p class="ct-rep__role">Chief Executive Officer</p>
-                  <a class="btn btn--ghost" href="james.html">Select Rep</a>
                 </div>
               </li>
               <li class="ct-rep">
@@ -584,7 +580,6 @@
                 <div class="ct-rep__id">
                   <h4 class="ct-rep__name">Nick Marx</h4>
                   <p class="ct-rep__role">Director of Client Relations</p>
-                  <a class="btn btn--ghost" href="nick.html">Select Rep</a>
                 </div>
               </li>
               <!-- COTY McGOWAN REPLACES SHAY SPATZ, 2026-08-25 on owner instruction.
@@ -617,7 +612,6 @@
                 <div class="ct-rep__id">
                   <h4 class="ct-rep__name">Coty McGowan</h4>
                   <p class="ct-rep__role">Sales Manager</p>
-                  <a class="btn btn--ghost" href="#contact-book" data-demo-open>Select Rep</a>
                 </div>
               </li>
               <li class="ct-rep">

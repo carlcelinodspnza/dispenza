@@ -1307,7 +1307,11 @@
 @media (min-width:768px){
   .ct-reps .ct-rep__id{text-align:center;align-items:center}
   .ct-reps .ct-rep__name{margin-top:var(--ds-space-sm)}
-  .ct-reps .ct-rep__role{margin-top:7px;margin-bottom:var(--ds-space-md)}
+  /* margin-bottom is now ZERO. That --ds-space-md existed solely to hold the
+     "Select Rep" control off the role line; with every control removed it became
+     24px of trailing dead space at the foot of each card, measured. The gap it
+     used to guarantee is documented above and can be restored with the button. */
+  .ct-reps .ct-rep__role{margin-top:7px;margin-bottom:0}
   .ct-reps .ct-rep__id .btn{align-self:center}
 }
 
