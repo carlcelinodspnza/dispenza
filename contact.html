@@ -385,10 +385,11 @@
            OWNER-DATA: is Adam still a rep? The owner answered by removing the
            card. SELECT A REP now lists two reps, and the grid's 3-column rule
            is quantity-queried down to 2 so no empty track is left. His
-           portrait, assets/in-pages/our-team-at-dispenza-adam-brener.webp, is
-           now unreferenced by the whole build and is a candidate for deletion
-           -- left in place pending the owner's word, since removing a rep is
-           more often reversible than an asset delete.
+           portrait, assets/in-pages/our-team-at-dispenza-adam-brener.webp, was
+           left in place pending the owner's word. That word came 2026-08-25 and
+           the file is DELETED. There was never an adam.html to retire alongside
+           it -- /adam was not in the page inventory, which is what this note
+           flagged in the first place.
 
        F11 "Conversion Page" IS A CMS DEFAULT TITLE, SHIPPED BECAUSE THE BRIEF
            FORBIDS DELETING IT. It is the h1 of the retired /conversation-form
@@ -597,8 +598,9 @@
                                page yet, and shay.html is Shay's (h1 SHAY SPATZ,
                                shay@dispenza.com).
                    OWNER ACTION: Coty's photo and job title, and whether a bio page
-                   should be built from the shay.html template. shay.html itself is
-                   untouched and still linked from _contents.html. -->
+                   should be built. NOTE the shay.html template is no longer on disk
+                   -- that page was retired 2026-08-25; recover it from git history if
+                   it is wanted as a starting point. -->
               <li class="ct-rep">
                 <figure class="ct-rep__shot tc-lift" data-media-in>
                   <img src="assets/in-pages/rep-portrait-placeholder.webp"
@@ -612,8 +614,19 @@
               </li>
               <li class="ct-rep">
                 <figure class="ct-rep__shot tc-lift" data-media-in>
-                  <img src="assets/in-pages/sergio-ruiz-dispenza-team.webp"
-                       alt="Sergio Ruiz" width="600" height="600" loading="lazy" decoding="async">
+                  <!-- OWNER-SUPPLIED REPLACEMENT, 2026-08-25. New filename, not an
+                       overwrite: sergio-ruiz-dispenza-team.webp is unrelated art still
+                       in use on sergio.html, and reusing a name mid-review serves a
+                       cached stale image.
+                       Source 1080x1920 RGBA PNG (3.48MB), already EXACTLY 9:16 — the
+                       card's own ratio — so cover crops nothing. ALPHA IS PRESERVED
+                       through the WebP conversion and is load-bearing here: the top
+                       fifth of this artwork is transparent so the subject breaks out
+                       above the purple panel and the card's own field shows through.
+                       Flattening it would have printed a hard box behind his head.
+                       576x1024 (2x covers the card's 213px widest) at q78 -> 83KB. -->
+                  <img src="assets/in-pages/sergio-ruiz-dispenza-team-portrait.webp"
+                       alt="Sergio Ruiz" width="576" height="1024" loading="lazy" decoding="async">
                 </figure>
                 <div class="ct-rep__id">
                   <h4 class="ct-rep__name">Sergio Ruiz</h4>
