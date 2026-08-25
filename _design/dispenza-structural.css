@@ -1275,3 +1275,48 @@
    the clip is what keeps its bottom corners rounded rather than square.
    ============================================================================ */
 .ct-reps .ct-rep__shot{border:0;background:#0000}
+
+/* ============================================================================
+   REP CARD TEXT — CENTRED, WITH REAL SPACING (owner, 2026-08-25)
+
+   Measured before changing anything: the name->role gap was 3px and the
+   role->CTA gap was ZERO — the buttons were touching the role text. The zero is
+   not an authoring mistake, it is what margin-top:auto resolves to when a card
+   has no slack left: the cards WITH a control are the tallest content in the
+   row, so "push to the floor" had nothing to push through.
+
+   Fixed by putting the minimum gap on the ROLE's margin-bottom and leaving the
+   control's margin-top:auto in place. Margins do not collapse in a flex column,
+   so the two ADD: the gap is never less than --ds-space-md, and any spare height
+   still goes above the control so all controls stay on the same baseline. Two
+   cards now have no control at all, which this survives for the same reason.
+
+   Scoped >=768: below that the card is a horizontal thumb-and-text row where
+   centring the text and adding a bottom margin would both be wrong.
+   ============================================================================ */
+@media (min-width:768px){
+  .ct-reps .ct-rep__id{text-align:center;align-items:center}
+  .ct-reps .ct-rep__name{margin-top:var(--ds-space-sm)}
+  .ct-reps .ct-rep__role{margin-top:7px;margin-bottom:var(--ds-space-md)}
+  .ct-reps .ct-rep__id .btn{align-self:center}
+}
+
+/* ============================================================================
+   OFFICE LINE — CENTRED (owner, 2026-08-25)
+
+   The address/phone pair ran from the left edge of a 1072px column. Centring
+   the flex row also centres the stacked variant below 720px, where the pair
+   wraps to two lines — otherwise the two would disagree at the breakpoint.
+   ============================================================================ */
+.tc-rows--inline{justify-content:center}
+@media (max-width:719px){
+  .tc-rows--inline{align-items:center;text-align:center}
+}
+
+/* Phone keeps the horizontal thumb-and-text row, so it is NOT centred — but the
+   3px name-to-role gap was the same cramped value the desktop card had, and the
+   owner's note about line spacing applies to it just as much. */
+@media (max-width:767px){
+  .ct-reps .ct-rep__role{margin-top:6px}
+  .ct-reps .ct-rep .btn{margin-top:var(--ds-space-md)}
+}
