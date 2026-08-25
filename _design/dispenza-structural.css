@@ -998,3 +998,56 @@
   .hz-plans--plated .hz-badge{position:static;display:inline-block;margin:0 0 10px;text-align:left}
   .hz-plans--plated .hz-name{max-width:none}
 }
+
+/* ============================================================================
+   PRICING — HEX TEXTURE + CARD HOVER (owner, 2026-08-25)
+
+   The hexagon is NOT redrawn. It is the SAME 52x90 inline-SVG tile the site
+   already ships on .mc-dissolve__hex, so the honeycomb here is geometrically
+   identical to the one used elsewhere rather than a lookalike.
+   ============================================================================ */
+
+/* The pattern paints as a flat colour showing THROUGH a two-layer mask: the hex
+   tile (repeated) intersected with a vertical fade, so the texture does not
+   hard-cut at the section's top and bottom edges — #pricing is .mc-section--banded
+   (padding-top:0), so its top edge butts directly against the dark section above
+   and an abrupt start would read as a seam. */
+#pricing{position:relative}
+#pricing:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:#00000014;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cpath d='M26 0 L0 15 L0 45 L26 60 L52 45 L52 15 Z M26 60 L26 90' fill='none' stroke='%23fff' stroke-width='1.4'/%3E%3C/svg%3E"),linear-gradient(180deg,#0000 0%,#000 13%,#000 86%,#0000 100%);
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cpath d='M26 0 L0 15 L0 45 L26 60 L52 45 L52 15 Z M26 60 L26 90' fill='none' stroke='%23fff' stroke-width='1.4'/%3E%3C/svg%3E"),linear-gradient(180deg,#0000 0%,#000 13%,#000 86%,#0000 100%);
+  /* 34x59, not the tile's native 52x90: the owner's standing preference on this
+     site is SMALLER hexagons ("too zoomed in... back it up a little so we'd see
+     smaller hexagon patterns", on the hero). 34x59 is the site's own reduced
+     variant, already used by .mc-dissolve__hex, so this is still a reused value. */
+  -webkit-mask-size:34px 59px,100% 100%;mask-size:34px 59px,100% 100%;
+  -webkit-mask-repeat:repeat,no-repeat;mask-repeat:repeat,no-repeat;
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+/* the section's own content must sit ABOVE the texture */
+#pricing>.container{position:relative;z-index:1}
+
+/* ---- card hover ----------------------------------------------------------
+   Uses the independent `scale` property, NOT transform. .hz-plan carries
+   data-reveal, whose rules already own `transform` (translate3d -> translate(0,0));
+   a transform:scale() on hover would REPLACE that mid-animation and fight the
+   reveal. `scale` composes with transform instead, so the two are independent.
+
+   The reveal's transition is re-declared verbatim below because a later
+   `transition` shorthand would otherwise reset it — including its stagger delay.
+   The delay is attached per-property so it applies to the reveal only; without
+   that, hovering would sit behind the stagger before anything moved.
+
+   Gated on hover:hover + pointer:fine so a touch device never lands in a stuck
+   hover state, and on prefers-reduced-motion:no-preference because the
+   reduced-motion block further up deliberately forces transform:none. */
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .hz-plans--plated>.hz-plan{position:relative;
+    transition:opacity var(--ds-dur-reveal) var(--ds-ease-reveal) calc(var(--i,0) * var(--ds-stagger)),
+               transform var(--ds-dur-reveal) var(--ds-ease-reveal) calc(var(--i,0) * var(--ds-stagger)),
+               scale .34s var(--ds-ease-out),
+               box-shadow .34s var(--ds-ease-out)}
+  .hz-plans--plated>.hz-plan:hover{scale:1.025;z-index:2;
+    box-shadow:0 4px 10px #0000000f,0 28px 62px -18px #00000042}
+  .hz-plans--plated>.hz-plan--full:hover{box-shadow:0 4px 10px #0000000f,0 28px 62px -18px #0000004f}
+}
