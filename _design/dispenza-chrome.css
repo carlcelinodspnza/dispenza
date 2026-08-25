@@ -75,13 +75,20 @@
 .rail-panel--services>*{position:relative}
 
 /* --- the preview card, from treatment C ----------------------------------- */
-.rail-panel--services .svc-preview{position:relative;overflow:hidden;
+/* align-self:start + min-height:0 stop the card STRETCHING to match the list
+   beside it. Measured before the change: the list is 433px, the card's own
+   content is 242px, and the difference showed as 191px of dead space between
+   the description and the PREVIEW footer -- 44% of the card. Filling that void
+   with a larger watermark was tried and rejected: it hid the gap rather than
+   removing it. The card now sizes to its content and the remaining space is
+   ordinary column whitespace outside the card, not a hole inside it. */
+.rail-panel--services .svc-preview{position:relative;overflow:hidden;align-self:start;min-height:0;
   background:linear-gradient(160deg,#3a1170 0%,#1d0940 100%);border-color:#ffffff1f}
 .rail-panel--services .svc-preview>*{position:relative}
 /* the watermark numeral. content:attr(data-ghost) is set by page-effects.js as
    the hovered row changes, so it tracks the preview instead of being frozen. */
 .rail-panel--services .svc-preview::after{content:attr(data-ghost);position:absolute;
-  right:-10px;bottom:-46px;font-family:var(--ds-font-display);font-size:190px;font-weight:800;
+  right:-6px;bottom:-34px;font-family:var(--ds-font-display);font-size:150px;font-weight:800;
   line-height:.8;letter-spacing:-.05em;color:#ffffff0f;pointer-events:none}
 
 /* --- rows: accent spine, accent numeral, arrow ---------------------------- */

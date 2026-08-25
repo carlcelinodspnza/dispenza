@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Service pager — five designs</title>
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+<style>
+/* Scoped pg-* so nothing reaches the live pages. Every service number and title
+   is verbatim from index.html's #panel-services. Each option is shown as it
+   would appear on service 05 (Conversion rate optimization): previous is
+   04 Advertisement design, next is 06 Integrations. */
+body{background:var(--ds-bg-surface);color:var(--ds-ink)}
+.pg-wrap{max-width:1180px;margin:0 auto;padding:40px 24px 130px}
+.pg-k{display:inline-block;margin:0 0 6px;font-family:var(--ds-font-display);font-size:11.5px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ds-accent-light)}
+.pg-t{margin:0 0 8px;font-family:var(--ds-font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;color:#fff}
+.pg-p{margin:0 0 22px;font-family:var(--ds-font-body);font-size:14.5px;color:var(--ds-ink-soft);max-width:80ch;line-height:1.6}
+.pg-opt{margin:74px 0 0;padding-top:28px;border-top:1px solid var(--ds-line)}
+.pg-stage{padding:34px 30px;border:1px dashed #e3e3e31f;border-radius:var(--ds-r-surface);background:#0e0f12}
+.pg-lbl{font-family:var(--ds-font-display);font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-ink-soft)}
+a{text-decoration:none}
+
+/* ============ P1 · RULE — no boxes at all ============ */
+.p1{border-top:1px solid var(--ds-line);padding-top:20px;display:grid;
+  grid-template-columns:1fr auto 1fr;align-items:center;gap:20px}
+.p1 a{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--ds-ink-soft);
+  font-family:var(--ds-font-display);font-size:16px;font-weight:700;transition:color .16s}
+.p1 a:hover{color:#fff}
+.p1 .p1-next{justify-self:end;color:#fff}
+.p1 .p1-next:hover{color:var(--ds-accent-light)}
+.p1 .p1-n{font-size:12px;letter-spacing:.12em;color:var(--ds-ink-soft)}
+.p1 .p1-next .p1-n{color:var(--ds-accent-ink)}
+.p1 .p1-car{color:var(--ds-accent-ink);font-size:19px;line-height:1}
+.p1 .p1-pos{font-family:var(--ds-font-body);font-size:12.5px;color:var(--ds-ink-soft);white-space:nowrap}
+.p1 .p1-pos b{font-family:var(--ds-font-display);color:#fff}
+
+/* ============ P2 · NEXT BAR — one action, full width ============ */
+.p2-prev{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-bottom:10px;
+  font-family:var(--ds-font-body);font-size:13px;color:var(--ds-ink-soft)}
+.p2-prev:hover{color:#fff}
+.p2-bar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 26px;
+  border-radius:var(--ds-r-surface);border:1px solid #8d3fe84d;
+  background:linear-gradient(100deg,#8d3fe81f 0%,#8d3fe80a 46%,#0000 100%);
+  transition:border-color .18s,background .18s}
+.p2-bar:hover{border-color:var(--ds-accent);background:linear-gradient(100deg,#8d3fe833 0%,#8d3fe814 46%,#0000 100%)}
+.p2-bar .lbl{display:block;font-family:var(--ds-font-display);font-size:10.5px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink);margin-bottom:6px}
+.p2-bar .ttl{font-family:var(--ds-font-display);font-size:23px;font-weight:800;color:#fff;letter-spacing:-.015em}
+.p2-bar .num{font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.12em;
+  color:var(--ds-accent-ink);margin-left:12px}
+.p2-go{flex:none;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;
+  border-radius:50%;background:var(--ds-accent);color:#fff;font-size:20px;line-height:1;
+  box-shadow:0 8px 18px -6px #8d3fe87a}
+
+/* ============ P3 · INDEX — a real page nav, all eight ============ */
+.p3{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.p3-arrow{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;
+  border-radius:50%;border:1px solid var(--ds-line);color:var(--ds-ink-soft);font-size:17px;transition:.16s}
+.p3-arrow:hover{border-color:var(--ds-accent);color:var(--ds-accent-light)}
+.p3-dots{display:flex;gap:6px}
+.p3-dot{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0 6px;
+  border-radius:10px;font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.08em;
+  color:var(--ds-ink-soft);border:1px solid transparent;transition:.16s}
+.p3-dot:hover{color:#fff;border-color:var(--ds-line)}
+.p3-dot.on{background:var(--ds-accent);color:#fff;box-shadow:0 6px 14px -5px #8d3fe87a}
+.p3-cap{margin-top:14px;text-align:center;font-family:var(--ds-font-body);font-size:13px;color:var(--ds-ink-soft)}
+.p3-cap b{font-family:var(--ds-font-display);color:#fff;font-weight:700}
+
+/* ============ P4 · SPLIT BAND — two halves, one divider ============ */
+.p4{display:grid;grid-template-columns:1fr 1px 1fr;border-top:1px solid var(--ds-line);
+  border-bottom:1px solid var(--ds-line)}
+.p4-div{background:var(--ds-line)}
+.p4 a{display:flex;flex-direction:column;gap:6px;padding:24px 26px;min-height:44px;transition:background .18s}
+.p4 a:hover{background:#ffffff08}
+.p4 .p4-next{text-align:right;align-items:flex-end}
+.p4 .p4-next:hover{background:linear-gradient(90deg,#0000,#8d3fe814)}
+.p4 .lbl{font-family:var(--ds-font-display);font-size:10.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-ink-soft)}
+.p4 .p4-next .lbl{color:var(--ds-accent-ink)}
+.p4 .ttl{font-family:var(--ds-font-display);font-size:20px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.p4 .num{font-family:var(--ds-font-display);font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--ds-ink-soft)}
+
+/* ============ P5 · GHOST CARD — echoes the mega-menu preview ============ */
+.p5{display:grid;grid-template-columns:1fr 1.35fr;gap:18px;align-items:stretch}
+.p5-prev{display:flex;flex-direction:column;justify-content:center;gap:6px;padding:20px 22px;
+  border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);background:#ffffff05;transition:.18s}
+.p5-prev:hover{border-color:var(--ds-ink-soft);background:#ffffff0a}
+.p5-next{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:6px;
+  padding:24px 26px;border-radius:var(--ds-r-surface);border:1px solid #ffffff1f;
+  background:linear-gradient(160deg,#3a1170 0%,#1d0940 100%);transition:.18s}
+.p5-next:hover{border-color:var(--ds-accent-light)}
+.p5-next::after{content:"06";position:absolute;right:-8px;bottom:-40px;font-family:var(--ds-font-display);
+  font-size:150px;font-weight:800;line-height:.8;letter-spacing:-.05em;color:#ffffff12;pointer-events:none}
+.p5 .lbl{font-family:var(--ds-font-display);font-size:10.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-ink-soft);position:relative}
+.p5-next .lbl{color:#c9a7ff}
+.p5 .ttl{font-family:var(--ds-font-display);font-size:19px;font-weight:700;color:#fff;position:relative}
+.p5-next .ttl{font-size:24px;font-weight:800;letter-spacing:-.015em}
+.p5 .num{font-family:var(--ds-font-display);font-size:11.5px;font-weight:700;letter-spacing:.12em;
+  color:var(--ds-ink-soft);position:relative}
+.p5-next .num{color:#c9a7ff}
+
+@media (max-width:719px){
+  .p1{grid-template-columns:1fr;gap:10px}
+  .p1 .p1-next{justify-self:start}
+  .p4{grid-template-columns:1fr}
+  .p4-div{height:1px}
+  .p4 .p4-next{text-align:left;align-items:flex-start}
+  .p5{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="pg-wrap">
+  <p class="pg-k">Review page</p>
+  <h1 class="pg-t" style="font-size:32px">Service pager — five designs</h1>
+  <p class="pg-p">All five are shown as they would appear on <b>service 05, Conversion rate
+    optimization</b> — previous is 04 Advertisement design, next is 06 Integrations. Every number and
+    title is verbatim from the mega menu. The dashed frame is just the review stage, not part of any
+    design.</p>
+
+  <div class="pg-p" style="padding:12px 16px;border-left:2px solid var(--ds-accent);background:#8d3fe80f;border-radius:0 8px 8px 0;color:#d9d4e2">
+    <b style="color:#fff">What is wrong with the current one.</b> Two heavy bordered cards of equal
+    weight sit either side of a small centred label, so the eye has no idea which one is the action —
+    and the boxes are mostly empty, because a service title is short and the card is half the row.
+    Every option below fixes that by either removing the boxes or making the two ends visibly unequal.
+  </div>
+
+  <!-- P1 -->
+  <section class="pg-opt">
+    <p class="pg-k">Option 1</p>
+    <h2 class="pg-t">Rule — no boxes</h2>
+    <p class="pg-p">A hairline and one row of type. Nothing is boxed, so nothing looks empty; the next
+      end is white with an accent number and caret, the previous is muted. Quietest of the five and
+      the shortest by a wide margin.</p>
+    <div class="pg-stage">
+      <nav class="p1">
+        <a href="#"><span class="p1-car">&lsaquo;</span><span class="p1-n">04</span> Advertisement design</a>
+        <span class="p1-pos"><b>05</b> of 08</span>
+        <a class="p1-next" href="#">Integrations <span class="p1-n">06</span><span class="p1-car">&rsaquo;</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- P2 -->
+  <section class="pg-opt">
+    <p class="pg-k">Option 2</p>
+    <h2 class="pg-t">Next bar — one clear action</h2>
+    <p class="pg-p">Commits to forward motion: the next service is a full-width accent bar with a
+      round go button, and previous is demoted to a small text link above it. Use this if the point of
+      the module is to keep people moving through the eight.</p>
+    <div class="pg-stage">
+      <a class="p2-prev" href="#">&lsaquo; Previous — 04 Advertisement design</a>
+      <a class="p2-bar" href="#">
+        <span><span class="lbl">Next service</span><span class="ttl">Integrations</span><span class="num">06</span></span>
+        <span class="p2-go" aria-hidden="true">&rsaquo;</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- P3 -->
+  <section class="pg-opt">
+    <p class="pg-k">Option 3</p>
+    <h2 class="pg-t">Index — an actual page nav</h2>
+    <p class="pg-p">Takes "page nav" literally: all eight are present as numbered keys with the
+      current one filled, chevrons at each end, and the next service named underneath. The only option
+      that lets someone jump straight to service 07 without going back to the menu.</p>
+    <div class="pg-stage">
+      <nav class="p3">
+        <a class="p3-arrow" href="#" aria-label="Previous service">&lsaquo;</a>
+        <span class="p3-dots">
+          <a class="p3-dot" href="#">01</a><a class="p3-dot" href="#">02</a><a class="p3-dot" href="#">03</a>
+          <a class="p3-dot" href="#">04</a><span class="p3-dot on" aria-current="page">05</span>
+          <a class="p3-dot" href="#">06</a><a class="p3-dot" href="#">07</a><a class="p3-dot" href="#">08</a>
+        </span>
+        <a class="p3-arrow" href="#" aria-label="Next service">&rsaquo;</a>
+      </nav>
+      <p class="p3-cap">Next: <b>Integrations</b></p>
+    </div>
+  </section>
+
+  <!-- P4 -->
+  <section class="pg-opt">
+    <p class="pg-k">Option 4</p>
+    <h2 class="pg-t">Split band — two halves, one divider</h2>
+    <p class="pg-p">Keeps both ends equally reachable but removes the card borders entirely: a single
+      band ruled top and bottom, split down the middle. The halves fill on hover, so the target is the
+      whole half rather than a small box.</p>
+    <div class="pg-stage" style="padding:0;border:0;background:transparent">
+      <nav class="p4">
+        <a href="#"><span class="lbl">&lsaquo; Previous</span><span class="ttl">Advertisement design</span><span class="num">04</span></a>
+        <span class="p4-div"></span>
+        <a class="p4-next" href="#"><span class="lbl">Next service &rsaquo;</span><span class="ttl">Integrations</span><span class="num">06</span></a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- P5 -->
+  <section class="pg-opt">
+    <p class="pg-k">Option 5</p>
+    <h2 class="pg-t">Ghost card — echoes the mega menu</h2>
+    <p class="pg-p">Reuses the treatment just shipped on the mega-menu preview: the next service is a
+      purple gradient card with its number as a watermark, previous is a quiet outline. The two ends
+      are deliberately unequal in width as well as weight, so the action is unmistakable.</p>
+    <div class="pg-stage">
+      <nav class="p5">
+        <a class="p5-prev" href="#"><span class="lbl">&lsaquo; Previous</span><span class="ttl">Advertisement design</span><span class="num">04</span></a>
+        <a class="p5-next" href="#"><span class="lbl">Next service &rsaquo;</span><span class="ttl">Integrations</span><span class="num">06</span></a>
+      </nav>
+    </div>
+  </section>
+</div>
+</body>
+</html>
