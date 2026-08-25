@@ -41,3 +41,70 @@
 @media (pointer: coarse){
   .rail__link{display:inline-flex;align-items:center;min-height:44px}
 }
+
+/* ============================================================================
+   SERVICES MEGA MENU — "A + C" (owner, 2026-08-25)
+
+   The owner picked treatment A (depth, texture, row affordances) and asked for
+   treatment C's preview card inside it. This is that combination, applied to the
+   live panel.
+
+   Scoped to .rail-panel--services so the other rail panels keep their existing
+   flat treatment; this is the only one that was called out.
+
+   WHY THE PANEL LOOKED FLAT, for the record: the shell was a single opaque
+   --ds-bg-surface-2 fill with a border and no gradient or texture, the preview
+   was a solid block of --ds-accent-deep containing only text, and the row
+   numbers were the same muted grey as the descriptions, so nothing had
+   hierarchy except font size.
+   ============================================================================ */
+
+/* --- the shell: gradient + the site's own hex field at a whisper ----------- */
+.rail-panel--services{position:relative;
+  background:linear-gradient(168deg,#26282f 0%,#1a1b20 46%,#141519 100%)}
+/* border-radius:inherit on the LAYER rather than overflow:hidden on the panel --
+   the panel is a positioned dropdown and clipping it risks cutting something
+   that legitimately sits outside its box. */
+.rail-panel--services::before{content:"";position:absolute;inset:0;pointer-events:none;
+  border-radius:inherit;background:#8d3fe8;opacity:.10;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cpath d='M26 0 L0 15 L0 45 L26 60 L52 45 L52 15 Z M26 60 L26 90' fill='none' stroke='%23fff' stroke-width='1.4'/%3E%3C/svg%3E"),radial-gradient(120% 90% at 12% 0%,#000 0%,#0000 70%);
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cpath d='M26 0 L0 15 L0 45 L26 60 L52 45 L52 15 Z M26 60 L26 90' fill='none' stroke='%23fff' stroke-width='1.4'/%3E%3C/svg%3E"),radial-gradient(120% 90% at 12% 0%,#000 0%,#0000 70%);
+  -webkit-mask-size:34px 59px,100% 100%;mask-size:34px 59px,100% 100%;
+  -webkit-mask-repeat:repeat,no-repeat;mask-repeat:repeat,no-repeat;
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+.rail-panel--services>*{position:relative}
+
+/* --- the preview card, from treatment C ----------------------------------- */
+.rail-panel--services .svc-preview{position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#3a1170 0%,#1d0940 100%);border-color:#ffffff1f}
+.rail-panel--services .svc-preview>*{position:relative}
+/* the watermark numeral. content:attr(data-ghost) is set by page-effects.js as
+   the hovered row changes, so it tracks the preview instead of being frozen. */
+.rail-panel--services .svc-preview::after{content:attr(data-ghost);position:absolute;
+  right:-10px;bottom:-46px;font-family:var(--ds-font-display);font-size:190px;font-weight:800;
+  line-height:.8;letter-spacing:-.05em;color:#ffffff0f;pointer-events:none}
+
+/* --- rows: accent spine, accent numeral, arrow ---------------------------- */
+/* .svc-row is display:grid, and a pseudo-element inside a grid container
+   BECOMES A GRID ITEM -- left in flow these two would have added phantom
+   columns to a `auto minmax(0,1fr)` track list. Absolute positioning takes them
+   out of the grid entirely, which is why both carry position:absolute. */
+/* padding-right is 14px, NOT the ~24px the arrow visually wants. Measured: at
+   24px the descriptions lose enough width to wrap, taking the panel from 575px
+   to 634px and turning five one-line descriptions into two-liners. 14px is the
+   largest value that leaves the wrap points untouched -- verified by counting
+   description lines at 0 / 8 / 14 / 24px. The arrow then lives INSIDE that
+   padding rather than stealing text width. */
+.rail-panel--services .svc-row{position:relative;border-radius:10px;padding-right:14px;
+  transition:background var(--ds-dur-fast) var(--ds-ease-out)}
+.rail-panel--services .svc-row::before{content:"";position:absolute;left:0;top:10px;bottom:10px;
+  width:2px;border-radius:2px;background:var(--ds-accent);opacity:0;
+  transition:opacity var(--ds-dur-fast) var(--ds-ease-out)}
+.rail-panel--services .svc-row::after{content:"\203A";position:absolute;right:3px;top:50%;
+  transform:translate(-4px,-50%);color:var(--ds-accent-ink);font-size:15px;line-height:1;opacity:0;
+  transition:opacity var(--ds-dur-fast) var(--ds-ease-out),transform var(--ds-dur-fast) var(--ds-ease-out)}
+.rail-panel--services .svc-row:hover{background:#ffffff0a}
+.rail-panel--services .svc-row:hover::before,
+.rail-panel--services .svc-row:focus-visible::before{opacity:1}
+.rail-panel--services .svc-row:hover::after,
+.rail-panel--services .svc-row:focus-visible::after{opacity:1;transform:translate(0,-50%)}

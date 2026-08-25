@@ -223,10 +223,20 @@
       var pvNum = doc.getElementById('svc-pv-num');
       var pvTitle = doc.getElementById('svc-pv-title');
       var pvDesc = doc.getElementById('svc-pv-desc');
+      /* The oversized ghost numeral behind the preview is drawn by CSS from this
+         attribute rather than from an element, so the eight mega-menu markups on
+         27 pages did not have to change. If this block never runs the attribute is
+         simply absent and content:attr() renders nothing -- the card loses its
+         watermark and nothing else, which keeps the whole feature additive. */
+      var pvCard = doc.getElementById('svc-preview');
       if (pvNum && pvTitle && pvDesc) {
         var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
         var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
-        var showSvc = function (o) { pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d; };
+        var showSvc = function (o) {
+          pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d;
+          if (pvCard) { pvCard.setAttribute('data-ghost', o.n); }
+        };
+        showSvc(rest);   /* paint the ghost at rest, before any hover */
         svcRows.forEach(function (row) {
           var o = {
             n: row.getAttribute('data-n') || rest.n,
