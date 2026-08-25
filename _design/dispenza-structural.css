@@ -1222,5 +1222,14 @@
    Shay Spatz's file is the exception: mode RGB, no alpha, an opaque light-grey
    studio background. It crops correctly but still reads as a bright rectangle
    beside four dark ones. That is unchanged here and remains art work.
+
+   RAISED 4/5 -> 9/16 (owner, same day) to match a supplied reference card. That
+   reference measures 419x742, i.e. w/h 0.565; 9/16 is 0.5625, the closest simple
+   ratio. At five-up this makes the shot 195x345.
+
+   The alternative -- a 9/16 box with the square portrait kept whole and centred
+   -- was rendered and rejected: it leaves ~75px of dead field above and below a
+   floating circle, and letterboxes Shay's opaque file outright. Cover keeps the
+   subject filling the frame, which is what the reference actually does.
    ============================================================================ */
-.ct-rep__shot img{aspect-ratio:4/5}
+.ct-rep__shot img{aspect-ratio:9/16}
