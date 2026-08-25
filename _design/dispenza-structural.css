@@ -1399,8 +1399,23 @@
    outright would flatten the hover to a tight 20px shadow and lose the sense of
    the panel rising. Same geometry, black instead of accent.
    ============================================================================ */
+/* SUPERSEDED SAME DAY: the neutral lift below became "no hover at all" on owner
+   instruction ("remove hover animation for this image"). Rewritten in place
+   rather than overridden by a later block, so the file does not carry a rule
+   that only exists to be beaten by the next one.
+
+   THREE things have to go, not one. .tc-lift contributes a translateY(-3px)
+   transform, a box-shadow swap, AND a transition that animates both. Killing
+   only the shadow would leave the panel still jumping; killing shadow and
+   transform but leaving the transition declared is harmless but misleading.
+   All three are neutralised here.
+
+   :focus-within is included deliberately. It is not decoration -- it is the
+   keyboard equivalent of hover, so leaving it live would mean the animation the
+   owner removed still fires for anyone tabbing through the page. */
+.tc-head__media.tc-lift,
 .tc-head__media.tc-lift:hover,
-.tc-head__media.tc-lift:focus-within{box-shadow:0 6px 20px #0000008a,0 34px 76px -16px #00000066}
+.tc-head__media.tc-lift:focus-within{box-shadow:none;transform:none;transition:none}
 
 /* The --float heroes carry the same purple by a DIFFERENT mechanism, and it is
    worse there: not a hover box-shadow but a drop-shadow FILTER on the image,
@@ -1414,5 +1429,9 @@
 
    Same geometry, neutral colour, at rest and on hover. */
 .tc-head__media--float img{filter:drop-shadow(0 26px 34px #0000008c) drop-shadow(0 4px 10px #00000059)}
+/* the float heroes swap the image's drop-shadow on hover, which is the same
+   hover animation by another route; pinned to the rest-state value so nothing
+   changes under the pointer. The continuous tc-phonefloat animation is NOT
+   touched -- it is ambient, not a hover response. */
 .tc-head__media--float.tc-lift:hover img,
-.tc-head__media--float.tc-lift:focus-within img{filter:drop-shadow(0 34px 42px #0000009e) drop-shadow(0 6px 14px #00000073)}
+.tc-head__media--float.tc-lift:focus-within img{filter:drop-shadow(0 26px 34px #0000008c) drop-shadow(0 4px 10px #00000059)}
