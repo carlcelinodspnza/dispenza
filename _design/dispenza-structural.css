@@ -873,3 +873,28 @@
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
+
+/* ============================================================================
+   SECTION-GUIDE PANELS: RHYTHM BETWEEN TOPICS                     2026-08-25
+   ----------------------------------------------------------------------------
+   When the rail was a tablist only one panel was ever on screen, so the panels
+   never needed separating and carry margin:0. Stacked into a long scroll that
+   left a MEASURED 0px between them — one topic's closing line ran straight into
+   the next topic's image, with no signal that a new topic had begun.
+
+   The value is set against the panel's own internal rhythm, not picked by eye:
+   inside a panel the largest step is 40px (figure -> number), then 4px
+   (number -> heading) and 14px (heading -> body). A separation that is not
+   clearly bigger than 40px reads as another internal step rather than a break,
+   so this clamps 72-112px — between 1.8x and 2.8x the largest internal gap at
+   every width.
+
+   Adjacent-sibling so the FIRST panel is not pushed away from the section head;
+   verified across all eight pages that the panels are true adjacent siblings
+   (n-1 adjacent pairs on every one), under two different parents
+   (article.tc-sec and div.col), which is why this keys on the panel class
+   rather than on a parent's gap.
+   ============================================================================ */
+.tc-tabs__panel + .tc-tabs__panel {
+  margin-top: clamp(72px, 7vw, 112px);
+}
