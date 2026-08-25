@@ -1255,3 +1255,23 @@
   .ct-rep__id{display:flex;flex-direction:column;flex:1 1 auto}
   .ct-rep__id .btn{margin-top:auto}
 }
+
+/* ============================================================================
+   REP PORTRAIT — NO CONTAINER (owner, 2026-08-25: "remove all cards'
+   container outline")
+
+   .ct-rep__shot drew a 1px --ds-line stroke around a --ds-bg-warm (#1b1d22)
+   panel, on a section whose ground is --ds-bg-surface (#15161a). Removing only
+   the stroke would leave that panel: 6 points of luminance above the section,
+   which still reads as a box. So both go, and the artwork sits directly on the
+   section.
+
+   This is safe ONLY because the supplied portraits carry their own rounded
+   purple panel and are transparent above it — the container was doing the
+   framing when the art was square cut-outs with no frame of its own. It is not
+   safe to reintroduce a square source here without also reinstating this.
+
+   border-radius and overflow are KEPT: the artwork is opaque at its base, so
+   the clip is what keeps its bottom corners rounded rather than square.
+   ============================================================================ */
+.ct-reps .ct-rep__shot{border:0;background:#0000}
