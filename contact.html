@@ -552,8 +552,17 @@
             <ul class="ct-reps" data-reveal>
               <li class="ct-rep">
                 <figure class="ct-rep__shot tc-lift" data-media-in>
-                  <img src="assets/in-pages/our-team-at-dispenza-james-compton-4.webp"
-                       alt="James Compton" width="500" height="500" loading="lazy" decoding="async">
+                  <!-- OWNER-SUPPLIED REPLACEMENT, 2026-08-25. Filed under a NEW name
+                       rather than overwriting our-team-at-dispenza-james-compton-4.webp
+                       for two reasons: that file is still in use on james.html, and
+                       reusing a filename while the owner is reviewing serves them a
+                       cached stale image.
+                       Source was 1080x1920 PNG (1.72MB), already EXACTLY 9:16 — the
+                       same ratio as the card — so object-fit:cover crops nothing.
+                       Resampled to 675x1200 (ample for 2x at the card's 213px widest)
+                       and converted to WebP at q82: 63KB. -->
+                  <img src="assets/in-pages/james-compton-dispenza-team-portrait.webp"
+                       alt="James Compton" width="675" height="1200" loading="lazy" decoding="async">
                 </figure>
                 <div class="ct-rep__id">
                   <h4 class="ct-rep__name">James Compton</h4>
