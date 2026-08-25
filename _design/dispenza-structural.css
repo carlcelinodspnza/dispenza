@@ -945,12 +945,17 @@
 .hz-plans--plated .hz-badge{position:absolute;top:20px;right:24px;margin:0;padding:5px 11px;
   border-radius:var(--ds-r-pill);background:#ffffff29;color:#fff;font-size:10px;line-height:1.4;
   letter-spacing:.14em;text-align:right}
-.hz-plans--plated .hz-name{color:#fff;font-size:15px;letter-spacing:.02em;opacity:.9;
-  max-width:calc(100% - 130px)}
+/* With the monthly figure removed the NAME is the plate's hero, so it takes the
+   size the figure used to carry. Fluid rather than fixed: the plate is ~525px at
+   1440 but only ~330px at 768, and a fixed 40px would collide with the badge
+   there. The max-width keeps it clear of the badge, which is absolutely
+   positioned top-right. */
+.hz-plans--plated .hz-name{color:#fff;font-size:clamp(26px,2.6vw,40px);letter-spacing:-.02em;
+  line-height:1.05;opacity:1;max-width:calc(100% - 130px)}
 .hz-plans--plated .hz-price{margin:8px 0 0;font-size:38px;font-weight:800;letter-spacing:-.035em;color:#fff}
 .hz-plans--plated .hz-unit{font-family:var(--ds-font-display);font-size:.4em;font-weight:700;
   letter-spacing:0;color:#ffffffb8;margin-left:.05em}
-.hz-plans--plated .hz-sub{margin:9px 0 0;font-size:12px;font-weight:600;color:#ffffffd6}
+.hz-plans--plated .hz-sub{margin:14px 0 0;font-size:12.5px;font-weight:600;color:#ffffffd6}
 .hz-plans--plated .hz-add{margin:4px 0 0;font-size:12px;color:#ffffffa8}
 
 /* panel: was a two-column grid, now a single column — that reflow is most of

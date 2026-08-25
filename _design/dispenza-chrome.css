@@ -120,3 +120,20 @@
 .rail-panel--services .svc-row:focus-visible::before{opacity:1}
 .rail-panel--services .svc-row:hover::after,
 .rail-panel--services .svc-row:focus-visible::after{opacity:1;transform:translate(0,-50%)}
+
+/* ============================================================================
+   NAV LOGO — LARGER (owner, 2026-08-25)
+
+   Rail 26px -> 36px and the mobile drawer 24px -> 32px.
+
+   THE ASSET HAD TO BE RE-EXPORTED FIRST. Earlier today Rectangle1.webp was
+   right-sized to 340px wide because it was drawn at 141px -- correct then, but
+   it capped the logo at ~170 CSS px before going soft at 2x. A 36px-tall rail
+   logo is ~182px wide, which needs ~370px. Recovered the pre-optimisation
+   original from git (1010x200) and re-exported at 460x91, which covers 2x with
+   headroom without carrying the full 1010px again. 7KB -> 11KB.
+
+   The rail is 60px tall, so a 36px mark still clears its padding.
+   ============================================================================ */
+.rail__logo img{height:36px}
+.drawer-head img{height:32px}
