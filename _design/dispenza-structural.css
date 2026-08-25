@@ -1070,3 +1070,68 @@
   .ct-reps:has(> .ct-rep:last-child:nth-child(2)){grid-template-columns:repeat(2,minmax(0,1fr))}
   .ct-reps:has(> .ct-rep:last-child:nth-child(1)){grid-template-columns:minmax(0,1fr)}
 }
+
+/* ============================================================================
+   SELECT A REP — five across (owner, 2026-08-25: "Grid 2")
+
+   The rep bench went from two to five. Five is an awkward number in a fixed
+   grid: it divides cleanly into 5 or 1 and into nothing else, so 3-across
+   leaves an orphan row of two — which is exactly the arrangement the owner
+   rejected when choosing this layout.
+
+   >=1024 therefore carries all five in ONE row. Between 768 and 1023 the
+   inherited 3-across rule still applies and does produce 3+2; that is left
+   deliberately, because five cards across a 768px viewport gives each ~130px,
+   too narrow for a name, a role and a 44px control. FLAGGED FOR THE OWNER
+   rather than silently chosen. Below 768 the pre-existing compact rule takes
+   over and the cards stack one per row.
+   ============================================================================ */
+@media (min-width:1024px){
+  .ct-reps{grid-template-columns:repeat(5,minmax(0,1fr));gap:var(--ds-space-md)}
+  /* the shot's 240px cap never binds at five-up (~205px columns at 1180), but the
+     name has to come down or "Thomas Robinson" and "Director of Client Relations"
+     both wrap to three lines and the row's baselines stop agreeing. */
+  .ct-reps .ct-rep__name{font-size:15px;line-height:1.25}
+  .ct-reps .ct-rep__shot{max-width:none}
+}
+
+/* the role line — sourced from each rep's own page <title>, never invented */
+.ct-rep__role{margin:3px 0 0;font-family:var(--ds-font-body);font-size:12.5px;
+  color:var(--ds-ink-soft);line-height:1.4}
+
+/* the one booking control left in the module, for people who do not want to pick
+   a person. Solid, because it is now the module's ONLY primary action — the
+   submit button it replaced was the previous holder of that role. */
+.ct-anyrep{margin:var(--ds-space-xl) 0 0;padding:var(--ds-space-md) var(--ds-space-lg);
+  border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);background:var(--ds-bg-warm);
+  display:flex;align-items:center;gap:var(--ds-space-md) var(--ds-space-lg);flex-wrap:wrap}
+.ct-anyrep__t{margin:0;font-family:var(--ds-font-display);font-size:var(--ds-step-body);
+  font-weight:700;color:var(--ds-ink-heading)}
+.ct-anyrep__p{margin:0;flex:1 1 24ch;font-family:var(--ds-font-body);font-size:13.5px;
+  color:var(--ds-ink-soft);line-height:1.5}
+.ct-anyrep .btn{margin-left:auto}
+@media (max-width:600px){
+  .ct-anyrep{flex-direction:column;align-items:flex-start}
+  .ct-anyrep .btn{margin-left:0;width:100%;justify-content:center}
+}
+
+/* ============================================================================
+   TOUCH TARGET — linked values in a .tc-rows detail list
+
+   Missed by the 2026-08-24 site-wide tap-target sweep. contact.html's
+   `tel:+17024207272` renders 143x22 under pointer:coarse, i.e. 22px of vertical
+   target against the 44px minimum already applied everywhere else on the site.
+
+   It slipped through because it LOOKS like the documented exemption — an inline
+   phone number in prose — but it is not one. It is the value cell of a contact
+   detail row, and its parent's entire text is the number, so it is a discrete
+   control a thumb has to hit, not a link inside a sentence. The exemption covers
+   a number sitting mid-paragraph, where enlarging it would wreck the leading.
+
+   inline-flex + min-height grows the box around the already-positioned label
+   rather than shifting it, per the sizing rule. width is untouched: these are
+   full-width value cells, so only the vertical axis was ever failing.
+   ============================================================================ */
+@media (pointer: coarse), (max-width: 1023px){
+  .tc-rows__v a{display:inline-flex;align-items:center;min-height:44px}
+}

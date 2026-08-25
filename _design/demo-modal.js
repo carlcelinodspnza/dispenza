@@ -386,9 +386,18 @@
      is re-rendered. In-page demo CTAs are deliberately left navigating to
      contact.html -- changing 82 buttons across 27 pages was not asked for. */
   document.addEventListener('click', function (e) {
-    var t = e.target.closest ? e.target.closest('.rail__actions a.btn, .drawer-cta a.btn') : null;
+    var t = e.target.closest
+      ? e.target.closest('[data-demo-open], .rail__actions a.btn, .drawer-cta a.btn')
+      : null;
     if (!t) { return; }
-    if (!/demo/i.test(t.textContent || '')) { return; }   /* skip "Call us" */
+    /* [data-demo-open] is an EXPLICIT opt-in, so it skips the text heuristic below.
+       That heuristic exists only because the two chrome selectors are broad -- they
+       match every button in the rail and the drawer, including "Call us". An element
+       that has deliberately asked for the modal needs no such guess, and relying on
+       its label would silently break the moment the copy changes.
+       Added 2026-08-25: contact.html's inline booking form was removed, so the page
+       needs a way to raise the modal from the body rather than from the chrome. */
+    if (!t.hasAttribute('data-demo-open') && !/demo/i.test(t.textContent || '')) { return; }
     e.preventDefault();
     open(t);
   });

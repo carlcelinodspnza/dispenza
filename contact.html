@@ -532,23 +532,23 @@
             <p class="mc-eyebrow" data-reveal>Conversion Page</p>
             <h2 class="tc-sec__h" id="contact-book-h" data-reveal>BOOK YOUR DEMO</h2>
 
-            <!-- src: conversation-form.html, its only control. On the source it
-                 opened the booking modal; here it reaches the booking form, which is
-                 the same destination now that the modal's contents render on the
-                 page. It rides at the TOP of the module because the module is
-                 2,272px tall on a phone: a reader who already knows who they want
-                 to talk to should not have to scroll the whole rep picker to reach
-                 a field. Ghost, never solid - the one solid button in this module is
-                 the submit, and the frozen two-button model allows no third. -->
-            <div class="mc-actions" data-reveal>
-              <a class="btn btn--ghost" href="#contact-form">BOOK NOW</a>
-            </div>
+            <!-- BOOK NOW REMOVED 2026-08-25. It was an in-page jump to #contact-form,
+                 519px down, to a form that is now gone; and the owner flagged this
+                 module's jump links as redundant. The booking control for people who
+                 do not want to choose a rep is the one CTA at the FOOT of the module,
+                 which opens the 8-step Request a Demo modal rather than scrolling. -->
 
             <!-- The source's h2 under an h1; here an h3 under the h2, because the
                  page already spends its one h1 on CONTACT US. Rank relationship
                  preserved, string untouched. -->
             <div class="tc-defs" data-reveal><h3 class="tc-defs__t">SELECT A REP</h3></div>
 
+            <!-- FIVE REPS, 2026-08-25 on owner instruction ("Grid 2"). The three
+                 added -- James Compton, Nick Marx, Shay Spatz -- were NOT newly
+                 sourced: all three already had published bio pages and portraits in
+                 this build and were simply never listed here. Each role string is
+                 taken from that person's OWN page <title>, so no job title is
+                 invented. Sergio and Thomas gain the same role line for parity. -->
             <ul class="ct-reps" data-reveal>
               <li class="ct-rep">
                 <figure class="ct-rep__shot tc-lift" data-media-in>
@@ -557,6 +557,7 @@
                 </figure>
                 <div class="ct-rep__id">
                   <h4 class="ct-rep__name">Sergio Ruiz</h4>
+                  <p class="ct-rep__role">Account Executive</p>
                   <a class="btn btn--ghost" href="sergio.html">Select Rep</a>
                 </div>
               </li>
@@ -567,101 +568,65 @@
                 </figure>
                 <div class="ct-rep__id">
                   <h4 class="ct-rep__name">Thomas Robinson</h4>
+                  <p class="ct-rep__role">Business Development</p>
                   <a class="btn btn--ghost" href="thomas.html">Select Rep</a>
                 </div>
               </li>
-              <!-- ADAM BRENZI'S CARD REMOVED 2026-08-25 on owner instruction. This
-                   also RESOLVES build note F10 below, which had flagged his card as
-                   an open owner question (the source routed it to /adam, a page not
-                   in the 28-page inventory, and asked whether he was still a rep).
-                   The answer is no. His portrait asset is now unreferenced by every
-                   page in the build. -->
+              <li class="ct-rep">
+                <figure class="ct-rep__shot tc-lift" data-media-in>
+                  <img src="assets/in-pages/our-team-at-dispenza-james-compton-4.webp"
+                       alt="James Compton" width="500" height="500" loading="lazy" decoding="async">
+                </figure>
+                <div class="ct-rep__id">
+                  <h4 class="ct-rep__name">James Compton</h4>
+                  <p class="ct-rep__role">Chief Executive Officer</p>
+                  <a class="btn btn--ghost" href="james.html">Select Rep</a>
+                </div>
+              </li>
+              <li class="ct-rep">
+                <figure class="ct-rep__shot tc-lift" data-media-in>
+                  <img src="assets/in-pages/our-team-at-dispenza-nick-marx-1.webp"
+                       alt="Nick Marx" width="500" height="500" loading="lazy" decoding="async">
+                </figure>
+                <div class="ct-rep__id">
+                  <h4 class="ct-rep__name">Nick Marx</h4>
+                  <p class="ct-rep__role">Director of Client Relations</p>
+                  <a class="btn btn--ghost" href="nick.html">Select Rep</a>
+                </div>
+              </li>
+              <li class="ct-rep">
+                <figure class="ct-rep__shot tc-lift" data-media-in>
+                  <img src="assets/in-pages/Headshot__Shay_Spatz.webp"
+                       alt="Shay Spatz" width="3065" height="3065" loading="lazy" decoding="async">
+                </figure>
+                <div class="ct-rep__id">
+                  <h4 class="ct-rep__name">Shay Spatz</h4>
+                  <p class="ct-rep__role">Digital Design Expert</p>
+                  <a class="btn btn--ghost" href="shay.html">Select Rep</a>
+                </div>
+              </li>
             </ul>
 
-            <!-- THE BOOKING FORM. A REAL, WORKING CONTROL, NOT A MOCKUP: real
-                 <input>/<select> elements with real names, real types, the source's
-                 own `required` flags, and a real action that navigates on submit
-                 (F5). Every visible label, option and button string is the source's
-                 own, in the source's own order; only the step titles and the seven
-                 Prev/Next pairs are omitted, because the mechanism they drove is
-                 gone (F4).
-                 THE STORE-TYPE FIELD IS NAMED FOR ITS SIBLING. The paid lander
-                 pages/dispensary-marketing-and-advertising.content.html already
-                 ships step 1 of this same wizard and submits it here as
-                 `store-type`, so this field carries the same name and the value
-                 arrives in the query string. It cannot pre-select the matching
-                 radio without JavaScript, and no page-local script is allowed here,
-                 so the visitor confirms the choice. OWNER ACTION: the CRM wiring
-                 that reads the query string lands with the endpoint in F5.
-                 THE RADIO GROUP REUSES the .ad-choice family the lander already
-                 defines - it is literally the same control from the same wizard, so
-                 it is one rule set used twice, not two. -->
-            <form class="ct-form" id="contact-form" action="thank-you.html" method="get"
-                  aria-labelledby="contact-book-h" data-reveal>
-              <fieldset class="ct-form__set">
-                <p class="ct-field__label" id="contact-storetype">Select Store Type</p>
-                <ul class="ad-choices" role="radiogroup" aria-labelledby="contact-storetype">
-                  <li class="ad-choice">
-                    <input class="ad-choice__input" type="radio" name="store-type" id="ct-store-retail" value="Retail Only">
-                    <label class="ad-choice__label" for="ct-store-retail">Retail Only</label>
-                  </li>
-                  <li class="ad-choice">
-                    <input class="ad-choice__input" type="radio" name="store-type" id="ct-store-delivery" value="Delivery Only">
-                    <label class="ad-choice__label" for="ct-store-delivery">Delivery Only</label>
-                  </li>
-                  <li class="ad-choice">
-                    <input class="ad-choice__input" type="radio" name="store-type" id="ct-store-both" value="Retail &amp; Delivery">
-                    <label class="ad-choice__label" for="ct-store-both">Retail &amp; Delivery</label>
-                  </li>
-                </ul>
-
-                <div class="ct-form__grid">
-                  <div class="ct-field">
-                    <label class="ct-field__label" for="ct-first-name">First Name <span class="ct-req">*</span></label>
-                    <input class="ct-input" type="text" id="ct-first-name" name="first_name" autocomplete="given-name" required>
-                  </div>
-                  <div class="ct-field">
-                    <label class="ct-field__label" for="ct-last-name">Last Name</label>
-                    <input class="ct-input" type="text" id="ct-last-name" name="last_name" autocomplete="family-name">
-                  </div>
-                  <div class="ct-field ct-field--wide">
-                    <label class="ct-field__label" for="ct-dispensary">Dispensary Name <span class="ct-req">*</span></label>
-                    <input class="ct-input" type="text" id="ct-dispensary" name="dispensary_name" autocomplete="organization" required>
-                  </div>
-                  <div class="ct-field">
-                    <label class="ct-field__label" for="ct-email">What is your email? <span class="ct-req">*</span></label>
-                    <input class="ct-input" type="email" id="ct-email" name="email" autocomplete="email" required>
-                  </div>
-                  <div class="ct-field">
-                    <!-- the placeholder is the source's own, verbatim -->
-                    <label class="ct-field__label" for="ct-phone">What is your phone number? <span class="ct-req">*</span></label>
-                    <input class="ct-input" type="tel" id="ct-phone" name="phone_number" autocomplete="tel"
-                           inputmode="tel" placeholder="+1 (555) 555-5555" required>
-                  </div>
-                  <div class="ct-field ct-field--wide">
-                    <!-- the "www." prefill is the source's own `value="www."` -->
-                    <label class="ct-field__label" for="ct-website">What is your website URL "www." <span class="ct-req">*</span></label>
-                    <input class="ct-input" type="text" id="ct-website" name="website" autocomplete="url" value="www." required>
-                  </div>
-                  <div class="ct-field ct-field--wide">
-                    <label class="ct-field__label" for="ct-when">When would you like to talk? <span class="ct-req">*</span></label>
-                    <select class="ct-select" id="ct-when" name="time_to_talk" required>
-                      <option value="">Select an option...</option>
-                      <option value="As soon as possible">As soon as possible</option>
-                      <option value="Choose Date &amp; Time">Choose Date &amp; Time</option>
-                    </select>
-                  </div>
-                </div>
-
-                <!-- "SUBMIT" is the #sgp_2 form's own submit label, on the submit
-                     button, and it is the only control in this row: the module's
-                     second source control, BOOK NOW, sits at the TOP of the module
-                     where it is an entry rather than a rival to the submit. -->
-                <div class="ct-form__actions mc-actions">
-                  <button class="btn btn--solid" type="submit">SUBMIT</button>
-                </div>
-              </fieldset>
-            </form>
+            <!-- THE BOOKING FORM WAS REMOVED 2026-08-25 on owner instruction, and
+                 REPLACED by the control below rather than simply deleted. That
+                 distinction is the whole point: this form was one of only two on the
+                 site, the rep bio pages carry no form at all and link back here, and
+                 ~82 in-page demo CTAs across 27 pages navigate to this page. Deleting
+                 it outright would have left every one of those paths on a page with
+                 nothing to do.
+                 The replacement was already built and already shipping: demo-modal.js
+                 loads on all 27 pages and its own form posts to thank-you.html, the
+                 SAME action the removed form used -- so the thank-you route is not
+                 orphaned and the submission convention is unchanged.
+                 The hook is data-demo-open, added to demo-modal.js's delegated
+                 selector. It is an attribute rather than a class so any page can
+                 raise the modal later without depending on chrome markup. -->
+            <div class="ct-anyrep" data-reveal>
+              <p class="ct-anyrep__t">No preference?</p>
+              <p class="ct-anyrep__p">Book straight into the calendar and we&#39;ll match you with
+                whoever is free first.</p>
+              <a class="btn btn--solid" href="#contact-book" data-demo-open>Request A Demo</a>
+            </div>
           </article>
 
         </div>
