@@ -1479,3 +1479,29 @@
      same 14px treatment as every other single-nested card. */
   .ct-anyrep{padding-inline:var(--ds-space-sm)}
 }
+
+/* ============================================================================
+   REP CARD ON PHONE — LET THE PORTRAIT USE THE ROW (owner, 2026-08-25:
+   "we can still increase image size to utilize space after the text")
+
+   Measured at 390px first: the card is 342px wide, the portrait was pinned to a
+   fixed 104px, and the text block was CONTENT-sized at 145px, so the widest
+   inked element ended at x=273 and 69px of the row was simply empty.
+
+   Two separate causes, both fixed:
+     - the shot's fixed 104px basis becomes a PROPORTION, so it scales with the
+       card instead of staying small on a wider phone;
+     - .ct-rep__id gets flex:1 1 auto so the text claims what is left rather
+       than shrink-wrapping and leaving a hole on the right.
+
+   A proportion rather than a bigger fixed px: at 360px the card is only 312px,
+   and a fixed 150px portrait would squeeze "Director of Client Relations" into
+   three lines. 42% scales down with the card and keeps the text on two.
+
+   The gap comes down from 24px to 16px, which is the other 8px of the row.
+   ============================================================================ */
+@media (max-width:767px){
+  .ct-reps .ct-rep{gap:var(--ds-space-sm)}
+  .ct-reps .ct-rep__shot{flex:0 0 42%;max-width:42%}
+  .ct-reps .ct-rep__id{flex:1 1 auto;min-width:0}
+}
