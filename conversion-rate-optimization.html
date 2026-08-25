@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="_design/dispenza-fonts.css?v=4f436d86">
 <link rel="stylesheet" href="_design/dispenza-tokens.css?v=bf07bcdb">
 <link rel="stylesheet" href="_design/dispenza-chrome.css?v=a42107cf">
-<link rel="stylesheet" href="_design/dispenza-structural.css?v=e92e25f4">
+<link rel="stylesheet" href="_design/dispenza-structural.css?v=4fbfd7ce">
 
 </head>
 <body class="site-body">
@@ -517,14 +517,17 @@
        dead end on the last page would not deliver that.
        Both ends are real <a> elements, so this works with no JavaScript. -->
   <nav class="svc-pager" aria-label="Service pages">
-    <a class="svc-pager__side svc-pager__prev" href="ads-design.html">
-      <span class="svc-pager__lbl"><span class="svc-pager__car" aria-hidden="true">&lsaquo;</span> Previous</span>
-      <span class="svc-pager__row"><span class="svc-pager__n">04</span><span class="svc-pager__t">Advertisement design</span></span>
-    </a>
-    <span class="svc-pager__pos"><b>05</b> of 08</span>
-    <a class="svc-pager__side svc-pager__next" href="integrations.html">
-      <span class="svc-pager__lbl">Next service <span class="svc-pager__car" aria-hidden="true">&rsaquo;</span></span>
-      <span class="svc-pager__row"><span class="svc-pager__n">06</span><span class="svc-pager__t">Integrations</span></span>
+    <div class="svc-pager__top">
+      <a class="svc-pager__prev" href="ads-design.html"><span class="svc-pager__car" aria-hidden="true">&lsaquo;</span>
+        Previous &mdash; <span class="svc-pager__pn">04</span> Advertisement design</a>
+      <span class="svc-pager__pos"><b>05</b> of 08</span>
+    </div>
+    <a class="svc-pager__bar" href="integrations.html">
+      <span class="svc-pager__id">
+        <span class="svc-pager__lbl">Next service</span>
+        <span class="svc-pager__t">Integrations</span><span class="svc-pager__n">06</span>
+      </span>
+      <span class="svc-pager__go" aria-hidden="true">&rsaquo;</span>
     </a>
   </nav>
 
