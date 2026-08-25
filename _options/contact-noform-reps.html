@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Contact without the form — rep bench</title>
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+<style>
+/* Scoped cn-* — nothing here reaches contact.html. Every name, role, page and
+   portrait below is REAL and already in the build; no person is invented. */
+body{background:var(--ds-bg-surface);color:var(--ds-ink)}
+.cn-wrap{max-width:1140px;margin:0 auto;padding:40px 24px 120px}
+.cn-k{display:inline-block;margin:0 0 6px;font-family:var(--ds-font-display);font-size:11.5px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ds-accent-light)}
+.cn-t{margin:0 0 8px;font-family:var(--ds-font-display);font-size:27px;font-weight:800;letter-spacing:-.02em;color:#fff}
+.cn-p{margin:0 0 8px;font-family:var(--ds-font-body);font-size:14.5px;color:var(--ds-ink-soft);max-width:78ch;line-height:1.6}
+.cn-note{margin:12px 0 26px;padding:12px 16px;border-left:2px solid var(--ds-accent);background:#8d3fe80f;
+  border-radius:0 8px 8px 0;font-family:var(--ds-font-body);font-size:13.5px;color:#d9d4e2;max-width:78ch;line-height:1.65}
+.cn-note b{color:#fff}
+.cn-note--warn{border-left-color:#c9a227;background:#c9a2270f}
+.cn-opt{margin:66px 0 0;padding-top:28px;border-top:1px solid var(--ds-line)}
+.cn-stage{border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);background:var(--ds-bg-warm);padding:30px}
+.cn-h{margin:0;font-family:var(--ds-font-display);font-size:23px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:-.01em}
+.cn-lede{margin:8px 0 24px;font-family:var(--ds-font-body);font-size:14px;color:var(--ds-ink-soft);line-height:1.6}
+
+/* ---- the rep card, shared ---- */
+.cn-rep{min-width:0;display:flex;flex-direction:column}
+.cn-rep__shot{margin:0;border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);
+  background:#0e0f12;overflow:hidden;line-height:0}
+.cn-rep__shot img{width:100%;height:auto;aspect-ratio:1;object-fit:cover;display:block}
+.cn-rep__nm{margin:13px 0 0;font-family:var(--ds-font-display);font-size:15px;font-weight:700;color:#fff}
+.cn-rep__ro{margin:3px 0 0;font-family:var(--ds-font-body);font-size:12.5px;color:var(--ds-ink-soft)}
+.cn-rep__go{margin-top:11px;align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;
+  padding:10px 18px;border:1px solid var(--ds-accent);border-radius:var(--ds-r-pill);color:var(--ds-accent-light);
+  font-family:var(--ds-font-display);font-size:11.5px;font-weight:700;letter-spacing:.1em;text-decoration:none}
+
+/* T1 — 3-across (today's rule) with five people: an orphan row of two */
+.cn-g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ds-space-lg)}
+/* T2 — five across, cards get smaller */
+.cn-g5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+.cn-g5 .cn-rep__nm{font-size:13.5px}
+.cn-g5 .cn-rep__ro{font-size:11.5px}
+.cn-g5 .cn-rep__go{padding:9px 13px;font-size:10.5px}
+/* T3 — six across two clean rows of three */
+.cn-g6{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--ds-space-lg)}
+
+.cn-cta{margin:30px 0 0;padding:22px;border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);
+  background:#0e0f12;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.cn-cta p{margin:0;font-family:var(--ds-font-body);font-size:14px;color:var(--ds-ink-soft);max-width:52ch}
+.cn-cta b{color:#fff}
+.cn-btn{display:inline-flex;align-items:center;min-height:48px;padding:14px 26px;border-radius:var(--ds-r-pill);
+  background:var(--ds-accent);color:#fff;font-family:var(--ds-font-display);font-size:12.5px;font-weight:700;
+  letter-spacing:.1em;text-decoration:none}
+
+table.cn-tab{width:100%;border-collapse:collapse;margin:8px 0 0;font-family:var(--ds-font-body);font-size:13px}
+.cn-tab th,.cn-tab td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--ds-line);vertical-align:top}
+.cn-tab th{font-family:var(--ds-font-display);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ds-ink-soft)}
+.cn-tab td{color:#d9d4e2}
+.cn-ok{color:#7ee0a8}.cn-no{color:#e8a0a0}
+
+@media (max-width:900px){
+  .cn-g3,.cn-g6{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cn-g5{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .cn-g3,.cn-g5,.cn-g6{grid-template-columns:1fr}
+  .cn-stage{padding:20px}
+}
+</style>
+</head>
+<body>
+<div class="cn-wrap">
+  <p class="cn-k">Review page</p>
+  <h1 class="cn-t" style="font-size:32px">Contact without the form — the rep bench</h1>
+  <p class="cn-p">You said you're planning to drop the form and add three reps. Two things came out of
+    checking the build, and both change the shape of that plan.</p>
+
+  <div class="cn-note">
+    <b>1 — You don't need to source three new reps. Four already exist in the build.</b> Six team
+    members have live, published bio pages; the contact page only ever listed two of them. Every one
+    of the four missing has a page AND a portrait already in <code>assets/in-pages/</code>. No new
+    people, no new pages, no new photography.
+  </div>
+
+  <div class="cn-note cn-note--warn">
+    <b>2 — Removing the form with nothing in its place dead-ends the funnel.</b> That form is one of
+    only two on the entire site, and the other one (on
+    <code>dispensary-marketing-and-advertising.html</code>) <b>submits to contact.html</b>, so it
+    feeds the form you'd be deleting. The rep bio pages carry <b>no form and no submit button</b> —
+    they each link back to contact.html six times. And of the 87 demo CTAs across the site, only the
+    header/drawer ones open the booking modal; roughly 82 in-page ones <b>navigate to
+    contact.html</b>. Delete the form and every one of those paths lands on a page with nothing to do.
+    <br><br>
+    <b>The replacement is already built and already shipped.</b> <code>demo-modal.js</code> — the
+    8-step Request&nbsp;a&nbsp;Demo flow — loads on all 27 pages. It only intercepts header and drawer
+    CTAs today, by deliberate choice recorded in its own source comment. Pointing the in-page CTAs and
+    the rep buttons at it turns the modal into the booking mechanism everywhere, which is what makes
+    dropping the inline form safe rather than destructive.
+  </div>
+
+  <h2 class="cn-t" style="font-size:20px;margin-top:34px">The full bench, as it exists today</h2>
+  <table class="cn-tab">
+    <tr><th>Person</th><th>Role (from their own page title)</th><th>Page</th><th>Portrait</th><th>On contact page</th></tr>
+    <tr><td>Sergio Ruiz</td><td>Account Executive</td><td>sergio.html</td><td class="cn-ok">600×600 · 19KB</td><td class="cn-ok">yes</td></tr>
+    <tr><td>Thomas Robinson</td><td>Business Development</td><td>thomas.html</td><td class="cn-ok">500×500 · 15KB</td><td class="cn-ok">yes</td></tr>
+    <tr><td>James Compton</td><td>Chief Executive Officer</td><td>james.html</td><td class="cn-ok">500×500 · 15KB</td><td class="cn-no">no</td></tr>
+    <tr><td>Nick Marx</td><td>Director of Client Relations</td><td>nick.html</td><td class="cn-ok">500×500 · 12KB</td><td class="cn-no">no</td></tr>
+    <tr><td>Shay Spatz</td><td>Digital Design Expert</td><td>shay.html</td><td>3065×3065 · 93KB <b>needs downscale</b></td><td class="cn-no">no</td></tr>
+    <tr><td>Frances Hutzel</td><td>Event Planner</td><td>frances.html</td><td>4000×2661 · 333KB <b>landscape, needs square crop</b></td><td class="cn-no">no</td></tr>
+    <tr><td>Adam Brenzi</td><td>—</td><td class="cn-no">none (/adam never existed)</td><td class="cn-ok">500×500 · 10KB</td><td class="cn-no">removed today</td></tr>
+  </table>
+  <div class="cn-note" style="margin-top:18px">
+    <b>Which three is a judgement call, and it is yours.</b> "Select a rep" implies the person who
+    will run your demo. Nick Marx (Client Relations) fits that squarely and James Compton (CEO)
+    plausibly. Frances Hutzel is an Event Planner and Shay Spatz a Digital Design Expert — real team
+    members, but not obviously the person you book a demo with. Worth picking on purpose rather than
+    by who happens to have a square photo.
+  </div>
+
+  <div class="cn-note cn-note--warn">
+    <b>3 — The portraits are not one set, and it shows the moment they sit in a row.</b> Sergio,
+    Thomas, James and Nick all share the same treatment: the subject cut out over a purple
+    hexagon arc on near-black. <b>Shay's is a plain light-grey studio headshot</b> and Frances's is
+    an uncropped 4000×2661 landscape. In grid 2 below, Shay's card reads as a bright rectangle
+    against four dark ones — it is the first thing the eye goes to, for the wrong reason. This is the
+    same problem as the case-study banners: it is fixed by recompositing onto the house background,
+    not by CSS. Flagging it as a real art dependency before anything ships.
+  </div>
+
+  <!-- ===================== T1 ===================== -->
+  <section class="cn-opt">
+    <p class="cn-k">Grid 1</p>
+    <h2 class="cn-t">Five reps in today's 3-across rule</h2>
+    <p class="cn-p">What happens if you add three and change no CSS: five cards in three columns
+      leaves an orphan row of two. Shown so the problem is visible, not as a recommendation.</p>
+    <div class="cn-stage">
+      <h3 class="cn-h">Select a rep</h3>
+      <p class="cn-lede">Pick who you'd like to talk to and we'll set the time.</p>
+      <div class="cn-g3">
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/sergio-ruiz-dispenza-team.webp" alt="Sergio Ruiz" width="600" height="600" loading="lazy"></figure><p class="cn-rep__nm">Sergio Ruiz</p><p class="cn-rep__ro">Account Executive</p><a class="cn-rep__go" href="../sergio.html">SELECT REP</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/thomas-benjamin-dispenza-team.webp" alt="Thomas Robinson" width="500" height="500" loading="lazy"></figure><p class="cn-rep__nm">Thomas Robinson</p><p class="cn-rep__ro">Business Development</p><a class="cn-rep__go" href="../thomas.html">SELECT REP</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/our-team-at-dispenza-james-compton-4.webp" alt="James Compton" width="500" height="500" loading="lazy"></figure><p class="cn-rep__nm">James Compton</p><p class="cn-rep__ro">Chief Executive Officer</p><a class="cn-rep__go" href="../james.html">SELECT REP</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/our-team-at-dispenza-nick-marx-1.webp" alt="Nick Marx" width="500" height="500" loading="lazy"></figure><p class="cn-rep__nm">Nick Marx</p><p class="cn-rep__ro">Director of Client Relations</p><a class="cn-rep__go" href="../nick.html">SELECT REP</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/Headshot__Shay_Spatz.webp" alt="Shay Spatz" width="3065" height="3065" loading="lazy"></figure><p class="cn-rep__nm">Shay Spatz</p><p class="cn-rep__ro">Digital Design Expert</p><a class="cn-rep__go" href="../shay.html">SELECT REP</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== T2 ===================== -->
+  <section class="cn-opt">
+    <p class="cn-k">Grid 2</p>
+    <h2 class="cn-t">Five across — one clean row</h2>
+    <p class="cn-p">Five equal columns, smaller cards, no orphan. Reads as a bench rather than a
+      catalogue, and the whole choice sits in one glance. Drops to three columns on tablet and one on
+      phone.</p>
+    <div class="cn-stage">
+      <h3 class="cn-h">Select a rep</h3>
+      <p class="cn-lede">Pick who you'd like to talk to and we'll set the time.</p>
+      <div class="cn-g5">
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/sergio-ruiz-dispenza-team.webp" alt="Sergio Ruiz" width="600" height="600" loading="lazy"></figure><p class="cn-rep__nm">Sergio Ruiz</p><p class="cn-rep__ro">Account Executive</p><a class="cn-rep__go" href="../sergio.html">SELECT</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/thomas-benjamin-dispenza-team.webp" alt="Thomas Robinson" width="500" height="500" loading="lazy"></figure><p class="cn-rep__nm">Thomas Robinson</p><p class="cn-rep__ro">Business Development</p><a class="cn-rep__go" href="../thomas.html">SELECT</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/our-team-at-dispenza-james-compton-4.webp" alt="James Compton" width="500" height="500" loading="lazy"></figure><p class="cn-rep__nm">James Compton</p><p class="cn-rep__ro">Chief Executive Officer</p><a class="cn-rep__go" href="../james.html">SELECT</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/our-team-at-dispenza-nick-marx-1.webp" alt="Nick Marx" width="500" height="500" loading="lazy"></figure><p class="cn-rep__nm">Nick Marx</p><p class="cn-rep__ro">Director of Client Relations</p><a class="cn-rep__go" href="../nick.html">SELECT</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/Headshot__Shay_Spatz.webp" alt="Shay Spatz" width="3065" height="3065" loading="lazy"></figure><p class="cn-rep__nm">Shay Spatz</p><p class="cn-rep__ro">Digital Design Expert</p><a class="cn-rep__go" href="../shay.html">SELECT</a></div>
+      </div>
+      <div class="cn-cta">
+        <p><b>No preference?</b> Book straight into the calendar and we'll assign whoever is free
+          first. This opens the same 8-step Request a Demo flow the header button already uses.</p>
+        <a class="cn-btn" href="#">REQUEST A DEMO</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== T3 ===================== -->
+  <section class="cn-opt">
+    <p class="cn-k">Grid 3</p>
+    <h2 class="cn-t">Six — two clean rows of three</h2>
+    <p class="cn-p">If Frances goes in too, six divides evenly into the existing 3-across rule and
+      needs no grid change at all. Her photo is the only real blocker: 4000×2661 landscape at 333KB,
+      so it needs a square crop and a downscale before it can sit next to five 500px headshots.</p>
+    <div class="cn-stage">
+      <h3 class="cn-h">Select a rep</h3>
+      <p class="cn-lede">Pick who you'd like to talk to and we'll set the time.</p>
+      <div class="cn-g6">
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/sergio-ruiz-dispenza-team.webp" alt="Sergio Ruiz" width="600" height="600" loading="lazy"></figure><p class="cn-rep__nm">Sergio Ruiz</p><p class="cn-rep__ro">Account Executive</p><a class="cn-rep__go" href="../sergio.html">SELECT REP</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/thomas-benjamin-dispenza-team.webp" alt="Thomas Robinson" width="500" height="500" loading="lazy"></figure><p class="cn-rep__nm">Thomas Robinson</p><p class="cn-rep__ro">Business Development</p><a class="cn-rep__go" href="../thomas.html">SELECT REP</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/our-team-at-dispenza-james-compton-4.webp" alt="James Compton" width="500" height="500" loading="lazy"></figure><p class="cn-rep__nm">James Compton</p><p class="cn-rep__ro">Chief Executive Officer</p><a class="cn-rep__go" href="../james.html">SELECT REP</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/our-team-at-dispenza-nick-marx-1.webp" alt="Nick Marx" width="500" height="500" loading="lazy"></figure><p class="cn-rep__nm">Nick Marx</p><p class="cn-rep__ro">Director of Client Relations</p><a class="cn-rep__go" href="../nick.html">SELECT REP</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/Headshot__Shay_Spatz.webp" alt="Shay Spatz" width="3065" height="3065" loading="lazy"></figure><p class="cn-rep__nm">Shay Spatz</p><p class="cn-rep__ro">Digital Design Expert</p><a class="cn-rep__go" href="../shay.html">SELECT REP</a></div>
+        <div class="cn-rep"><figure class="cn-rep__shot"><img src="../assets/in-pages/DSC_4221.webp" alt="Frances Hutzel" width="4000" height="2661" loading="lazy"></figure><p class="cn-rep__nm">Frances Hutzel</p><p class="cn-rep__ro">Event Planner</p><a class="cn-rep__go" href="../frances.html">SELECT REP</a></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
