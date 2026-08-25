@@ -1635,3 +1635,50 @@
 @media (max-width:767px){
   .tc-head__seal{margin-bottom:var(--ds-space-lg)}
 }
+
+/* ============================================================================
+   SERVICE PAGER — previous / position / next (owner, 2026-08-25)
+
+   Sits at the foot of all eight service pages. Three parts on one row: the
+   previous service, a plain "05 of 08" position, and the next service given the
+   accent treatment because that is the direction the owner asked for.
+
+   Both ends are real anchors with the destination's own number and title, so a
+   reader knows where they are going before they click, and it works with no
+   JavaScript at all.
+   ============================================================================ */
+.svc-pager{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;gap:var(--ds-space-md);
+  max-width:var(--ds-container-max);margin:var(--ds-space-2xl) auto 0;
+  padding:0 var(--ds-space-md) var(--ds-space-2xl)}
+.svc-pager__side{display:flex;flex-direction:column;gap:8px;min-width:0;padding:18px 20px;
+  border:1px solid var(--ds-line);border-radius:var(--ds-r-surface);text-decoration:none;
+  background:linear-gradient(180deg,#ffffff08,#ffffff03);
+  transition:border-color var(--ds-dur-fast) var(--ds-ease-out),background var(--ds-dur-fast) var(--ds-ease-out)}
+.svc-pager__side:hover{border-color:var(--ds-accent);background:#8d3fe814}
+.svc-pager__side:focus-visible{outline:2px solid var(--ds-accent-light);outline-offset:2px}
+/* the next card leads, so it carries the accent edge at rest */
+.svc-pager__next{border-color:#8d3fe83d;text-align:right;align-items:flex-end}
+.svc-pager__lbl{font-family:var(--ds-font-display);font-size:10.5px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-ink-soft)}
+.svc-pager__next .svc-pager__lbl{color:var(--ds-accent-ink)}
+.svc-pager__car{font-size:14px;line-height:1;vertical-align:-1px}
+.svc-pager__row{display:flex;align-items:baseline;gap:10px;min-width:0}
+.svc-pager__next .svc-pager__row{flex-direction:row-reverse}
+.svc-pager__n{font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.12em;
+  color:var(--ds-ink-soft);flex:none}
+.svc-pager__next .svc-pager__n{color:var(--ds-accent-ink)}
+.svc-pager__t{font-family:var(--ds-font-display);font-size:16px;font-weight:700;color:var(--ds-ink-heading);
+  letter-spacing:-.005em;min-width:0}
+.svc-pager__pos{align-self:center;font-family:var(--ds-font-body);font-size:12.5px;color:var(--ds-ink-soft);
+  white-space:nowrap;padding:0 4px}
+.svc-pager__pos b{font-family:var(--ds-font-display);color:var(--ds-ink-heading);font-weight:700}
+
+/* On a phone the three-across row would give each card ~110px. Stacked, with the
+   NEXT card first: it is the action the owner asked for, and putting it under
+   the thumb rather than below the back-link is the point of the change. */
+@media (max-width:719px){
+  .svc-pager{grid-template-columns:1fr;gap:var(--ds-space-sm);padding-bottom:var(--ds-space-xl)}
+  .svc-pager__next{order:-1;text-align:left;align-items:flex-start}
+  .svc-pager__next .svc-pager__row{flex-direction:row}
+  .svc-pager__pos{order:1;justify-self:center}
+}

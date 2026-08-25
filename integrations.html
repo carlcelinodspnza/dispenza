@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="_design/dispenza-fonts.css?v=4f436d86">
 <link rel="stylesheet" href="_design/dispenza-tokens.css?v=bf07bcdb">
 <link rel="stylesheet" href="_design/dispenza-chrome.css?v=ce341dab">
-<link rel="stylesheet" href="_design/dispenza-structural.css?v=8d318ece">
+<link rel="stylesheet" href="_design/dispenza-structural.css?v=e92e25f4">
 
 </head>
 <body class="site-body">
@@ -406,6 +406,29 @@
       </div>
     </div>
   </section>
+
+  <!-- ══ SERVICE PAGER ══ ADDED 2026-08-25 on owner instruction ("we should have a
+       page nav and next button here that leads to the next service, for all
+       services pages").
+       ORDER AND COPY COME FROM THE MEGA MENU, not from a new list: the eight
+       data-n / data-title values in index.html's #panel-services are the single
+       place this sequence is defined, so the pager cannot drift from the menu.
+       IT CYCLES. 08 -> 01 and 01 -> 08, so every one of the eight has both a
+       previous and a next; the owner asked for a next on all of them, and a
+       dead end on the last page would not deliver that.
+       Both ends are real <a> elements, so this works with no JavaScript. -->
+  <nav class="svc-pager" aria-label="Service pages">
+    <a class="svc-pager__side svc-pager__prev" href="conversion-rate-optimization.html">
+      <span class="svc-pager__lbl"><span class="svc-pager__car" aria-hidden="true">&lsaquo;</span> Previous</span>
+      <span class="svc-pager__row"><span class="svc-pager__n">05</span><span class="svc-pager__t">Conversion rate optimization</span></span>
+    </a>
+    <span class="svc-pager__pos"><b>06</b> of 08</span>
+    <a class="svc-pager__side svc-pager__next" href="consulting.html">
+      <span class="svc-pager__lbl">Next service <span class="svc-pager__car" aria-hidden="true">&rsaquo;</span></span>
+      <span class="svc-pager__row"><span class="svc-pager__n">07</span><span class="svc-pager__t">Consulting</span></span>
+    </a>
+  </nav>
+
 
   <script src="_design/doc-guide.js?v=ab642f2a" defer></script>
 
