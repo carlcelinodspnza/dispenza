@@ -18,3 +18,26 @@
   left:var(--ds-space-sm);right:var(--ds-space-sm);bottom:var(--ds-space-2xs);
   height:2px;border-radius:var(--ds-r-pill);background:var(--ds-accent)}
 .drawer-link[data-section-current],.drawer-trigger[data-section-current]{color:var(--ds-accent-ink)}
+
+/* ============================================================================
+   TOUCH TARGETS — THE DESKTOP NAV RAIL ON A TOUCH DEVICE (2026-08-25)
+
+   Found by re-running the tap-target audit at 1024 and 1440 with touch
+   emulation ON, which earlier sweeps never did -- they only tested phone
+   widths, so these were invisible. On a touch laptop or a large tablet
+   pointer:coarse is TRUE at any width, the rail is the visible navigation, and
+   its five links measured 33px tall.
+
+   That is the exact failure mode the sizing rule warns about: target size is a
+   property of the INPUT DEVICE, not the screen, so gating on a max-width would
+   have missed it.
+
+   The rail is 62px tall, so 44px links fit inside it without changing the
+   header's height. min-height grows the box around an already-centred label
+   rather than moving it, and no mouse user sees any difference because the
+   query is pointer:coarse ONLY -- deliberately no width arm here, since below
+   1024 the rail is hidden and the drawer takes over.
+   ============================================================================ */
+@media (pointer: coarse){
+  .rail__link{display:inline-flex;align-items:center;min-height:44px}
+}
