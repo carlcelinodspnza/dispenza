@@ -1616,3 +1616,22 @@
 @media (min-width:430px) and (max-width:599px){
   .ct-reps{max-width:360px;margin-inline:auto}
 }
+
+/* ============================================================================
+   HEAD SEAL — MINIMUM CLEARANCE BEFORE THE NEXT HEADING (owner: "the divider is
+   too close to Let's Talk")
+
+   Measured: on mobile the rule sat 0px above the heading -- literally touching.
+   Desktop was fine at 40px, from margin collapsing that the smaller mobile type
+   does not produce. Three pages are affected (contact, ads1, thank-you); the
+   other seals already clear their heading.
+
+   margin-BOTTOM is used rather than a padding or a gap precisely BECAUSE
+   adjacent margins collapse: the resulting space is max(this, the next
+   element's margin-top), which is exactly "at least 40px" semantics. Pages that
+   already clear by more keep their larger value, so this cannot inflate the 19
+   that were already correct.
+   ============================================================================ */
+@media (max-width:767px){
+  .tc-head__seal{margin-bottom:var(--ds-space-lg)}
+}
