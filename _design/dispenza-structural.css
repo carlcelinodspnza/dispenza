@@ -1198,3 +1198,29 @@
    ============================================================================ */
 .ct-doors{max-width:none}
 #contact-office .tc-vcard{max-width:none}
+
+/* ============================================================================
+   REP PORTRAITS — TALLER CARD (owner, 2026-08-25)
+
+   The shot was aspect-ratio:1, i.e. exactly the square the source files are.
+   4/5 takes the card from 195x195 to 195x243 at five-up (+25% height).
+
+   WHY object-fit:cover IS SAFE HERE, AND WHY contain IS NOT. Four of the five
+   portraits are RGBA with fully transparent corners -- measured at 26-37% of
+   each file -- so the dark field behind each subject is not part of the photo,
+   it is .ct-rep__shot's own background showing through. That means:
+
+     - cover scales the subject UP and trims the left/right edges, which are
+       mostly the transparent corners plus the outer sliver of the hexagon arc.
+       The arc still reads; the subject gets larger, which is the visible win.
+     - contain was tried and REJECTED on the render, not on theory: with the
+       image's aspect released, Sergio's and Shay's cards came out completely
+       EMPTY. Fitting a square inside a taller box also leaves dead background
+       above and below, so the card grows while the portrait does not -- the
+       opposite of what was asked.
+
+   Shay Spatz's file is the exception: mode RGB, no alpha, an opaque light-grey
+   studio background. It crops correctly but still reads as a bright rectangle
+   beside four dark ones. That is unchanged here and remains art work.
+   ============================================================================ */
+.ct-rep__shot img{aspect-ratio:4/5}
