@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="en" data-surface="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pricing row — 5 layout options</title>
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+<style>
+/* ---------------------------------------------------------------------------
+   Scoped to this review page only — every rule is po-* so nothing can leak
+   into the site if an option is later lifted wholesale. Options inherit the
+   real tokens from the stylesheets above, so what renders here is what the
+   section would actually look like.
+   --------------------------------------------------------------------------- */
+body { background: var(--ds-bg-light); color: var(--ds-ink-on-light); }
+.po-wrap { max-width: 1120px; margin: 0 auto; padding: 40px 24px 96px; }
+.po-lede { font-family: var(--ds-font-body); color: var(--ds-ink-soft-light); max-width: 62ch; }
+.po-opt { margin: 72px 0 0; padding-top: 28px; border-top: 1px solid #00000014; }
+.po-opt__tag {
+  display: inline-block; margin: 0 0 4px;
+  font-family: var(--ds-font-display); font-size: 12px; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--ds-accent);
+}
+.po-opt__t { margin: 0 0 4px; font-family: var(--ds-font-display); font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+.po-opt__why { margin: 0 0 26px; font-family: var(--ds-font-body); font-size: 15px; color: var(--ds-ink-soft-light); max-width: 70ch; }
+
+/* shared atoms ------------------------------------------------------------- */
+.po-name { font-family: var(--ds-font-display); font-weight: 800; letter-spacing: -.02em; text-transform: uppercase; }
+.po-name em { font-style: italic; text-transform: none; }
+.po-fig { font-family: var(--ds-font-display); font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+.po-fig span { font-size: .42em; font-weight: 700; letter-spacing: 0; }
+.po-add { font-size: 12px; color: var(--ds-ink-soft-light); }
+.po-sub { font-size: 13px; font-weight: 600; color: var(--ds-accent); }
+.po-inc { font-weight: 700; font-style: italic; }
+.po-badge {
+  display: inline-block; padding: 4px 10px; border-radius: 999px;
+  font-family: var(--ds-font-display); font-size: 10px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+}
+.po-badge--pop { background: var(--ds-accent); color: #fff; }
+.po-badge--full { background: #00000010; color: var(--ds-ink-soft-light); }
+
+/* ============ A · COMPARE GRID ============================================ */
+.poA { border: 1px solid #00000014; border-radius: 16px; overflow: hidden; background: #fff; }
+.poA__head { display: grid; grid-template-columns: 1fr 168px 168px; align-items: end; gap: 0;
+  padding: 22px 24px 18px; border-bottom: 1px solid #00000014; }
+.poA__slot { text-align: center; }
+.poA__slot .po-name { font-size: 15px; display: block; margin-bottom: 2px; }
+.poA__slot .po-fig { font-size: 26px; }
+.poA__slot .po-add { display: block; margin-top: 3px; }
+.poA__intro .po-name { font-size: 13px; letter-spacing: .14em; color: var(--ds-ink-soft-light); }
+.poA__row { display: grid; grid-template-columns: 1fr 168px 168px; align-items: center;
+  padding: 9px 24px; font-family: var(--ds-font-body); font-size: 14.5px; }
+.poA__row:nth-child(odd) { background: #00000005; }
+.poA__row b { font-weight: 700; font-style: italic; }
+.poA__tick { text-align: center; color: var(--ds-accent); font-weight: 700; }
+.poA__no { text-align: center; color: #00000026; }
+
+/* ============ B · RIBBON SPLIT ============================================ */
+.poB { display: grid; gap: 18px; }
+.poB__card { position: relative; display: grid; grid-template-columns: 260px 1fr;
+  border: 1px solid #00000014; border-radius: 16px; background: #fff; overflow: hidden; }
+.poB__card--hero { border-color: var(--ds-accent); box-shadow: 0 0 0 3px #8d3fe81f; }
+.poB__rail { padding: 22px; border-right: 1px solid #00000014; background: #8d3fe80a; }
+.poB__rail .po-name { font-size: 19px; display: block; }
+.poB__rail .po-fig { font-size: 40px; margin: 12px 0 2px; }
+.poB__feat { padding: 22px 24px; columns: 2; column-gap: 30px; font-family: var(--ds-font-body); font-size: 14px; }
+.poB__feat li { break-inside: avoid; margin: 0 0 7px; padding-left: 17px; position: relative; list-style: none; }
+.poB__feat li::before { content: "✓"; position: absolute; left: 0; color: var(--ds-accent); font-weight: 700; }
+.poB__ribbon { position: absolute; top: 12px; right: -34px; transform: rotate(45deg);
+  padding: 4px 40px; background: var(--ds-accent); color: #fff;
+  font-family: var(--ds-font-display); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+
+/* ============ C · SEGMENTED SWITCHER ====================================== */
+.poC { border: 1px solid #00000014; border-radius: 16px; background: #fff; padding: 24px; max-width: 720px; }
+.poC__seg { display: inline-flex; padding: 4px; border-radius: 999px; background: #00000008; margin-bottom: 22px; }
+.poC__seg button { min-height: 40px; padding: 0 20px; border: 0; border-radius: 999px; background: none;
+  font-family: var(--ds-font-display); font-size: 13px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ds-ink-soft-light); cursor: pointer; }
+.poC__seg button[aria-pressed="true"] { background: var(--ds-accent); color: #fff; }
+.poC__body { display: none; }
+.poC__body.is-on { display: grid; grid-template-columns: 220px 1fr; gap: 26px; align-items: start; }
+.poC__body .po-fig { font-size: 44px; }
+.poC__list { columns: 2; column-gap: 26px; font-family: var(--ds-font-body); font-size: 14px; }
+.poC__list li { break-inside: avoid; margin: 0 0 7px; padding-left: 17px; position: relative; list-style: none; }
+.poC__list li::before { content: "✓"; position: absolute; left: 0; color: var(--ds-accent); font-weight: 700; }
+
+/* ============ D · PRICE-LED PANEL ========================================= */
+.poD { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.poD__card { border-radius: 16px; overflow: hidden; border: 1px solid #00000014; background: #fff; }
+.poD__top { padding: 24px; color: #fff;
+  background: linear-gradient(140deg, var(--ds-accent) 0%, var(--ds-accent-deep) 100%); }
+.poD__card--alt .poD__top { background: linear-gradient(140deg, #2a2c33 0%, #15161a 100%); }
+.poD__top .po-name { font-size: 17px; display: block; opacity: .9; }
+.poD__top .po-fig { font-size: 42px; margin: 10px 0 2px; }
+.poD__top .po-add, .poD__top .po-sub { color: #ffffffbf; }
+.poD__chips { padding: 20px; display: flex; flex-wrap: wrap; gap: 7px; }
+.poD__chip { padding: 6px 11px; border-radius: 999px; border: 1px solid #00000014;
+  font-family: var(--ds-font-body); font-size: 12.5px; background: #00000004; }
+.poD__chip--inc { border-color: #8d3fe83d; background: #8d3fe80f; font-weight: 700; }
+
+/* ============ E · DENSE DUO =============================================== */
+.poE { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.poE__card { border: 1px solid #00000014; border-radius: 16px; background: #fff; padding: 22px; }
+.poE__card--hero { border-color: var(--ds-accent); }
+.poE__top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  padding-bottom: 14px; border-bottom: 1px solid #00000010; }
+.poE__top .po-name { font-size: 17px; }
+.poE__top .po-fig { font-size: 30px; }
+.poE__mods { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 12px; }
+.poE__mod { padding: 4px 9px; border-radius: 6px; background: var(--ds-accent); color: #fff;
+  font-family: var(--ds-font-display); font-size: 10.5px; font-weight: 700; letter-spacing: .06em; }
+.poE__rest { font-family: var(--ds-font-body); font-size: 13.5px; color: var(--ds-ink-soft-light); }
+.poE__rest li { margin: 0 0 6px; padding-left: 16px; position: relative; list-style: none; }
+.poE__rest li::before { content: "✓"; position: absolute; left: 0; color: var(--ds-accent); }
+
+@media (max-width: 900px) {
+  .poA__head, .poA__row { grid-template-columns: 1fr 84px 84px; padding-left: 14px; padding-right: 14px; }
+  .poB__card, .poC__body.is-on, .poD, .poE { grid-template-columns: 1fr; }
+  .poB__rail { border-right: 0; border-bottom: 1px solid #00000014; }
+  .poB__feat, .poC__list { columns: 1; }
+}
+</style>
+</head>
+<body>
+<div class="po-wrap">
+
+  <p class="po-opt__tag">Review page</p>
+  <h1 class="po-opt__t" style="font-size:32px">Pricing row — 5 layout options</h1>
+  <p class="po-lede">
+    Real content, real tokens — these load the site's own stylesheets, so the type, colour and
+    spacing are what the live section would use. Note the underlying fact all five exploit:
+    <strong>11 of the 13 features are identical across both plans.</strong> Only 2 genuinely differ
+    (WEB Plus vs WEB Pro, and Enterprise's CREATIVE&nbsp;Pro / OUTREACH / Review Management / A&nbsp;La&nbsp;Carte).
+    The current layout prints that shared list twice, which is most of why it reads long and bland.
+  </p>
+
+  <!-- ================= A ================= -->
+  <section class="po-opt">
+    <p class="po-opt__tag">Option A</p>
+    <h2 class="po-opt__t">Compare grid</h2>
+    <p class="po-opt__why">Prints each feature once and ticks the columns. Shortest of the five and the
+      only one that answers "what do I get for the extra $2,300?" at a glance. Most SaaS-conventional.</p>
+    <div class="poA">
+      <div class="poA__head">
+        <div class="poA__intro"><span class="po-name">What's included</span></div>
+        <div class="poA__slot">
+          <span class="po-badge po-badge--pop">Most popular</span>
+          <span class="po-name" style="margin-top:6px">Marketing <em>Pro</em></span>
+          <span class="po-fig">$4,200<span>/mo</span></span>
+          <span class="po-add">+$3,000 / location</span>
+        </div>
+        <div class="poA__slot">
+          <span class="po-badge po-badge--full">Full suite</span>
+          <span class="po-name" style="margin-top:6px">Enterprise</span>
+          <span class="po-fig">$6,500<span>/mo</span></span>
+          <span class="po-add">+$3,000 / location</span>
+        </div>
+      </div>
+      <div class="poA__row"><span><b>SEO Pro</b> included</span><span class="poA__tick">✓</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span><b>WEB</b> module</span><span class="poA__tick">Plus</span><span class="poA__tick">Pro</span></div>
+      <div class="poA__row"><span><b>Web Graphics</b> included</span><span class="poA__tick">✓</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span><b>CREATIVE Pro</b> included</span><span class="poA__no">—</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span><b>OUTREACH</b> Email + SMS</span><span class="poA__no">—</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span>Review Management</span><span class="poA__no">—</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span>Monthly Strategy Sessions</span><span class="poA__tick">✓</span><span class="poA__no">—</span></div>
+      <div class="poA__row"><span>Monthly + Quarterly Advanced Reporting &amp; Attribution</span><span class="poA__tick">✓</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span>Dedicated Campaign Strategist</span><span class="poA__tick">✓</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span>General Marketing Consulting</span><span class="poA__tick">✓</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span>Technology &amp; Integrations Support</span><span class="poA__tick">✓</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span>Semi-Exclusivity</span><span class="poA__tick">✓</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span>Performance Benchmarks</span><span class="poA__tick">✓</span><span class="poA__tick">✓</span></div>
+      <div class="poA__row"><span>All A La Carte Upgrades</span><span class="poA__no">—</span><span class="poA__tick">✓</span></div>
+    </div>
+  </section>
+
+  <!-- ================= B ================= -->
+  <section class="po-opt">
+    <p class="po-opt__tag">Option B</p>
+    <h2 class="po-opt__t">Ribbon split</h2>
+    <p class="po-opt__why">Closest to what's there now, tightened: price rail on a tinted panel, features in
+      two columns beside it, badge as a corner ribbon instead of a full-width bar. Lowest-risk change.</p>
+    <div class="poB">
+      <article class="poB__card poB__card--hero">
+        <div class="poB__ribbon">Popular</div>
+        <div class="poB__rail">
+          <span class="po-name">Marketing <em>Pro</em></span>
+          <span class="po-sub">Guaranteed results</span>
+          <div class="po-fig">$4,200<span>/mo</span></div>
+          <div class="po-add">+$3,000 / additional location</div>
+        </div>
+        <ul class="poB__feat">
+          <li><span class="po-inc">SEO Pro</span> included</li>
+          <li><span class="po-inc">WEB Plus</span> included</li>
+          <li><span class="po-inc">Web Graphics</span> included</li>
+          <li>Monthly Strategy Sessions</li>
+          <li>Monthly + Quarterly Advanced Reporting &amp; Attribution</li>
+          <li>Dedicated Campaign Strategist</li>
+          <li>General Marketing Consulting</li>
+          <li>Technology &amp; Integrations Support</li>
+          <li>Semi-Exclusivity</li>
+          <li>Performance Benchmarks</li>
+        </ul>
+      </article>
+      <article class="poB__card">
+        <div class="poB__rail">
+          <span class="po-name">Enterprise</span>
+          <span class="po-sub">Guaranteed results + retention</span>
+          <div class="po-fig">$6,500<span>/mo</span></div>
+          <div class="po-add">+$3,000 / additional location</div>
+        </div>
+        <ul class="poB__feat">
+          <li><span class="po-inc">SEO Pro</span> included</li>
+          <li><span class="po-inc">WEB Pro</span> included</li>
+          <li><span class="po-inc">CREATIVE Pro</span> included</li>
+          <li><span class="po-inc">OUTREACH Email</span> included</li>
+          <li><span class="po-inc">OUTREACH SMS</span> included</li>
+          <li>Review Management</li>
+          <li>Monthly + Quarterly Advanced Reporting &amp; Attribution</li>
+          <li>Dedicated Campaign Strategist</li>
+          <li>General Marketing Consulting</li>
+          <li>Technology &amp; Integrations Support</li>
+          <li>Semi-Exclusivity</li>
+          <li>Performance Benchmarks</li>
+          <li>Includes all A La Carte Upgrades</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= C ================= -->
+  <section class="po-opt">
+    <p class="po-opt__tag">Option C</p>
+    <h2 class="po-opt__t">Segmented switcher</h2>
+    <p class="po-opt__why">One card, a segmented control swaps the plan. The smallest footprint by far —
+      but it hides one plan behind a click, which is the opposite of what the lede promises
+      ("Nothing is behind a click"). Included so the trade-off is visible, not because it fits that copy.</p>
+    <div class="poC">
+      <div class="poC__seg" role="group" aria-label="Choose a plan">
+        <button type="button" data-seg="1" aria-pressed="true">Marketing Pro</button>
+        <button type="button" data-seg="2" aria-pressed="false">Enterprise</button>
+      </div>
+      <div class="poC__body is-on" data-body="1">
+        <div>
+          <span class="po-badge po-badge--pop">Most popular</span>
+          <div class="po-fig" style="margin-top:10px">$4,200<span>/mo</span></div>
+          <div class="po-add">+$3,000 / additional location</div>
+          <p class="po-sub" style="margin-top:8px">Guaranteed results</p>
+        </div>
+        <ul class="poC__list">
+          <li><span class="po-inc">SEO Pro</span> included</li><li><span class="po-inc">WEB Plus</span> included</li>
+          <li><span class="po-inc">Web Graphics</span> included</li><li>Monthly Strategy Sessions</li>
+          <li>Monthly + Quarterly Reporting &amp; Attribution</li><li>Dedicated Campaign Strategist</li>
+          <li>General Marketing Consulting</li><li>Technology &amp; Integrations Support</li>
+          <li>Semi-Exclusivity</li><li>Performance Benchmarks</li>
+        </ul>
+      </div>
+      <div class="poC__body" data-body="2">
+        <div>
+          <span class="po-badge po-badge--full">Full suite</span>
+          <div class="po-fig" style="margin-top:10px">$6,500<span>/mo</span></div>
+          <div class="po-add">+$3,000 / additional location</div>
+          <p class="po-sub" style="margin-top:8px">Guaranteed results + retention</p>
+        </div>
+        <ul class="poC__list">
+          <li><span class="po-inc">SEO Pro</span> included</li><li><span class="po-inc">WEB Pro</span> included</li>
+          <li><span class="po-inc">CREATIVE Pro</span> included</li><li><span class="po-inc">OUTREACH Email</span> included</li>
+          <li><span class="po-inc">OUTREACH SMS</span> included</li><li>Review Management</li>
+          <li>Monthly + Quarterly Reporting &amp; Attribution</li><li>Dedicated Campaign Strategist</li>
+          <li>General Marketing Consulting</li><li>Technology &amp; Integrations Support</li>
+          <li>Semi-Exclusivity</li><li>Performance Benchmarks</li><li>All A La Carte Upgrades</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= D ================= -->
+  <section class="po-opt">
+    <p class="po-opt__tag">Option D</p>
+    <h2 class="po-opt__t">Price-led panel</h2>
+    <p class="po-opt__why">The number leads on a filled panel, features drop to chips underneath. Boldest
+      of the five and the most "product page" — good if the price is the argument.</p>
+    <div class="poD">
+      <article class="poD__card">
+        <div class="poD__top">
+          <span class="po-badge" style="background:#ffffff29;color:#fff">Most popular</span>
+          <span class="po-name" style="margin-top:8px">Marketing <em>Pro</em></span>
+          <div class="po-fig">$4,200<span>/mo</span></div>
+          <div class="po-add">+$3,000 / additional location</div>
+        </div>
+        <div class="poD__chips">
+          <span class="poD__chip poD__chip--inc">SEO Pro</span><span class="poD__chip poD__chip--inc">WEB Plus</span>
+          <span class="poD__chip poD__chip--inc">Web Graphics</span><span class="poD__chip">Strategy Sessions</span>
+          <span class="poD__chip">Advanced Reporting</span><span class="poD__chip">Campaign Strategist</span>
+          <span class="poD__chip">Marketing Consulting</span><span class="poD__chip">Integrations Support</span>
+          <span class="poD__chip">Semi-Exclusivity</span><span class="poD__chip">Performance Benchmarks</span>
+        </div>
+      </article>
+      <article class="poD__card poD__card--alt">
+        <div class="poD__top">
+          <span class="po-badge" style="background:#ffffff29;color:#fff">Full suite</span>
+          <span class="po-name" style="margin-top:8px">Enterprise</span>
+          <div class="po-fig">$6,500<span>/mo</span></div>
+          <div class="po-add">+$3,000 / additional location</div>
+        </div>
+        <div class="poD__chips">
+          <span class="poD__chip poD__chip--inc">SEO Pro</span><span class="poD__chip poD__chip--inc">WEB Pro</span>
+          <span class="poD__chip poD__chip--inc">CREATIVE Pro</span><span class="poD__chip poD__chip--inc">OUTREACH Email</span>
+          <span class="poD__chip poD__chip--inc">OUTREACH SMS</span><span class="poD__chip">Review Management</span>
+          <span class="poD__chip">Advanced Reporting</span><span class="poD__chip">Campaign Strategist</span>
+          <span class="poD__chip">Marketing Consulting</span><span class="poD__chip">Integrations Support</span>
+          <span class="poD__chip">Semi-Exclusivity</span><span class="poD__chip">Performance Benchmarks</span>
+          <span class="poD__chip">All A La Carte Upgrades</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= E ================= -->
+  <section class="po-opt">
+    <p class="po-opt__tag">Option E</p>
+    <h2 class="po-opt__t">Dense duo</h2>
+    <p class="po-opt__why">Two equal cards. The paid-for <em>modules</em> are promoted to solid tags — they are
+      what actually differs — and the shared service list sits quietly beneath in smaller type.</p>
+    <div class="poE">
+      <article class="poE__card poE__card--hero">
+        <div class="poE__top">
+          <span class="po-name">Marketing <em>Pro</em></span>
+          <span class="po-fig">$4,200<span>/mo</span></span>
+        </div>
+        <div class="poE__mods">
+          <span class="poE__mod">SEO PRO</span><span class="poE__mod">WEB PLUS</span><span class="poE__mod">WEB GRAPHICS</span>
+        </div>
+        <ul class="poE__rest">
+          <li>Monthly Strategy Sessions</li><li>Monthly + Quarterly Advanced Reporting &amp; Attribution</li>
+          <li>Dedicated Campaign Strategist</li><li>General Marketing Consulting</li>
+          <li>Technology &amp; Integrations Support</li><li>Semi-Exclusivity</li><li>Performance Benchmarks</li>
+        </ul>
+        <p class="po-add" style="margin-top:12px">+$3,000 / additional location</p>
+      </article>
+      <article class="poE__card">
+        <div class="poE__top">
+          <span class="po-name">Enterprise</span>
+          <span class="po-fig">$6,500<span>/mo</span></span>
+        </div>
+        <div class="poE__mods">
+          <span class="poE__mod">SEO PRO</span><span class="poE__mod">WEB PRO</span><span class="poE__mod">CREATIVE PRO</span>
+          <span class="poE__mod">OUTREACH EMAIL</span><span class="poE__mod">OUTREACH SMS</span>
+        </div>
+        <ul class="poE__rest">
+          <li>Review Management</li><li>Monthly + Quarterly Advanced Reporting &amp; Attribution</li>
+          <li>Dedicated Campaign Strategist</li><li>General Marketing Consulting</li>
+          <li>Technology &amp; Integrations Support</li><li>Semi-Exclusivity</li>
+          <li>Performance Benchmarks</li><li>Includes all A La Carte Upgrades</li>
+        </ul>
+        <p class="po-add" style="margin-top:12px">+$3,000 / additional location</p>
+      </article>
+    </div>
+  </section>
+
+</div>
+<script>
+/* Option C only — the segmented control, so the option can actually be tried. */
+(function () {
+  var segs = document.querySelectorAll('.poC__seg button');
+  segs.forEach(function (b) {
+    b.addEventListener('click', function () {
+      segs.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      document.querySelectorAll('.poC__body').forEach(function (p) {
+        p.classList.toggle('is-on', p.dataset.body === b.dataset.seg);
+      });
+    });
+  });
+}());
+</script>
+</body>
+</html>
