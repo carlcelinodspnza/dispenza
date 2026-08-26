@@ -2270,5 +2270,16 @@
    part of the image that has already become white. */
 .hw-consult__copy{margin-top:calc(-1 * var(--ds-space-2xl));position:relative;z-index:1}
 
+/* PHONES: DROP THE INNER PADDING. The .container already pads 24px each side, and
+   .hw-consult__copy was adding 24px more inside it, so on a 390px phone the paragraph ran
+   in 294px of a 342px column -- measured 33 characters per line against a comfortable
+   45-75, and 25 at 320px. That is a layout fault, not a copy-length one: the text was
+   paying for the same gutter twice. Removing the inner padding returns the full column.
+   Desktop keeps it, because there the copy is capped at 920px well inside the container
+   and the padding only matters if the viewport ever squeezes it. */
+@media (max-width:719px){
+  .hw-consult__copy{padding-inline:0}
+}
+
 /* The hover speed-up that briefly lived here is REMOVED at the owner's request. The
    columns now run at one constant pace and do not react to the pointer. */
