@@ -1716,23 +1716,27 @@
   color:var(--ds-ink);letter-spacing:-.015em;transition:color var(--ds-dur-fast) var(--ds-ease-out)}
 .svc-pager__row:hover .svc-pager__t{color:var(--ds-ink-heading)}
 
-/* THE NUMBER COLUMN. With seven rows the trailing numbers were ragged across 183px, which
-   reads as sloppy rather than as a list. The widest plain title measures 247px, so a 260px
-   floor lands every number on the same x. Deliberately NOT margin-left:auto -- the rows run
-   the full container width, so that would strand the number ~800px from the title it
-   belongs to. The next row keeps its own position: its title starts after the eyebrow, so
-   it cannot share the column without dragging the eyebrow out of place, and it is a
-   deliberately distinct row anyway.
+/* THE NUMBER SITS AT THE FAR END OF THE ROW, at every width (owner, 2026-08-26: "move the
+   numbers at the opposite end of the page names, like how it is laid out in Option A").
 
-   GATED ON min-width:720px, not reset in the phone block below. A 260px floor does not fit
-   a 320px viewport -- the row has 238px of content width there, and the overflow gave the
-   whole PAGE a horizontal scrollbar (325 vs 320). Resetting it in the max-width:719px block
-   does not work either: this selector carries three classes and a bare .svc-pager__t
-   carries one, so the reset loses on specificity inside the media query and the floor stays
-   live. Gating the rule is the fix that cannot be silently overridden. */
-@media (min-width:720px){
-  .svc-pager__row .svc-pager__t{min-width:260px}
-}
+   This REPLACES a 260px min-width floor on the title, which packed the numbers into a
+   column just after the longest title. I had argued against the right edge on desktop on
+   the grounds that it strands the number ~800px from the title it labels; the owner saw
+   both and chose the far edge, which is what option A demonstrated. Their call, and it is
+   the better one for a list this wide: the eye tracks a single hard right margin instead of
+   an invisible one that only exists because of the longest string in the set.
+
+   It is also strictly more robust than the floor was. The floor had to be gated in
+   `@media (min-width:720px)` because 260px does not fit a 320px viewport -- and a reset in
+   the phone block could not do the job, since a three-class selector beats a bare
+   `.svc-pager__t` inside a media query (a @media adds no specificity). An auto margin makes
+   no width assumption at all, so one unconditional rule now serves every width and there is
+   nothing left to gate or accidentally out-specify.
+
+   `.svc-pager__id` has to grow for the auto margin to have room to push into -- without it
+   the flex item shrinks to its content and the number lands right beside the title. */
+.svc-pager__id{flex:1 1 auto}
+.svc-pager__n{margin-left:auto}
 .svc-pager__n{font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.12em;
   color:var(--ds-accent-ink)}
 
@@ -1745,16 +1749,9 @@
      exists to remove, so only the column gap survives the wrap. */
   .svc-pager__id{gap:1px 10px}
   .svc-pager__t{font-size:15px}
-  /* Phones get the same aligned number column by a DIFFERENT mechanism. A min-width floor
-     cannot work here: aligning would need a floor at least as wide as the widest title
-     (~220px at 15px), and a 320px viewport only leaves the row 238px of content, so the
-     floor would overflow the page. Pushing the number to the row's right edge aligns at
-     every width with no width assumption at all -- and because the row is narrow on a
-     phone, "right edge" is only ~80px from the title rather than the ~800px it would be
-     on desktop, which is why this is the phone rule and the floor is the desktop one. */
-  .svc-pager__id{flex:1 1 auto}
-  .svc-pager__n{margin-left:auto}
-  .svc-pager__row--next .svc-pager__t{font-size:17px}
+  /* the two rules that used to live here -- .svc-pager__id{flex} and .svc-pager__n{margin-
+     left:auto} -- are unconditional now that desktop uses the same mechanism, so the phone
+     block no longer needs its own copy. */
 }
 
 /* ============================================================================

@@ -95,11 +95,10 @@
 /* extra breathing room above the rule, on top of the base padding-top */
 .rail-panel--services .svc-preview__slot{margin-top:auto;padding-top:var(--ds-space-lg)}
 .rail-panel--services .svc-preview>*{position:relative}
-/* the watermark numeral. content:attr(data-ghost) is set by page-effects.js as
-   the hovered row changes, so it tracks the preview instead of being frozen. */
-.rail-panel--services .svc-preview::after{content:attr(data-ghost);position:absolute;
-  right:-14px;bottom:-58px;font-family:var(--ds-font-display);font-size:260px;font-weight:800;
-  line-height:.8;letter-spacing:-.05em;color:#ffffff0f;pointer-events:none}
+/* The watermark numeral that used to sit here is REMOVED. It drew content:attr(data-ghost),
+   an attribute the deleted preview JS set per hovered row; with the card now a fixed link
+   there is no number to watermark, and the rule was rendering an empty string. Its job --
+   giving the card some depth -- is done by the hex field below instead. */
 
 /* --- rows: accent spine, accent numeral, arrow ---------------------------- */
 /* .svc-row is display:grid, and a pseudo-element inside a grid container
@@ -214,3 +213,32 @@
 .rail-panel--services .svc-preview--gate .svc-preview__desc{margin-top:var(--ds-space-sm);
   font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.16em;
   text-transform:uppercase;color:var(--ds-accent-light)}
+
+
+/* ============================================================================
+   SUITE GATE, SECOND PASS  ..  owner, 2026-08-26: "this looks bland and plain,
+   perhaps we can increase H1 and add subtle hexagon pattern at the background?"
+
+   THE HEX FIELD is the same mark and the same mask technique the panel itself
+   uses -- one 52x90 SVG tile, masked so it fades rather than tiling edge to
+   edge. Two differences from the panel's copy, both because this card is a
+   small dark plate rather than a wide surface:
+     - it is painted WHITE at 6% rather than accent at 10%. On the card's deep
+       violet an accent-on-accent field reads as noise; white reads as etched.
+     - the radial mask is anchored bottom-right and the tile is scaled up, so
+       the pattern is a corner motif behind the copy instead of an even texture
+       competing with it.
+   pointer-events:none because the whole card is a link and the layer must not
+   eat the click. It sits under the copy for free: `.svc-preview>*` is already
+   position:relative from the mega-menu treatment.
+
+   THE TITLE goes 25px -> 31px. Not larger: the card column is 320px wide and
+   the string is 47 characters, so 31px already sets it in four lines; pushing
+   further starts pulling the subtitle toward the card's lower edge. */
+.rail-panel--services .svc-preview--gate::before{content:"";position:absolute;inset:0;
+  pointer-events:none;border-radius:inherit;background:#fff;opacity:.06;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cpath d='M26 0 L0 15 L0 45 L26 60 L52 45 L52 15 Z M26 60 L26 90' fill='none' stroke='%23fff' stroke-width='1.4'/%3E%3C/svg%3E"),radial-gradient(120% 100% at 92% 100%,#000 0%,#0000 72%);
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='90' viewBox='0 0 52 90'%3E%3Cpath d='M26 0 L0 15 L0 45 L26 60 L52 45 L52 15 Z M26 60 L26 90' fill='none' stroke='%23fff' stroke-width='1.4'/%3E%3C/svg%3E"),radial-gradient(120% 100% at 92% 100%,#000 0%,#0000 72%);
+  -webkit-mask-size:78px 135px,100% 100%;mask-size:78px 135px,100% 100%;
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+.rail-panel--services .svc-preview--gate .svc-preview__title{font-size:31px;line-height:1.12}
