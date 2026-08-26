@@ -1970,3 +1970,25 @@
   .hw-media.is-in .dg-needle--tach{animation:none;transform:rotate(115deg)}
   .hw-media.is-in .dg-needle--speed{animation:none;transform:rotate(44.6deg)}
 }
+
+
+/* THE CLUSTER NEEDS MORE ROOM THAN ITS COLUMN (owner, 2026-08-26: "increase size").
+   Measured at 1440: the media column is only 368px because .col--measure takes the
+   site's 640px reading measure, leaving the 2.1:1 cluster 368x174 with 195px of
+   unused height beneath it.
+
+   The measure is NOT narrowed to buy that room -- it is the spine of this design and
+   every other block on the page holds it. Instead the figure bleeds into the page
+   gutter, which is dead space: the container is 1120 inside the viewport, so there
+   are (100vw - 1120px)/2 of margin either side.
+
+   The clamp is what makes it safe rather than clever. It can never pull more than the
+   gutter actually has (minus 20px of breathing room), and it collapses to 0 at or
+   below the container width -- so no viewport can be made to scroll horizontally by
+   it. At 1440 that is -140px, taking the cluster 368 -> 508 wide. */
+.hw-media--gauge{margin-left:calc(-1 * clamp(0px, (100vw - var(--ds-container-max)) / 2 - 20px, 150px))}
+
+/* margin-LEFT, not right. This block sets style="order:0" on its media column, so the
+   cluster sits on the LEFT of the split and the empty gutter is on its left too.
+   Bleeding right pulled it 76px UNDER the copy -- measured, and the reason this rule
+   is not symmetric with the way a right-hand media block would have to be written. */
