@@ -21,7 +21,7 @@
      first source that 404s. Both defects are fixed here: no network request, correct sources. -->
 <link rel="stylesheet" href="_design/dispenza-fonts.css?v=4f436d86">
 <link rel="stylesheet" href="_design/dispenza-tokens.css?v=bf07bcdb">
-<link rel="stylesheet" href="_design/dispenza-chrome.css?v=ce9ed890">
+<link rel="stylesheet" href="_design/dispenza-chrome.css?v=ab563326">
 <link rel="stylesheet" href="_design/dispenza-structural.css?v=b51616f4">
 
 </head>
@@ -83,12 +83,10 @@
 
       <div class="svc-body">
 
-        <div class="svc-preview" id="svc-preview" aria-hidden="true">
-          <span class="svc-preview__num" id="svc-pv-num">01</span>
-          <span class="svc-preview__title" id="svc-pv-title">Performance marketing</span>
-          <span class="svc-preview__desc" id="svc-pv-desc">Paid and organic demand for a licensed dispensary.</span>
-          <span class="svc-preview__slot">Preview</span>
-        </div>
+        <a class="svc-preview svc-preview--gate" href="how-it-works.html">
+          <span class="svc-preview__title">Dispensary &amp; Cannabis Marketing &mdash; Our Full Suite</span>
+          <span class="svc-preview__desc">How it works</span>
+        </a>
 
         <div class="panel__grid panel__grid--services svc-list">
           <a class="panel__item svc-row" href="performance-marketing.html"
@@ -469,7 +467,7 @@
      The `.js` flag that ARMS the reveal hide-rule (.js [data-reveal]{opacity:0}) is set
      INSIDE page-effects.js after its observer is installed - never here - so a 404 on it
      fails OPEN (content stays visible) instead of blanking every revealed element site-wide. -->
-<script src="_design/page-effects.js?v=ea49a916" defer></script>
+<script src="_design/page-effects.js?v=d4fdd010" defer></script>
 <script src="_design/demo-modal.js?v=388bd913" defer></script>
 </body>
 </html>

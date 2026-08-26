@@ -217,38 +217,21 @@
         io.observe(footer);
       }
 
-      /* SERVICES preview — mirrors the hovered/focused row, rests on 01.
-         PURELY ADDITIVE: if this block never runs, the preview simply stays on Performance marketing and
-         all eight links keep working. It is a decoration over information that is already on screen. */
-      var pvNum = doc.getElementById('svc-pv-num');
-      var pvTitle = doc.getElementById('svc-pv-title');
-      var pvDesc = doc.getElementById('svc-pv-desc');
-      /* The oversized ghost numeral behind the preview is drawn by CSS from this
-         attribute rather than from an element, so the eight mega-menu markups on
-         27 pages did not have to change. If this block never runs the attribute is
-         simply absent and content:attr() renders nothing -- the card loses its
-         watermark and nothing else, which keeps the whole feature additive. */
-      var pvCard = doc.getElementById('svc-preview');
-      if (pvNum && pvTitle && pvDesc) {
-        var svcRows = [].slice.call(doc.querySelectorAll('.svc-row'));
-        var rest = { n: '01', t: 'Performance marketing', d: 'Paid and organic demand for a licensed dispensary.' };
-        var showSvc = function (o) {
-          pvNum.textContent = o.n; pvTitle.textContent = o.t; pvDesc.textContent = o.d;
-          if (pvCard) { pvCard.setAttribute('data-ghost', o.n); }
-        };
-        showSvc(rest);   /* paint the ghost at rest, before any hover */
-        svcRows.forEach(function (row) {
-          var o = {
-            n: row.getAttribute('data-n') || rest.n,
-            t: row.getAttribute('data-title') || rest.t,
-            d: row.getAttribute('data-desc') || rest.d
-          };
-          row.addEventListener('mouseenter', function () { showSvc(o); });
-          row.addEventListener('focus', function () { showSvc(o); });
-        });
-        var svcList = doc.querySelector('.svc-list');
-        if (svcList) svcList.addEventListener('mouseleave', function () { showSvc(rest); });
-      }
+      /* THE SERVICES PREVIEW IS GONE (owner, 2026-08-26): "instead of making this a
+         preview, this should be a quick access to the How it Works page."
+
+         What stood here mirrored the hovered/focused .svc-row into a card — swapping
+         its number, title and description, and driving an oversized ghost numeral
+         through a data-ghost attribute that CSS read with content:attr(). The card is
+         now a fixed link to how-it-works.html with copy the owner supplied, so there
+         is nothing left to mirror and the whole block is deleted rather than left to
+         no-op against ids that no longer exist.
+
+         Removed with it: the mouseenter/focus handlers on every .svc-row and the
+         mouseleave reset on .svc-list. Those existed ONLY to feed this card — the rows
+         are plain links and none of their own behaviour depended on them. The
+         data-n / data-title / data-desc attributes stay on the rows: the service pager
+         on the eight service pages is generated from them, so they are still read. */
     })();
 
 

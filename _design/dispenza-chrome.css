@@ -171,3 +171,46 @@
    ============================================================================ */
 .rail-panel.is-open::after{content:"";position:absolute;left:0;right:0;
   top:calc(-1 * var(--ds-space-xs) - 2px);height:calc(var(--ds-space-xs) + 2px)}
+
+/* ============================================================================
+   THE SUITE GATE  ..  owner, 2026-08-26: "instead of making this a preview, this
+   should be a quick access to the How it Works page", with the title
+   "Dispensary & Cannabis Marketing -- Our Full Suite" and the subtitle
+   "How it works".
+
+   The card used to mirror whichever service row you hovered. It is now a fixed
+   link, so the JS that drove it is deleted (see page-effects.js) and the markup
+   carries only the two lines the owner specified.
+
+   WHAT WENT WITH IT, and why the card does not look emptier for it:
+   - the "01" number and the "Preview" footer label both described the old
+     behaviour and would now be lying, so they are gone from the markup;
+   - the giant ghost numeral behind the card was painted from a data-ghost
+     attribute the deleted JS set. With the attribute absent, content:attr()
+     resolves to an empty string and the layer simply does not paint -- no rule
+     had to change for that;
+   - with the number and footer removed the two remaining lines were top-heavy
+     against the card's 240px min-height, so the content centres itself instead
+     of leaving a void underneath. That void is the exact complaint this site has
+     had before.
+
+   NOTE ON THE HEADING LEVEL. The owner wrote "H1" for the title. It is rendered
+   at heading SCALE but stays a <span>: this card sits inside the site navigation
+   on 26 pages, so a real <h1> here would give every one of those pages a second
+   top-level heading that describes the nav rather than the page. The visual
+   hierarchy asked for is delivered; the document outline is left correct.
+   ============================================================================ */
+.rail-panel--services .svc-preview--gate{justify-content:center;text-decoration:none;
+  transition:border-color var(--ds-dur-fast) var(--ds-ease-out),
+             background var(--ds-dur-fast) var(--ds-ease-out),
+             transform var(--ds-dur-fast) var(--ds-ease-out)}
+.rail-panel--services .svc-preview--gate:hover{border-color:var(--ds-accent);
+  background:linear-gradient(160deg,#48179a 0%,#230b52 100%);transform:translateY(-2px)}
+.rail-panel--services .svc-preview--gate:focus-visible{outline:2px solid var(--ds-accent-light);
+  outline-offset:3px}
+/* the title is the card's hero now that nothing sits above it */
+.rail-panel--services .svc-preview--gate .svc-preview__title{margin-top:0;font-size:25px;line-height:1.18}
+/* the subtitle names the destination, so it is the accent line rather than body copy */
+.rail-panel--services .svc-preview--gate .svc-preview__desc{margin-top:var(--ds-space-sm);
+  font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-accent-light)}
