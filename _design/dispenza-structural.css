@@ -2018,7 +2018,12 @@
 /* stacked: plain flow, and the 320px cap that .hw-media img carries is lifted so the
    flush image is not shrunk back down on a phone. */
 @media (max-width:1023px){
-  .hw-media--flush img{max-height:none;width:100%;height:auto}
+  /* Stacked, the media has no copy column to size against, so it fills the row width --
+     and a PORTRAIT asset then grows enormous: the trimmed billboard is 0.74:1, so at a
+     720px column it rendered 968px tall, taller than most phone viewports. Capping the
+     HEIGHT and letting width follow the aspect keeps every asset in proportion without
+     distorting any of them; margin:auto re-centres the narrower ones. */
+  .hw-media--flush img{max-height:520px;width:auto;max-width:100%;height:auto;margin:0 auto}
   .hw-media--gauge .dg{width:100%;height:auto}
 }
 
