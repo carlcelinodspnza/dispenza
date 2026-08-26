@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Service list — five ways to say "what's ahead" without the word</title>
+<link rel="stylesheet" href="../_design/dispenza-fonts.css">
+<link rel="stylesheet" href="../_design/dispenza-tokens.css">
+<link rel="stylesheet" href="../_design/dispenza-chrome.css">
+<link rel="stylesheet" href="../_design/dispenza-structural.css">
+<style>
+/* Scoped fw-* so nothing here can reach the live pages. Every number and title is
+   verbatim from index.html's #panel-services. All five are shown as they would
+   appear on service 01 (Performance marketing), so the list runs 02 -> 08.
+   The brief: the list must SAY "these are the pages ahead of you" visually.
+   Not one of the five uses the word "next", "upcoming", "more" or "continue". */
+body{background:var(--ds-bg-surface);color:var(--ds-ink)}
+.fw-wrap{max-width:1180px;margin:0 auto;padding:40px 24px 130px}
+.fw-k{display:inline-block;margin:0 0 6px;font-family:var(--ds-font-display);font-size:11.5px;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ds-accent-light)}
+.fw-h{margin:0 0 8px;font-family:var(--ds-font-display);font-size:26px;font-weight:800;letter-spacing:-.02em;color:#fff}
+.fw-p{margin:0 0 22px;font-family:var(--ds-font-body);font-size:14.5px;color:var(--ds-ink-soft);max-width:82ch;line-height:1.6}
+.fw-opt{margin:76px 0 0;padding-top:28px;border-top:1px solid var(--ds-line)}
+.fw-stage{padding:34px 30px;border:1px dashed #e3e3e31f;border-radius:var(--ds-r-surface);background:#0e0f12}
+.fw-lbl{font-family:var(--ds-font-display);font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-ink-soft)}
+.fw-why{margin:14px 0 0;font-size:13.5px;color:var(--ds-ink-soft);line-height:1.6;max-width:86ch}
+.fw-why b{color:var(--ds-ink);font-weight:600}
+a{text-decoration:none}
+ul{margin:0;padding:0;list-style:none}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   A — THE TRACK. A rail runs down the left. The page you are on is a filled
+   node at the top; everything below it is an open node on the same line, so
+   the eye reads one continuous path travelling downward.
+   ───────────────────────────────────────────────────────────────────────── */
+.a-list{position:relative;padding-left:34px}
+.a-list::before{content:"";position:absolute;left:5px;top:14px;bottom:18px;width:2px;
+  background:linear-gradient(180deg,var(--ds-accent) 0%,#8d3fe855 42%,#8d3fe814 100%)}
+.a-row{position:relative;display:flex;align-items:baseline;gap:14px;padding:11px 0}
+.a-row+.a-row{border-top:1px solid var(--ds-hairline)}
+.a-row::before{content:"";position:absolute;left:-33px;top:19px;width:12px;height:12px;border-radius:50%;
+  background:#0e0f12;border:2px solid #8d3fe866}
+.a-row--here::before{background:var(--ds-accent);border-color:var(--ds-accent);
+  box-shadow:0 0 0 4px #8d3fe82e}
+.a-here{color:var(--ds-ink-soft)}
+.a-here .a-t{color:var(--ds-ink-soft);font-weight:700}
+.a-t{font-family:var(--ds-font-display);font-size:17px;font-weight:700;color:var(--ds-ink);
+  letter-spacing:-.015em;transition:color var(--ds-dur-fast) var(--ds-ease-out)}
+.a-row:hover .a-t{color:#fff}
+.a-n{margin-left:auto;font-family:var(--ds-font-display);font-size:12px;font-weight:700;
+  letter-spacing:.12em;color:var(--ds-accent-ink)}
+.a-you{font-family:var(--ds-font-display);font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-accent-light);border:1px solid #8d3fe855;
+  border-radius:var(--ds-r-pill);padding:3px 9px}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   B — THE ARROWS. Every row carries a forward arrow. The nearest one is solid
+   and accented; each one after it fades. Direction and order, no words.
+   ───────────────────────────────────────────────────────────────────────── */
+.b-list{border:1px solid #8d3fe83d;border-radius:var(--ds-r-surface);overflow:hidden}
+.b-row{display:flex;align-items:center;gap:18px;padding:13px 20px;
+  transition:background var(--ds-dur-fast) var(--ds-ease-out)}
+.b-list li+li .b-row{border-top:1px solid var(--ds-hairline)}
+.b-row:hover{background:#8d3fe814}
+.b-n{font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.12em;
+  color:var(--ds-accent-ink);min-width:26px}
+.b-t{font-family:var(--ds-font-display);font-size:17px;font-weight:700;color:var(--ds-ink);letter-spacing:-.015em}
+.b-row:hover .b-t{color:#fff}
+.b-arw{margin-left:auto;font-size:20px;line-height:1;color:var(--ds-accent);
+  transition:transform var(--ds-dur-fast) var(--ds-ease-out)}
+.b-row:hover .b-arw{transform:translateX(4px)}
+.b-1 .b-arw{opacity:1} .b-2 .b-arw{opacity:.72} .b-3 .b-arw{opacity:.56}
+.b-4 .b-arw{opacity:.42} .b-5 .b-arw{opacity:.32} .b-6 .b-arw{opacity:.24} .b-7 .b-arw{opacity:.18}
+.b-1{background:linear-gradient(100deg,#8d3fe824 0%,#8d3fe80a 46%,#0000 100%)}
+.b-1 .b-t{font-size:19px;font-weight:800;color:#fff}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   C — THE COUNTER. The page you are on is printed at the top, struck and
+   dimmed, and the numbering simply carries on beneath it. The unbroken run
+   01 → 08 is what says "ahead"; nothing else has to.
+   ───────────────────────────────────────────────────────────────────────── */
+.c-done{display:flex;align-items:baseline;gap:14px;padding:6px 2px 20px;opacity:.5}
+.c-done .c-t{text-decoration:line-through;text-decoration-color:#8d3fe8aa;text-underline-offset:3px}
+.c-rule{position:relative;height:1px;background:var(--ds-line);margin:0 0 18px}
+.c-rule span{position:absolute;left:0;top:-7px;background:#0e0f12;padding-right:10px;
+  font-family:var(--ds-font-display);font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ds-accent-light)}
+.c-row{display:flex;align-items:baseline;gap:14px;padding:11px 2px}
+.c-row+.c-row{border-top:1px solid var(--ds-hairline)}
+.c-n{font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.12em;
+  color:var(--ds-accent-ink);min-width:26px}
+.c-t{font-family:var(--ds-font-display);font-size:17px;font-weight:700;color:var(--ds-ink);letter-spacing:-.015em}
+.c-row:hover .c-t{color:#fff}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   D — THE METER. Eight segments above the list: the one you are on is filled,
+   the seven ahead are hollow — and those seven ARE the rows underneath.
+   ───────────────────────────────────────────────────────────────────────── */
+.d-meter{display:grid;grid-template-columns:repeat(8,1fr);gap:5px;margin:0 0 20px}
+.d-seg{height:4px;border-radius:2px;background:#8d3fe824}
+.d-seg--on{background:var(--ds-accent);box-shadow:0 0 12px -2px #8d3fe8aa}
+.d-cap{display:flex;justify-content:space-between;margin:0 0 18px;
+  font-family:var(--ds-font-body);font-size:12.5px;color:var(--ds-ink-soft)}
+.d-cap b{font-family:var(--ds-font-display);color:#fff;font-weight:700}
+.d-list{border-top:1px solid var(--ds-line)}
+.d-row{display:flex;align-items:baseline;gap:14px;padding:11px 2px;border-bottom:1px solid var(--ds-hairline)}
+.d-n{font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.12em;
+  color:var(--ds-accent-ink);min-width:26px}
+.d-t{font-family:var(--ds-font-display);font-size:17px;font-weight:700;color:var(--ds-ink);letter-spacing:-.015em}
+.d-row:hover .d-t{color:#fff}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   E — THE RECEDE. The nearest page is the biggest and brightest; each one
+   after it steps back in size and light, so the list reads as distance.
+   ───────────────────────────────────────────────────────────────────────── */
+.e-list{padding-left:2px}
+.e-row{display:flex;align-items:baseline;gap:14px;padding:10px 0;
+  transition:color var(--ds-dur-fast) var(--ds-ease-out)}
+.e-row+.e-row{border-top:1px solid var(--ds-hairline)}
+.e-n{font-family:var(--ds-font-display);font-weight:700;letter-spacing:.12em;color:var(--ds-accent-ink);min-width:26px}
+.e-t{font-family:var(--ds-font-display);font-weight:800;color:var(--ds-ink);letter-spacing:-.018em}
+.e-row:hover .e-t{color:#fff}
+.e-1 .e-t{font-size:24px;opacity:1}      .e-1 .e-n{font-size:13px;opacity:1}
+.e-2 .e-t{font-size:21px;opacity:.88}    .e-2 .e-n{font-size:12.5px;opacity:.88}
+.e-3 .e-t{font-size:19px;opacity:.76}    .e-3 .e-n{font-size:12px;opacity:.76}
+.e-4 .e-t{font-size:17.5px;opacity:.66}  .e-4 .e-n{font-size:11.5px;opacity:.66}
+.e-5 .e-t{font-size:16.5px;opacity:.57}  .e-5 .e-n{font-size:11px;opacity:.57}
+.e-6 .e-t{font-size:15.5px;opacity:.49}  .e-6 .e-n{font-size:11px;opacity:.49}
+.e-7 .e-t{font-size:15px;opacity:.42}    .e-7 .e-n{font-size:11px;opacity:.42}
+</style>
+</head>
+<body>
+<div class="fw-wrap">
+
+  <p class="fw-k">Service list · five directions</p>
+  <h1 class="fw-h">Saying &ldquo;these come after this one&rdquo; without saying it</h1>
+  <p class="fw-p">All five are shown as they would appear on <b style="color:#fff">01 Performance
+  marketing</b>, so the list runs 02&nbsp;&rarr;&nbsp;08. <b style="color:#fff">None of them uses the
+  words next, upcoming, more or continue</b> &mdash; the ordering is carried by position, direction,
+  counting, progress or depth instead. Numbers and titles are verbatim from the mega menu.</p>
+
+  <!-- ══════════════════════════════ A ══════════════════════════════ -->
+  <section class="fw-opt">
+    <p class="fw-lbl">Option A</p>
+    <h2 class="fw-h" style="font-size:21px">The track</h2>
+    <p class="fw-p">A rail runs down the left. Where you are is a filled node; everything below sits
+    on the same line as an open node, so it reads as one path travelling downward.</p>
+    <div class="fw-stage">
+      <ul class="a-list">
+        <li class="a-row a-row--here a-here">
+          <span class="a-t">Performance marketing</span>
+          <span class="a-you">You are here</span>
+          <span class="a-n">01</span>
+        </li>
+        <li><a class="a-row" href="#"><span class="a-t">Brand and package design</span><span class="a-n">02</span></a></li>
+        <li><a class="a-row" href="#"><span class="a-t">Web design and development</span><span class="a-n">03</span></a></li>
+        <li><a class="a-row" href="#"><span class="a-t">Advertisement design</span><span class="a-n">04</span></a></li>
+        <li><a class="a-row" href="#"><span class="a-t">Conversion rate optimization</span><span class="a-n">05</span></a></li>
+        <li><a class="a-row" href="#"><span class="a-t">Integrations</span><span class="a-n">06</span></a></li>
+        <li><a class="a-row" href="#"><span class="a-t">Consulting</span><span class="a-n">07</span></a></li>
+        <li><a class="a-row" href="#"><span class="a-t">Reports</span><span class="a-n">08</span></a></li>
+      </ul>
+      <p class="fw-why"><b>Why it reads as ahead:</b> a route with a marked position. The one thing to
+      weigh is that it shows the current page as a row, which makes the block one line taller.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ B ══════════════════════════════ -->
+  <section class="fw-opt">
+    <p class="fw-lbl">Option B</p>
+    <h2 class="fw-h" style="font-size:21px">The arrows</h2>
+    <p class="fw-p">Every row carries a forward arrow. The nearest is solid and accented and each one
+    after it fades &mdash; direction and order at once, in a mark rather than a word.</p>
+    <div class="fw-stage">
+      <ul class="b-list">
+        <li><a class="b-row b-1" href="#"><span class="b-n">02</span><span class="b-t">Brand and package design</span><span class="b-arw">&rsaquo;</span></a></li>
+        <li><a class="b-row b-2" href="#"><span class="b-n">03</span><span class="b-t">Web design and development</span><span class="b-arw">&rsaquo;</span></a></li>
+        <li><a class="b-row b-3" href="#"><span class="b-n">04</span><span class="b-t">Advertisement design</span><span class="b-arw">&rsaquo;</span></a></li>
+        <li><a class="b-row b-4" href="#"><span class="b-n">05</span><span class="b-t">Conversion rate optimization</span><span class="b-arw">&rsaquo;</span></a></li>
+        <li><a class="b-row b-5" href="#"><span class="b-n">06</span><span class="b-t">Integrations</span><span class="b-arw">&rsaquo;</span></a></li>
+        <li><a class="b-row b-6" href="#"><span class="b-n">07</span><span class="b-t">Consulting</span><span class="b-arw">&rsaquo;</span></a></li>
+        <li><a class="b-row b-7" href="#"><span class="b-n">08</span><span class="b-t">Reports</span><span class="b-arw">&rsaquo;</span></a></li>
+      </ul>
+      <p class="fw-why"><b>Why it reads as ahead:</b> arrows point forward and the fade ranks them.
+      Closest to the shipped list &mdash; it keeps the current rows and only swaps the eyebrow for a mark.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ C ══════════════════════════════ -->
+  <section class="fw-opt">
+    <p class="fw-lbl">Option C</p>
+    <h2 class="fw-h" style="font-size:21px">The counter</h2>
+    <p class="fw-p">The page you are on is printed at the top, dimmed and struck through. The numbering
+    then simply carries on beneath it &mdash; the unbroken run 01&nbsp;&rarr;&nbsp;08 does the talking.</p>
+    <div class="fw-stage">
+      <div class="c-done"><span class="c-n">01</span><span class="c-t">Performance marketing</span></div>
+      <div class="c-rule"><span>Read so far</span></div>
+      <ul>
+        <li><a class="c-row" href="#"><span class="c-n">02</span><span class="c-t">Brand and package design</span></a></li>
+        <li><a class="c-row" href="#"><span class="c-n">03</span><span class="c-t">Web design and development</span></a></li>
+        <li><a class="c-row" href="#"><span class="c-n">04</span><span class="c-t">Advertisement design</span></a></li>
+        <li><a class="c-row" href="#"><span class="c-n">05</span><span class="c-t">Conversion rate optimization</span></a></li>
+        <li><a class="c-row" href="#"><span class="c-n">06</span><span class="c-t">Integrations</span></a></li>
+        <li><a class="c-row" href="#"><span class="c-n">07</span><span class="c-t">Consulting</span></a></li>
+        <li><a class="c-row" href="#"><span class="c-n">08</span><span class="c-t">Reports</span></a></li>
+      </ul>
+      <p class="fw-why"><b>Why it reads as ahead:</b> a crossed-off item is universally understood as
+      done, so everything under it is not. Quietest of the five. The small label can be dropped entirely
+      if you want it wordless.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ D ══════════════════════════════ -->
+  <section class="fw-opt">
+    <p class="fw-lbl">Option D</p>
+    <h2 class="fw-h" style="font-size:21px">The meter</h2>
+    <p class="fw-p">Eight segments sit above the list. The one you are on is lit; the seven still
+    hollow are exactly the seven rows underneath.</p>
+    <div class="fw-stage">
+      <div class="d-meter">
+        <span class="d-seg d-seg--on"></span><span class="d-seg"></span><span class="d-seg"></span><span class="d-seg"></span>
+        <span class="d-seg"></span><span class="d-seg"></span><span class="d-seg"></span><span class="d-seg"></span>
+      </div>
+      <div class="d-cap"><span>Performance marketing</span><span><b>01</b> of 08</span></div>
+      <ul class="d-list">
+        <li><a class="d-row" href="#"><span class="d-n">02</span><span class="d-t">Brand and package design</span></a></li>
+        <li><a class="d-row" href="#"><span class="d-n">03</span><span class="d-t">Web design and development</span></a></li>
+        <li><a class="d-row" href="#"><span class="d-n">04</span><span class="d-t">Advertisement design</span></a></li>
+        <li><a class="d-row" href="#"><span class="d-n">05</span><span class="d-t">Conversion rate optimization</span></a></li>
+        <li><a class="d-row" href="#"><span class="d-n">06</span><span class="d-t">Integrations</span></a></li>
+        <li><a class="d-row" href="#"><span class="d-n">07</span><span class="d-t">Consulting</span></a></li>
+        <li><a class="d-row" href="#"><span class="d-n">08</span><span class="d-t">Reports</span></a></li>
+      </ul>
+      <p class="fw-why"><b>Why it reads as ahead:</b> a progress meter is read instantly as
+      &ldquo;done / not done&rdquo;. It also absorbs the &ldquo;01 of 08&rdquo; that currently sits in the
+      top line, so nothing is duplicated.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ E ══════════════════════════════ -->
+  <section class="fw-opt">
+    <p class="fw-lbl">Option E</p>
+    <h2 class="fw-h" style="font-size:21px">The recede</h2>
+    <p class="fw-p">The nearest page is the biggest and brightest; each one after steps back in size
+    and light, so the list reads as distance &mdash; near things first, far things last.</p>
+    <div class="fw-stage">
+      <ul class="e-list">
+        <li><a class="e-row e-1" href="#"><span class="e-n">02</span><span class="e-t">Brand and package design</span></a></li>
+        <li><a class="e-row e-2" href="#"><span class="e-n">03</span><span class="e-t">Web design and development</span></a></li>
+        <li><a class="e-row e-3" href="#"><span class="e-n">04</span><span class="e-t">Advertisement design</span></a></li>
+        <li><a class="e-row e-4" href="#"><span class="e-n">05</span><span class="e-t">Conversion rate optimization</span></a></li>
+        <li><a class="e-row e-5" href="#"><span class="e-n">06</span><span class="e-t">Integrations</span></a></li>
+        <li><a class="e-row e-6" href="#"><span class="e-n">07</span><span class="e-t">Consulting</span></a></li>
+        <li><a class="e-row e-7" href="#"><span class="e-n">08</span><span class="e-t">Reports</span></a></li>
+      </ul>
+      <p class="fw-why"><b>Why it reads as ahead:</b> perspective. The one caveat worth stating plainly:
+      the furthest rows sit at 42% opacity, which is below the contrast floor for body text &mdash; if you
+      pick this, the fade should stop around 65% so row 08 stays legible.</p>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
