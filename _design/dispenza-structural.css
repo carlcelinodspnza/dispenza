@@ -1721,6 +1721,23 @@
   color:var(--ds-ink);letter-spacing:-.015em;transition:color var(--ds-dur-fast) var(--ds-ease-out)}
 .svc-pager__row:hover .svc-pager__t{color:var(--ds-ink-heading)}
 .svc-pager__row--next .svc-pager__t{font-size:19px;font-weight:800;color:var(--ds-ink-heading)}
+/* THE NUMBER COLUMN. With seven rows the trailing numbers were ragged across 183px, which
+   reads as sloppy rather than as a list. The widest plain title measures 247px, so a 260px
+   floor lands every number on the same x. Deliberately NOT margin-left:auto -- the rows run
+   the full container width, so that would strand the number ~800px from the title it
+   belongs to. The next row keeps its own position: its title starts after the eyebrow, so
+   it cannot share the column without dragging the eyebrow out of place, and it is a
+   deliberately distinct row anyway.
+
+   GATED ON min-width:720px, not reset in the phone block below. A 260px floor does not fit
+   a 320px viewport -- the row has 238px of content width there, and the overflow gave the
+   whole PAGE a horizontal scrollbar (325 vs 320). Resetting it in the max-width:719px block
+   does not work either: this selector carries three classes and a bare .svc-pager__t
+   carries one, so the reset loses on specificity inside the media query and the floor stays
+   live. Gating the rule is the fix that cannot be silently overridden. */
+@media (min-width:720px){
+  .svc-pager__row:not(.svc-pager__row--next) .svc-pager__t{min-width:260px}
+}
 .svc-pager__n{font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.12em;
   color:var(--ds-accent-ink)}
 
@@ -1734,5 +1751,14 @@
      exists to remove, so only the column gap survives the wrap. */
   .svc-pager__id{gap:1px 10px}
   .svc-pager__t{font-size:15px}
+  /* Phones get the same aligned number column by a DIFFERENT mechanism. A min-width floor
+     cannot work here: aligning would need a floor at least as wide as the widest title
+     (~220px at 15px), and a 320px viewport only leaves the row 238px of content, so the
+     floor would overflow the page. Pushing the number to the row's right edge aligns at
+     every width with no width assumption at all -- and because the row is narrow on a
+     phone, "right edge" is only ~80px from the title rather than the ~800px it would be
+     on desktop, which is why this is the phone rule and the floor is the desktop one. */
+  .svc-pager__id{flex:1 1 auto}
+  .svc-pager__n{margin-left:auto}
   .svc-pager__row--next .svc-pager__t{font-size:17px}
 }
