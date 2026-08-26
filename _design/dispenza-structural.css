@@ -1904,7 +1904,6 @@
 .dg-bezel{fill:#241a3d;stroke:#3a2d5c;stroke-width:1.2}
 .dg-face{fill:url(#dgFace)}
 
-.dg-arc-mag{fill:none;stroke:#e6187f;stroke-width:5;stroke-linecap:round;opacity:.92}
 .dg-arc-mag2{fill:none;stroke:#e6187f;stroke-width:6;stroke-linecap:round;opacity:.9}
 .dg-arc-blue{fill:none;stroke:#35a8dd;stroke-width:2.4;stroke-linecap:round;opacity:.85}
 /* the rev limit itself -- brighter and thicker so the needle's destination reads */
@@ -1916,11 +1915,6 @@
 .dg-n{fill:#fff;font-family:var(--ds-font-display,sans-serif);font-size:9px;font-weight:700;
   text-anchor:middle;letter-spacing:.02em}
 .dg-num--sp .dg-n{font-size:10px}
-.dg-cap{fill:#e7d9ff;font-family:var(--ds-font-body,sans-serif);font-size:5.4px;font-weight:600;
-  text-anchor:middle;opacity:.85}
-.dg-fe{fill:#ff5f8f;font-family:var(--ds-font-display,sans-serif);font-size:10px;font-weight:700;
-  text-anchor:middle}
-.dg-pump{fill:none;stroke:#ff3b5c;stroke-width:1.6;stroke-linejoin:round}
 
 .dg-odo-bg{fill:#120a1e;stroke:#3a2d5c;stroke-width:.8}
 .dg-odo{fill:#f5a623;font-family:ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.12em}
@@ -1937,38 +1931,32 @@
 .dg-needle{transform-box:view-box;transform-origin:var(--gx) var(--gy)}
 
 /* resting positions: both sweeping needles start at zero, fuel sits near full */
-.dg-needle--tach{transform:rotate(-125deg)}
 .dg-needle--speed{transform:rotate(-125deg)}
-.dg-needle--fuel{transform:rotate(-70deg)}
 
 /* THE SWEEP. Runs when the figure enters the viewport -- the page's own
    IntersectionObserver puts .is-in on [data-media-in], so this needs no new JS.
    Both curves deliberately OVERSHOOT and settle: a needle that glides straight
    to its mark reads as a slider, not a mechanism under load. */
-.hw-media.is-in .dg-needle--tach{animation:dg-rev 2.3s cubic-bezier(.3,.1,.2,1) forwards}
 .hw-media.is-in .dg-needle--speed{animation:dg-spd 2.3s cubic-bezier(.3,.1,.2,1) forwards}
 
-@keyframes dg-rev{
-  0%{transform:rotate(-125deg)}
-  6%{transform:rotate(-116deg)}
-  52%{transform:rotate(124deg)}
-  68%{transform:rotate(104deg)}
-  84%{transform:rotate(119deg)}
-  100%{transform:rotate(115deg)}
-}
+/* THE NEEDLE REACHES THE LIMIT. With the tachometer removed the redline moved onto
+   this dial (250-280), so the needle runs to 272km/h -- 117.9deg -- which sits inside
+   that band. Leaving it at the old 190km/h would have quietly dropped the one thing
+   the owner actually asked the animation to do. */
 @keyframes dg-spd{
   0%{transform:rotate(-125deg)}
-  58%{transform:rotate(54deg)}
-  76%{transform:rotate(36deg)}
-  100%{transform:rotate(44.6deg)}
+  6%{transform:rotate(-116deg)}
+  56%{transform:rotate(126deg)}
+  72%{transform:rotate(106deg)}
+  86%{transform:rotate(121deg)}
+  100%{transform:rotate(117.9deg)}
 }
 
 /* Reduced motion: land on the end state rather than flashing there. The sheet's
    global reduce block only clamps animation-duration to 1ms, which would play
    the whole sweep in a single frame. */
 @media (prefers-reduced-motion:reduce){
-  .hw-media.is-in .dg-needle--tach{animation:none;transform:rotate(115deg)}
-  .hw-media.is-in .dg-needle--speed{animation:none;transform:rotate(44.6deg)}
+  .hw-media.is-in .dg-needle--speed{animation:none;transform:rotate(117.9deg)}
 }
 
 
