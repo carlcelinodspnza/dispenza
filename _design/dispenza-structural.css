@@ -1693,30 +1693,46 @@
    the markup and its rules are deleted below. With it removed the label moves ONTO the
    title's line (see .svc-pager__id) and the padding drops, which is what turns this from a
    card into a row. */
-.svc-pager__bar{display:flex;align-items:center;gap:24px;
-  padding:13px 20px;border-radius:var(--ds-r-surface);border:1px solid #8d3fe84d;text-decoration:none;
-  background:linear-gradient(100deg,#8d3fe81f 0%,#8d3fe80a 46%,#0000 100%);
-  transition:border-color var(--ds-dur-fast) var(--ds-ease-out),background var(--ds-dur-fast) var(--ds-ease-out)}
-.svc-pager__bar:hover{border-color:var(--ds-accent);
-  background:linear-gradient(100deg,#8d3fe833 0%,#8d3fe814 46%,#0000 100%)}
-.svc-pager__bar:focus-visible{outline:2px solid var(--ds-accent-light);outline-offset:2px}
+/* THE LIST (owner, 2026-08-26): "let's add the other pages so it will look like a list
+   of next pages". The single next-service bar became the FIRST ROW of a list holding all
+   seven other service pages, in cycle order from the next one, wrapping 08 -> 01. The page
+   you are on is never in its own list, so every page shows exactly 7 rows.
+
+   The BORDER AND RADIUS MOVED from the row to the list, so the seven rows read as one
+   object rather than seven stacked cards. overflow:hidden is what keeps a row's hover
+   background from painting square over the container's rounded corners. */
+.svc-pager__list{border:1px solid #8d3fe84d;border-radius:var(--ds-r-surface);overflow:hidden}
+.svc-pager__list li + li{border-top:1px solid var(--ds-hairline)}
+.svc-pager__row{display:flex;align-items:center;gap:24px;padding:10px 20px;text-decoration:none;
+  transition:background var(--ds-dur-fast) var(--ds-ease-out)}
+.svc-pager__row:hover{background:#8d3fe814}
+.svc-pager__row:focus-visible{outline:2px solid var(--ds-accent-light);outline-offset:-2px}
+/* the next service keeps the accent wash and the larger type it had as a solo bar, so the
+   list still answers "what is next" first and "what else is there" second. */
+.svc-pager__row--next{padding:13px 20px;
+  background:linear-gradient(100deg,#8d3fe81f 0%,#8d3fe80a 46%,#0000 100%)}
+.svc-pager__row--next:hover{background:linear-gradient(100deg,#8d3fe833 0%,#8d3fe814 46%,#0000 100%)}
 /* the eyebrow, the title and the number all sit on ONE baseline now. Stacked, the
    eyebrow cost 13px of its own line plus a 6px margin before the title even started. */
 .svc-pager__id{min-width:0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .svc-pager__lbl{flex:none;font-family:var(--ds-font-display);font-size:10.5px;font-weight:700;
   letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink)}
-.svc-pager__t{font-family:var(--ds-font-display);font-size:19px;font-weight:800;
-  color:var(--ds-ink-heading);letter-spacing:-.015em}
+.svc-pager__t{font-family:var(--ds-font-display);font-size:16px;font-weight:700;
+  color:var(--ds-ink);letter-spacing:-.015em;transition:color var(--ds-dur-fast) var(--ds-ease-out)}
+.svc-pager__row:hover .svc-pager__t{color:var(--ds-ink-heading)}
+.svc-pager__row--next .svc-pager__t{font-size:19px;font-weight:800;color:var(--ds-ink-heading)}
 .svc-pager__n{font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.12em;
   color:var(--ds-accent-ink)}
 
 @media (max-width:719px){
   .svc-pager{margin-top:var(--ds-space-sm);padding-bottom:0}
-  .svc-pager__bar{padding:11px 16px;gap:10px}
+  .svc-pager__row{padding:9px 16px;gap:10px}
+  .svc-pager__row--next{padding:11px 16px}
   /* the eyebrow cannot share the title's line at phone widths -- the longest title
      ("Conversion rate optimization") already fills the row on its own -- so it wraps.
      Keeping the ROW gap at the desktop 12px would rebuild the stacked card this change
      exists to remove, so only the column gap survives the wrap. */
   .svc-pager__id{gap:1px 10px}
-  .svc-pager__t{font-size:17px}
+  .svc-pager__t{font-size:15px}
+  .svc-pager__row--next .svc-pager__t{font-size:17px}
 }
