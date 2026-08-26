@@ -2139,3 +2139,38 @@
   .hw-svc .row--split{gap:var(--ds-space-lg)}
   .hw-svc .row--split > .col--measure{flex:0 1 560px}
 }
+
+
+
+
+/* THE CRO ARTWORK IS WIDE, SO IT NEEDS WIDTH FROM THE GUTTER (owner: "increase size until
+   edges of the actual image aligns with height of the texts").
+
+   Two separate things were shrinking it, and both had to go:
+
+   1. THE FILE. The source was 800x800 with the artwork floating in the middle -- 167px of
+      transparency above and 204px below, so 46% of its own height was empty. contain was
+      faithfully fitting a box that was mostly nothing: the visible artwork was ~183px tall
+      inside a 339px box. The asset is trimmed to its ink (737x429), which alone took the
+      painted height to 275px.
+
+   2. THE COLUMN. Trimmed, the artwork is 1.72:1 -- far wider than tall. To stand as tall as
+      the copy it needs ~583px of width against the column's 472.
+
+   NARROWING THE COPY WAS TRIED AND REJECTED, measured: at a 440px measure the image reached
+   345px, but the narrower column pushed the copy from 339px to 398px, so the match moved
+   only 81% -> 87% while the measure fell to ~47 characters. The target rises almost as fast
+   as the image grows, so that road never arrives.
+
+   The width therefore comes from the page gutter instead, and margin-LEFT because this row
+   is .row--split-rev -- its media column renders on the LEFT, so the empty gutter is on its
+   left too. The clamp can never take more than the gutter actually holds and collapses to 0
+   at or below the container width, so nothing can be pushed off-screen.
+
+   NOTE: this does mean the CRO image sits closer to the viewport edge than the copy on the
+   far side. That is the cost of an exact height match on a 1.72:1 image in a fixed
+   container -- the two cannot both be true. */
+@media (min-width:1024px){
+  .hw-svc__row--wide .hw-media--flush{
+    margin-left:calc(-1 * clamp(0px, (100vw - var(--ds-container-max)) / 2 - 18px, 118px))}
+}
