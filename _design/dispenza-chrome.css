@@ -242,3 +242,51 @@
   -webkit-mask-size:78px 135px,100% 100%;mask-size:78px 135px,100% 100%;
   -webkit-mask-composite:source-in;mask-composite:intersect}
 .rail-panel--services .svc-preview--gate .svc-preview__title{font-size:31px;line-height:1.12}
+
+/* ============================================================================
+   SUITE GATE: THE GLARE  ..  owner, 2026-08-26: "add shine or glare animation
+   when hovered".
+
+   A single skewed light band travels left-to-right across the card. It uses the
+   card's ::after, which fell free when the watermark numeral was deleted, so no
+   markup on 26 pages had to change.
+
+   WHY AN @keyframes AND NOT A TRANSITION. A transition would have to run in
+   REVERSE when the pointer leaves -- the band sweeping backwards across the card
+   is the giveaway that it is a moving box rather than light. An animation plays
+   once, then the element returns to its resting position off the left edge on
+   its own, and replays on the next hover. Nothing to reset.
+
+   IT PASSES OVER THE COPY ON PURPOSE. `.svc-preview>*` makes the children
+   positioned, but that selector cannot match a pseudo-element, and ::after is
+   last in tree order -- so with equal auto z-index the band paints above the
+   text. That is what a glare does; at 27% white at its brightest peak it reads
+   as a sheen crossing the card rather than a panel hiding it.
+
+   The band is clipped by the card's existing overflow:hidden, and it is
+   pointer-events:none so it cannot swallow the click on its way past.
+
+   REDUCED MOTION: the sheet's global reduce block already clamps every
+   animation-duration to 1ms, which would leave this flashing rather than
+   disabled, so it is switched off explicitly below.
+   ============================================================================ */
+.rail-panel--services .svc-preview--gate::after{content:"";position:absolute;
+  top:-12%;bottom:-12%;left:-55%;width:45%;pointer-events:none;
+  background:linear-gradient(90deg,#fff0 0%,#ffffff26 36%,#ffffff5c 50%,#ffffff26 64%,#fff0 100%);
+  transform:translateX(0) skewX(-18deg)}
+.rail-panel--services .svc-preview--gate:hover::after,
+.rail-panel--services .svc-preview--gate:focus-visible::after{
+  animation:ds-gate-shine .95s cubic-bezier(.32,.16,.38,1)}
+/* Timing is deliberately NOT the site's --ds-ease-out. Measured with that curve the band
+   had already crossed 398 of its 549px by 240ms -- it left the card before the eye caught
+   it, which reads as a flicker rather than a sweep. A near-even curve over 950ms lets the
+   light actually travel. Peak alpha also went 45 -> 5c: at 27% white the sheen was too
+   faint to register against the card's own hover brightening. */
+@keyframes ds-gate-shine{
+  from{transform:translateX(0) skewX(-18deg)}
+  to{transform:translateX(400%) skewX(-18deg)}
+}
+@media (prefers-reduced-motion:reduce){
+  .rail-panel--services .svc-preview--gate:hover::after,
+  .rail-panel--services .svc-preview--gate:focus-visible::after{animation:none}
+}
