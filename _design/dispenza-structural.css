@@ -2319,3 +2319,20 @@
 .hw-suite .hw-cell{padding:var(--ds-space-md) var(--ds-space-sm);gap:var(--ds-space-xs)}
 .hw-suite .hw-cell__icon{max-height:38px}
 .hw-suite .hw-cell__title{font-size:26px;line-height:1.14}
+
+/* THE HERO KICKER (owner: this section "should reflect the texts from" the mega menu's suite
+   card). The card leads with "Dispensary & Cannabis Marketing — Our Full Suite" and carries
+   "HOW IT WORKS" as its small label, so the page's h1 and its kicker now say the same two
+   things.
+
+   CASE IS NOT COPIED, deliberately. The card sets its title in title case; this hero's h1 is
+   `text-transform:uppercase` and has been since the page was built, and every other display
+   heading on the site follows that. Reflecting the WORDS without importing the card's casing
+   keeps the hero consistent with its own page.
+
+   The kicker sits ABOVE the h1 rather than below it as on the card: in a hero an eyebrow
+   above the title is what readers expect, and below it would read as a caption.
+
+   `&nbsp;` binds "&" to "Cannabis" so the ampersand can never be left stranded at the end of
+   a line, which is the same treatment the card itself got. */
+.hw-head__kicker{margin:0 0 var(--ds-space-sm);color:var(--ds-accent-light)}
