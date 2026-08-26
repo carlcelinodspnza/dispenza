@@ -1887,3 +1887,86 @@
    in the flow and pushed the heading down. This rule is (0,2,0) so it cannot.
    z-index:0 keeps it under the content, which `.hw-head>*` raises to 1. */
 .hw-head > .hw-head__wash{position:absolute;top:0;right:0;bottom:0;left:0;z-index:0}
+
+
+/* ============================================================================
+   PERFORMANCE GAUGE CLUSTER (.dg)  ..  an animated rebuild of the owner's
+   supplied gauge artwork. Replaces a static photo in the PERFORMANCE GUARANTEE
+   block on how-it-works.html.
+
+   The needle is drawn pointing straight UP from its hub and rotated about that
+   hub, so every angle in this file is degrees clockwise from 12 o'clock. Each
+   needle carries its own hub coordinates as --gx/--gy inline, which is the only
+   per-gauge value CSS needs; the geometry itself lives in the SVG.
+   ============================================================================ */
+.dg{display:block;width:100%;height:auto}
+
+.dg-bezel{fill:#241a3d;stroke:#3a2d5c;stroke-width:1.2}
+.dg-face{fill:url(#dgFace)}
+
+.dg-arc-mag{fill:none;stroke:#e6187f;stroke-width:5;stroke-linecap:round;opacity:.92}
+.dg-arc-mag2{fill:none;stroke:#e6187f;stroke-width:6;stroke-linecap:round;opacity:.9}
+.dg-arc-blue{fill:none;stroke:#35a8dd;stroke-width:2.4;stroke-linecap:round;opacity:.85}
+/* the rev limit itself -- brighter and thicker so the needle's destination reads */
+.dg-arc-red{fill:none;stroke:#ff2d6f;stroke-width:6.5;stroke-linecap:round;filter:url(#dgGlow)}
+
+.dg-tick{stroke:#fff;stroke-width:2;stroke-linecap:round;opacity:.92}
+.dg-tick-sm{stroke:#cbb8e6;stroke-width:1;stroke-linecap:round;opacity:.5}
+
+.dg-n{fill:#fff;font-family:var(--ds-font-display,sans-serif);font-size:9px;font-weight:700;
+  text-anchor:middle;letter-spacing:.02em}
+.dg-num--sp .dg-n{font-size:10px}
+.dg-cap{fill:#e7d9ff;font-family:var(--ds-font-body,sans-serif);font-size:5.4px;font-weight:600;
+  text-anchor:middle;opacity:.85}
+.dg-fe{fill:#ff5f8f;font-family:var(--ds-font-display,sans-serif);font-size:10px;font-weight:700;
+  text-anchor:middle}
+.dg-pump{fill:none;stroke:#ff3b5c;stroke-width:1.6;stroke-linejoin:round}
+
+.dg-odo-bg{fill:#120a1e;stroke:#3a2d5c;stroke-width:.8}
+.dg-odo{fill:#f5a623;font-family:ui-monospace,monospace;font-size:11px;font-weight:700;letter-spacing:.12em}
+.dg-odo--dim{fill:#5a4520}
+
+/* the label the owner replaced: was "4.7 L100km" in the source artwork */
+.dg-label{fill:#fff;font-family:var(--ds-font-display,sans-serif);font-size:9.5px;font-weight:700;
+  letter-spacing:.18em;text-anchor:middle}
+.dg-rule{stroke:#fff;stroke-width:1.4;stroke-linecap:round;opacity:.9}
+
+.dg-needle path{fill:url(#dgNeedle);filter:url(#dgGlow)}
+.dg-hub{fill:#0e0818}
+.dg-hub-in{fill:#3a2d5c}
+.dg-needle{transform-box:view-box;transform-origin:var(--gx) var(--gy)}
+
+/* resting positions: both sweeping needles start at zero, fuel sits near full */
+.dg-needle--tach{transform:rotate(-125deg)}
+.dg-needle--speed{transform:rotate(-125deg)}
+.dg-needle--fuel{transform:rotate(-70deg)}
+
+/* THE SWEEP. Runs when the figure enters the viewport -- the page's own
+   IntersectionObserver puts .is-in on [data-media-in], so this needs no new JS.
+   Both curves deliberately OVERSHOOT and settle: a needle that glides straight
+   to its mark reads as a slider, not a mechanism under load. */
+.hw-media.is-in .dg-needle--tach{animation:dg-rev 2.3s cubic-bezier(.3,.1,.2,1) forwards}
+.hw-media.is-in .dg-needle--speed{animation:dg-spd 2.3s cubic-bezier(.3,.1,.2,1) forwards}
+
+@keyframes dg-rev{
+  0%{transform:rotate(-125deg)}
+  6%{transform:rotate(-116deg)}
+  52%{transform:rotate(124deg)}
+  68%{transform:rotate(104deg)}
+  84%{transform:rotate(119deg)}
+  100%{transform:rotate(115deg)}
+}
+@keyframes dg-spd{
+  0%{transform:rotate(-125deg)}
+  58%{transform:rotate(54deg)}
+  76%{transform:rotate(36deg)}
+  100%{transform:rotate(44.6deg)}
+}
+
+/* Reduced motion: land on the end state rather than flashing there. The sheet's
+   global reduce block only clamps animation-duration to 1ms, which would play
+   the whole sweep in a single frame. */
+@media (prefers-reduced-motion:reduce){
+  .hw-media.is-in .dg-needle--tach{animation:none;transform:rotate(115deg)}
+  .hw-media.is-in .dg-needle--speed{animation:none;transform:rotate(44.6deg)}
+}
