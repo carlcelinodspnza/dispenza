@@ -1707,20 +1707,15 @@
   transition:background var(--ds-dur-fast) var(--ds-ease-out)}
 .svc-pager__row:hover{background:#8d3fe814}
 .svc-pager__row:focus-visible{outline:2px solid var(--ds-accent-light);outline-offset:-2px}
-/* the next service keeps the accent wash and the larger type it had as a solo bar, so the
-   list still answers "what is next" first and "what else is there" second. */
-.svc-pager__row--next{padding:13px 20px;
-  background:linear-gradient(100deg,#8d3fe81f 0%,#8d3fe80a 46%,#0000 100%)}
-.svc-pager__row--next:hover{background:linear-gradient(100deg,#8d3fe833 0%,#8d3fe814 46%,#0000 100%)}
-/* the eyebrow, the title and the number all sit on ONE baseline now. Stacked, the
-   eyebrow cost 13px of its own line plus a 6px margin before the title even started. */
+/* NO EMPHASISED ROW ANY MORE (owner picked option D, 2026-08-26). The accent wash and the
+   larger type on the first row went with the "NEXT SERVICE" eyebrow -- both were ways of
+   SAYING which page is next, and the owner asked for that to be shown rather than said. The
+   meter above the list now carries position, so every row here is equal weight. */
 .svc-pager__id{min-width:0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.svc-pager__lbl{flex:none;font-family:var(--ds-font-display);font-size:10.5px;font-weight:700;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-ink)}
 .svc-pager__t{font-family:var(--ds-font-display);font-size:16px;font-weight:700;
   color:var(--ds-ink);letter-spacing:-.015em;transition:color var(--ds-dur-fast) var(--ds-ease-out)}
 .svc-pager__row:hover .svc-pager__t{color:var(--ds-ink-heading)}
-.svc-pager__row--next .svc-pager__t{font-size:19px;font-weight:800;color:var(--ds-ink-heading)}
+
 /* THE NUMBER COLUMN. With seven rows the trailing numbers were ragged across 183px, which
    reads as sloppy rather than as a list. The widest plain title measures 247px, so a 260px
    floor lands every number on the same x. Deliberately NOT margin-left:auto -- the rows run
@@ -1736,7 +1731,7 @@
    carries one, so the reset loses on specificity inside the media query and the floor stays
    live. Gating the rule is the fix that cannot be silently overridden. */
 @media (min-width:720px){
-  .svc-pager__row:not(.svc-pager__row--next) .svc-pager__t{min-width:260px}
+  .svc-pager__row .svc-pager__t{min-width:260px}
 }
 .svc-pager__n{font-family:var(--ds-font-display);font-size:12px;font-weight:700;letter-spacing:.12em;
   color:var(--ds-accent-ink)}
@@ -1744,7 +1739,6 @@
 @media (max-width:719px){
   .svc-pager{margin-top:var(--ds-space-sm);padding-bottom:0}
   .svc-pager__row{padding:9px 16px;gap:10px}
-  .svc-pager__row--next{padding:11px 16px}
   /* the eyebrow cannot share the title's line at phone widths -- the longest title
      ("Conversion rate optimization") already fills the row on its own -- so it wraps.
      Keeping the ROW gap at the desktop 12px would rebuild the stacked card this change
@@ -1824,3 +1818,46 @@
    measured -- so the band has no visible edge to cut short. */
 .hw-close{padding-bottom:0}
 .hw-close .mc-actions{justify-content:center}
+
+
+/* ============================================================================
+   THE METER  ..  owner picked option D and asked for the "You are here" marker
+   from option A, 2026-08-26.
+
+   WHAT THIS REPLACES. The list used to announce the next page in words -- a
+   "NEXT SERVICE" eyebrow on an accent-washed first row. The owner's brief was
+   that the list should SHOW which pages lie ahead rather than say it, so the
+   eyebrow and the emphasised row are gone (their rules are deleted above) and
+   position moved into a meter: eight segments, the one you are on lit, the
+   seven still hollow being exactly the seven rows underneath.
+
+   The meter is aria-hidden because it is a picture of something the very next
+   line already states in words ("<name> · You are here · 01 of 08"). A screen
+   reader gets the sentence, not eight empty list items.
+
+   "01 of 08" moved OUT of the top line and into this row -- leaving it above
+   would have printed the same position twice, once as a meter and once as text.
+   The top line now carries only the Previous link.
+   ============================================================================ */
+.svc-pager__meter{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px;
+  margin:0 0 12px;padding:0;list-style:none}
+.svc-pager__seg{height:4px;border-radius:2px;background:#8d3fe824}
+.svc-pager__seg--on{background:var(--ds-accent);box-shadow:0 0 12px -2px #8d3fe8aa}
+
+.svc-pager__now{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px}
+.svc-pager__nowname{font-family:var(--ds-font-display);font-size:15px;font-weight:700;
+  color:var(--ds-ink-heading);letter-spacing:-.01em}
+/* the pill is the one piece lifted from option A. Bordered rather than filled so it reads
+   as a marker on the current page, not as a button competing with the rows below. */
+.svc-pager__here{flex:none;font-family:var(--ds-font-display);font-size:10px;font-weight:700;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ds-accent-light);
+  border:1px solid #8d3fe855;border-radius:var(--ds-r-pill);padding:3px 9px;line-height:1.25}
+.svc-pager__now .svc-pager__pos{margin-left:auto}
+
+@media (max-width:719px){
+  /* the name + pill + count cannot share one line on a phone, so the count drops to its own
+     line rather than being pushed off the edge by margin-left:auto. */
+  .svc-pager__now{gap:8px}
+  .svc-pager__now .svc-pager__pos{margin-left:0;flex-basis:100%}
+  .svc-pager__meter{gap:4px;margin-bottom:10px}
+}
