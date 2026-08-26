@@ -1960,23 +1960,64 @@
 }
 
 
-/* THE CLUSTER NEEDS MORE ROOM THAN ITS COLUMN (owner, 2026-08-26: "increase size").
-   Measured at 1440: the media column is only 368px because .col--measure takes the
-   site's 640px reading measure, leaving the 2.1:1 cluster 368x174 with 195px of
-   unused height beneath it.
-
-   The measure is NOT narrowed to buy that room -- it is the spine of this design and
-   every other block on the page holds it. Instead the figure bleeds into the page
-   gutter, which is dead space: the container is 1120 inside the viewport, so there
-   are (100vw - 1120px)/2 of margin either side.
-
-   The clamp is what makes it safe rather than clever. It can never pull more than the
-   gutter actually has (minus 20px of breathing room), and it collapses to 0 at or
-   below the container width -- so no viewport can be made to scroll horizontally by
-   it. At 1440 that is -140px, taking the cluster 368 -> 508 wide. */
-.hw-media--gauge{margin-left:calc(-1 * clamp(0px, (100vw - var(--ds-container-max)) / 2 - 20px, 150px))}
 
 /* margin-LEFT, not right. This block sets style="order:0" on its media column, so the
    cluster sits on the LEFT of the split and the empty gutter is on its left too.
    Bleeding right pulled it 76px UNDER the copy -- measured, and the reason this rule
    is not symmetric with the way a right-hand media block would have to be written. */
+
+
+/* FLUSH MEDIA (owner, 2026-08-26: "remove container outline and increase the size, make
+   sure to align with top and bottom edge of [the copy]").
+
+   .hw-media--plate wraps its image in a light panel: 24px of padding, a hairline border
+   and a filled background. Dropping that class alone is not enough to make the image meet
+   the copy's top and bottom, because .hw-media img is capped at max-height:320px and the
+   figure centres its contents rather than stretching them.
+
+   So three things have to happen together: the cap comes off, the figure stretches instead
+   of centring, and the image takes the column's full height.
+
+   THE GUTTER BLEED IS WHAT MAKES THE ALIGNMENT EXACT, not just decoration. This artwork is
+   1.10:1. In the unbled 368px column, a full-height image would need 373px of width, so
+   object-fit:contain falls back to fitting by WIDTH and leaves ~2.5px of letterbox top and
+   bottom -- close, but not the flush edges asked for. Widening the column past 373px lets
+   HEIGHT bind instead, and the image then meets the copy exactly. Same clamp as the gauge:
+   it can never take more than the gutter has, and collapses to 0 at or below the container
+   width. margin-LEFT because every media column on this page sets order:0 and sits left. */
+.hw-media--flush img{max-height:none;height:100%;width:100%;object-fit:contain}
+
+
+/* MEDIA THAT MATCHES ITS COPY (owner, 2026-08-26: "too big -- ensure it only matches
+   height of [the copy] and center align the gauge along with the texts so we will have
+   equal paddings on both left and right side").
+
+   BOTH GUTTER BLEEDS ARE REMOVED. They pulled the media outside the container, which is
+   exactly what broke the equal left/right padding the owner is asking for -- and on the
+   web-design block, whose media column renders on the RIGHT, a left-pull dragged the
+   image 76-86px UNDER the copy at >=1440. Measured, not assumed.
+
+   THE HEIGHT MATCH NEEDS THE IMAGE OUT OF THE FLOW. While the media sits in normal flow
+   it CONTRIBUTES its own height to the row, so the row grows to fit the media and the
+   media then "matches" a height it set itself -- circular, and how the gauge ended up
+   445px tall against 330px of copy. Positioning it absolutely inside a full-height
+   figure means only the COPY can size the row; the media then fills exactly that.
+
+   The SVG needs no object-fit: preserveAspectRatio defaults to xMidYMid meet, which is
+   already contain, so it centres in the box on both axes. */
+/* GATED TO THE SPLIT LAYOUT. Taking the media out of the flow only works while there is
+   a copy column beside it to size the row. Once the row STACKS there is nothing to stretch
+   against, the figure collapses and the media renders 0px tall -- measured at 768 and 390,
+   where both images disappeared outright. Below the split the media goes back to ordinary
+   flow and sizes itself. */
+@media (min-width:1024px){
+  .hw-media--flush,.hw-media--gauge{position:relative;height:100%;min-height:0}
+  .hw-media--flush img,.hw-media--gauge .dg{position:absolute;top:0;left:0;
+    width:100%;height:100%;object-fit:contain}
+}
+/* stacked: plain flow, and the 320px cap that .hw-media img carries is lifted so the
+   flush image is not shrunk back down on a phone. */
+@media (max-width:1023px){
+  .hw-media--flush img{max-height:none;width:100%;height:auto}
+  .hw-media--gauge .dg{width:100%;height:auto}
+}
