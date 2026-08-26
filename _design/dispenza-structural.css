@@ -2283,3 +2283,24 @@
 
 /* The hover speed-up that briefly lived here is REMOVED at the owner's request. The
    columns now run at one constant pace and do not react to the pointer. */
+
+/* ============================================================================
+   THE THREE PROMISE CARDS, SLEEKER  ..  owner, 2026-08-26: "these cards are too
+   thick/tall, let's make them look sleeker."
+
+   Measured at 1440 before changing: 341x262, built from 40px of padding top and
+   bottom, a 44px icon, a 24px gap and a title of 75-112px.
+
+   THE MIDDLE CARD WAS SETTING THE HEIGHT, and for a reason worth fixing rather
+   than absorbing: its markup asks for two lines ("AMAZING FREE<br>SUPPORT") but
+   at 34px "AMAZING FREE" does not fit the 293px of usable card width, so it
+   wrapped to THREE. All three cards then stretched to match it. Taking the title
+   to 26px lets the authored break hold, which removes a whole line from the
+   tallest card before a single pixel of padding is touched.
+
+   Scoped to .hw-suite so only these promise cards change -- .hw-cell is a shared
+   object used elsewhere on the page with different content.
+   ============================================================================ */
+.hw-suite .hw-cell{padding:var(--ds-space-md) var(--ds-space-sm);gap:var(--ds-space-xs)}
+.hw-suite .hw-cell__icon{max-height:38px}
+.hw-suite .hw-cell__title{font-size:26px;line-height:1.14}
