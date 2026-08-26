@@ -2029,3 +2029,53 @@
    be part of that column for the image to reach up to it. It keeps the interval the
    removed row gap used to provide, so nothing moves visually. */
 .hw-svc__lede{margin-bottom:var(--ds-space-xl)}
+
+/* ============================================================================
+   INTEGRATIONS: VERTICAL MARQUEE  ..  owner, 2026-08-26: "remove container
+   outlines, increase the size of all logos, and let's add vertical marquee --
+   column left goes up, middle column scrolls down and right column scrolls up.
+   Top and bottom will fade to avoid the cropped look of the edges."
+
+   The block was ONE flat 603x477 image of a 3x4 grid of bordered cards, so
+   there was nothing to animate and no way to enlarge a logo without enlarging
+   the card outlines with it. The twelve logos are now separate files, sliced
+   from that composite and trimmed to their own ink -- which is what lets them
+   render larger: the card's padding is no longer part of the picture.
+
+   MARGIN, NOT GAP, ON THE TRACK ITEMS. Each column repeats its four logos
+   twice and animates to translateY(-50%). That only lands exactly one set on
+   if every item occupies the same block. With `gap` the track is
+   2N*h + (2N-1)*g tall, so half of it is NOT one set and the loop visibly
+   jumps; with margin-bottom on every item the track is 2N*(h+g) and half is
+   exactly N*(h+g). The seam is then invisible.
+
+   THE FADE IS A MASK, not an overlay gradient, so it works on whatever the
+   section's background happens to be rather than having to match it.
+   ============================================================================ */
+.hw-media--marquee{padding:0;border:0;background:none}
+.ig-marquee{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:var(--ds-space-sm);width:100%;height:100%;min-height:300px;
+  -webkit-mask-image:linear-gradient(180deg,#0000 0%,#000 14%,#000 86%,#0000 100%);
+  mask-image:linear-gradient(180deg,#0000 0%,#000 14%,#000 86%,#0000 100%)}
+.ig-col{overflow:hidden;min-width:0}
+.ig-track{display:flex;flex-direction:column;align-items:center;will-change:transform}
+.ig-logo{display:block;width:100%;max-width:118px;height:auto;
+  margin:0 0 var(--ds-space-lg);object-fit:contain}
+.ig-col--up .ig-track{animation:ig-up 28s linear infinite}
+.ig-col--down .ig-track{animation:ig-down 28s linear infinite}
+@keyframes ig-up{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes ig-down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+
+/* the marquee sizes to the copy exactly like the other flush media does */
+@media (min-width:1024px){
+  .hw-media--marquee{position:relative;height:100%;min-height:0}
+  .hw-media--marquee .ig-marquee{position:absolute;top:0;left:0}
+}
+@media (max-width:1023px){
+  .ig-marquee{height:380px}
+}
+/* Reduced motion: hold the columns still. The sheet's global reduce block only
+   clamps animation-duration to 1ms, which would spin this at a blur. */
+@media (prefers-reduced-motion:reduce){
+  .ig-col--up .ig-track,.ig-col--down .ig-track{animation:none}
+}
