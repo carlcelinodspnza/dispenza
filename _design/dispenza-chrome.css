@@ -142,3 +142,32 @@
    ============================================================================ */
 .rail__logo img{height:36px}
 .drawer-head img{height:32px}
+
+/* ============================================================================
+   MEGA MENU: BRIDGE THE HOVER GAP  ..  owner, 2026-08-26: "the megamenu should
+   not close even if I hover over between the nav and the megamenu gap".
+
+   MEASURED CAUSE. The panel is `top:calc(100% + var(--ds-space-xs))`, so a band
+   exactly --ds-space-xs tall sits between the dock's bottom edge (y=76) and the
+   panel's top edge (y=84). The panel IS a DOM descendant of #rail-dock, so
+   moving INTO it would normally not fire the dock's mouseleave -- but that band
+   is inside neither element's BOX, so the pointer genuinely leaves the dock's
+   subtree while crossing it. page-effects.js closes on `dock` mouseleave, so the
+   menu shut at y=78, two pixels into the gap. Walked the pointer down in 3px
+   steps to confirm.
+
+   THE FIX is a transparent hit area, not a JS timeout: the panel grows an ::after
+   that spans the gap, so the band now belongs to a dock descendant and mouseleave
+   never fires. No delay to tune, nothing to cancel, and it cannot desync from the
+   real geometry because it is derived from the SAME token as the offset.
+
+   ::after and not ::before -- .rail-panel--services::before already carries the
+   hex texture layer.
+
+   Scoped to .is-open so the strip cannot intercept pointer events over the hero
+   while the menu is shut. Applied to the BASE .rail-panel, so the team panel gets
+   the same treatment. The extra 2px overlaps the rail and the panel edge by a
+   pixel each, so sub-pixel rounding cannot leave a 1px dead seam.
+   ============================================================================ */
+.rail-panel.is-open::after{content:"";position:absolute;left:0;right:0;
+  top:calc(-1 * var(--ds-space-xs) - 2px);height:calc(var(--ds-space-xs) + 2px)}
