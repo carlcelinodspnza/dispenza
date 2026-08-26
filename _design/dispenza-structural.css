@@ -1762,3 +1762,37 @@
   .svc-pager__n{margin-left:auto}
   .svc-pager__row--next .svc-pager__t{font-size:17px}
 }
+
+/* ============================================================================
+   THE FOLDED BAND'S MARKS  ..  owner, 2026-08-26: "remove containers for logos
+   here and use the logos you have in the Homepage marquee. Increase the size a
+   bit too for these cards."
+
+   THE CONTAINER came from .rs-plate--light / --dark, which are the only rules
+   that paint a fill; the four cells no longer carry either class, so the box is
+   gone from the markup rather than being overpainted here. What still had to be
+   undone is the SLOT: .rs-plate--sm pins height to 56px and min-width to 104px,
+   and .rs-plate__mark caps itself at (56px - 2 * space-xs) = 28px. That cap, not
+   the fill, is why the marks were small.
+
+   SIZE IS PER MARK, NOT UNIFORM. A uniform height would make the NuLeaf wordmark
+   (4.08:1) read as half the size of the Firehouse badge (1.21:1) sitting beside
+   it. The homepage marquee already solved this for these exact marks, so the
+   values below are ITS optical heights scaled by 0.85 -- nuleaf 37.9 -> 32,
+   cannabis-guys 58.1 -> 49, firehouse 62.0 -> 53. The band and the marquee
+   therefore stay in the same optical relationship to one another.
+   ============================================================================ */
+/* height is NOT reset: the 56px slot is what keeps the four metrics on a common
+   line. Dropping it let each cell size to its own mark, and the shortest mark
+   (the NuLeaf wordmark at 32px) pulled its metric ~20px above the other three.
+   Only the padding, the min-width and the radius are undone -- the slot stays. */
+.rs-more .rs-plate{min-width:0;padding:0;border-radius:0}
+.rs-more .rs-plate__mark{max-height:var(--rs-mark,44px)}
+
+/* NorCal Holistics is the ONE brand with no mark in the marquee set (that set
+   carries 12 and NorCal is not among them), so it keeps its in-pages asset. That
+   asset is dark on transparent and disappears entirely against the card, so it is
+   forced to a white silhouette to sit with the three marquee marks. The other
+   three are NOT filtered: cannabis-guys and firehouse carry real internal detail
+   that a flat fill would destroy. Named for what it does, not for the client. */
+.rs-plate__mark--mono{filter:brightness(0) invert(1)}
