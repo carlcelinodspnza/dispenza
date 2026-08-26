@@ -1949,14 +1949,14 @@
   56%{transform:rotate(126deg)}
   72%{transform:rotate(106deg)}
   86%{transform:rotate(121deg)}
-  100%{transform:rotate(117.9deg)}
+  100%{transform:rotate(120.5deg)}
 }
 
 /* Reduced motion: land on the end state rather than flashing there. The sheet's
    global reduce block only clamps animation-duration to 1ms, which would play
    the whole sweep in a single frame. */
 @media (prefers-reduced-motion:reduce){
-  .hw-media.is-in .dg-needle--speed{animation:none;transform:rotate(117.9deg)}
+  .hw-media.is-in .dg-needle--speed{animation:none;transform:rotate(120.5deg)}
 }
 
 
@@ -2078,4 +2078,64 @@
    clamps animation-duration to 1ms, which would spin this at a blur. */
 @media (prefers-reduced-motion:reduce){
   .ig-col--up .ig-track,.ig-col--down .ig-track{animation:none}
+}
+
+
+/* ============================================================================
+   THE LIMITER BOUNCE  ..  owner, 2026-08-26: "I want it to look like a race
+   car's gauge when it is over revving, so the needle is bouncing a little back
+   and forth towards the end of the gauge."
+
+   TWO NESTED GROUPS, ONE ORIGIN. A single element cannot run two animations on
+   the same transform property, and this needs both: the sweep UP the dial, and
+   the flutter once it is there. The outer .dg-needle carries the sweep and holds
+   its end angle; the inner .dg-flutter carries the oscillation, and the two
+   rotations compose. The hub discs sit outside the flutter group so the pivot
+   itself does not wobble.
+
+   IT ONLY PULLS BACK, NEVER PAST. Every keyframe below is negative, i.e. down
+   the scale from the sweep's 120.5deg end. A rev limiter cuts fuel and the
+   needle FALLS off the stop before the engine picks up again -- it does not
+   swing past the top. Amplitudes and spacing are deliberately uneven so it
+   reads as an engine fighting a limiter rather than a pendulum.
+
+   The delay matches the sweep's duration so the bounce starts exactly as the
+   needle arrives, with no still moment between the two.
+   ============================================================================ */
+.dg-flutter{transform-box:view-box;transform-origin:var(--gx) var(--gy)}
+.hw-media.is-in .dg-flutter{animation:dg-limiter .62s ease-in-out 2.2s infinite}
+@keyframes dg-limiter{
+  0%{transform:rotate(0deg)}
+  9%{transform:rotate(-6.2deg)}
+  20%{transform:rotate(-1.1deg)}
+  31%{transform:rotate(-7.4deg)}
+  43%{transform:rotate(-2.6deg)}
+  55%{transform:rotate(-5.1deg)}
+  67%{transform:rotate(-0.7deg)}
+  79%{transform:rotate(-6.6deg)}
+  90%{transform:rotate(-2.1deg)}
+  100%{transform:rotate(0deg)}
+}
+@media (prefers-reduced-motion:reduce){
+  .hw-media.is-in .dg-flutter{animation:none}
+}
+
+/* BIGGER SERVICE MEDIA (owner, 2026-08-26: "let's increase images from these sections
+   more"). Measured at 1440: the row is 1072 wide and splits 640 (the site measure) + 64
+   (the row gap) + 368, so the media column had barely a third of the width -- and because
+   these images are roughly square, WIDTH is what binds them. Their boxes already had
+   ~119px of unused height underneath.
+
+   Scoped to .hw-svc so only the seven service rows change; the PERFORMANCE GUARANTEE
+   gauge, which the owner sized deliberately last round, is in another section and keeps
+   its proportions.
+
+   The measure gives up 80px and the gutter 24px, so the media column goes 368 -> 472
+   (+28%) while the copy stays at 560px -- about 60 characters, still a comfortable line
+   and well short of the 90+ where a measure stops being readable. That trade is the only
+   width available: the container is fixed and the owner has asked for equal padding on
+   both sides, which rules out bleeding into the gutter. */
+@media (min-width:1024px){
+  .hw-svc .row--split{gap:var(--ds-space-lg)}
+  .hw-svc .row--split > .col--measure{flex:0 1 560px}
 }
