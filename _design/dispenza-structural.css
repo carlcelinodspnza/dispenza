@@ -2174,3 +2174,21 @@
   .hw-svc__row--wide .hw-media--flush{
     margin-left:calc(-1 * clamp(0px, (100vw - var(--ds-container-max)) / 2 - 18px, 118px))}
 }
+
+
+/* TOP-ALIGNED ARTWORK (owner: "ensure that the top edge of the artwork aligns with top edge
+   of the text, please remove container outlines here as well").
+
+   Two things, because removing the plate alone would not have done it.
+
+   The plate is gone via --flush, which also makes the box match the copy column's height.
+   But object-fit:contain CENTRES what it fits, so an image whose aspect does not match its
+   box floats in the middle with equal slack above and below -- the top edge would still sit
+   low. object-position:top pins it to the top of the box instead, which is what the owner
+   is actually asking for.
+
+   The asset is trimmed to its ink first (800x800 -> its bounding box), because otherwise
+   "the top of the artwork" and "the top of the image" are not the same thing: the file
+   carried 56px of transparency above the artwork, and object-position:top would have
+   dutifully aligned that empty band with the heading. */
+.hw-media--top img{object-position:top}
