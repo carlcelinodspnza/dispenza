@@ -7,3 +7,7 @@ pm-layouts.html
 pm-body-layouts.html
 pm-body-image-layouts.html
 pm-sleek-concepts.html
+
+# stray output from a script whose scratchpad var failed to expand (2026-08-26):
+# 2.1MB of debug screenshots reached the live site at /undefined/*.png
+undefined/
