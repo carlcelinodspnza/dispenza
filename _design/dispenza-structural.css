@@ -2270,17 +2270,5 @@
    part of the image that has already become white. */
 .hw-consult__copy{margin-top:calc(-1 * var(--ds-space-2xl));position:relative;z-index:1}
 
-/* HOVER SPEEDS UP THE COLUMN UNDER THE CURSOR (owner, 2026-08-26: "an additional effect
-   where when hovered the column where the cursor is scrolls a bit faster").
-
-   Only animation-duration changes, so the column keeps its direction and its position in
-   the loop -- it does not restart or jump direction. Scoped to .ig-col:hover, so exactly
-   the column the pointer is over reacts and the other two carry on at their own pace,
-   which is what makes the effect read as a response rather than as the whole block
-   changing gear.
-
-   Gated on a real pointer: on touch there is no hover to leave, so a tapped column would
-   stay stuck at the faster speed for the rest of the session. */
-@media (hover:hover) and (pointer:fine){
-  .ig-col:hover .ig-track{animation-duration:11s}
-}
+/* The hover speed-up that briefly lived here is REMOVED at the owner's request. The
+   columns now run at one constant pace and do not react to the pointer. */
