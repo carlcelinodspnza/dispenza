@@ -2197,3 +2197,64 @@
    carried 56px of transparency above the artwork, and object-position:top would have
    dutifully aligned that empty band with the heading. */
 .hw-media--top img{object-position:top}
+
+/* ============================================================================
+   CONSULTING, AS THE CLOSING ROW  ..  owner, 2026-08-26: "since Consultations
+   will be the last row, we can use the image in full bleed but make the edges
+   fade to white softly and place the Consultations texts at the bottom of the
+   image, center-aligned."
+
+   FULL BLEED FROM INSIDE A CONTAINER. The row still lives in .container, so the
+   stack escapes it the standard way: 100vw wide, pulled left by
+   calc(50% - 50vw). The 50% resolves against the column it sits in, which is
+   centred, so the two cancel and the block lands flush with the viewport.
+
+   THE FADE IS A MASK ON ALL FOUR EDGES, composited so the two gradients
+   INTERSECT rather than stack -- source-in/intersect is what makes a corner fade
+   on both axes instead of one winning. It fades to TRANSPARENT, not to a white
+   overlay, so it works because the section itself is white rather than because
+   the gradient happens to match a colour.
+
+   THE COPY OVERLAYS ONLY WHERE THERE IS ROOM. On desktop the stack becomes a
+   one-cell grid and both children take that cell, so the text sits over the
+   image's faded lower edge, centred. Below the split that would be unreadable:
+   the photo is 1.8:1, so at 390px it is barely 217px tall while the heading,
+   body and CTA need ~400px -- the text would cover the entire picture. Under
+   1024px they stack normally instead and the copy simply follows the image.
+   ============================================================================ */
+/* WIDTH:AUTO WITH SYMMETRIC NEGATIVE MARGINS, not width:100vw. Pinning 100vw and pulling
+   left by calc(50% - 50vw) makes the browser reconcile two independently-rounded values,
+   and they disagreed by a sub-pixel: measured a 1px page scroll at exactly 1200, 1120 and
+   1024, present locally and absent on the deployed build, so it was this and not something
+   pre-existing. Letting width stay AUTO means the box is sized by its containing block
+   minus the two margins -- one expression, applied twice, so there is nothing to disagree.
+
+   overflow-x:clip on the section is kept as a belt-and-braces guard. It clips at the
+   section's own edges, which are the viewport's, and unlike overflow:hidden it creates no
+   scroll container and does not break position:sticky inside. */
+.hw-svc{overflow-x:clip}
+.hw-consult__stack{position:relative;width:auto;max-width:none;
+  margin-inline:calc(-1 * (50vw - 50%))}
+.hw-consult__media{margin:0}
+.hw-consult__media img{display:block;width:100%;height:auto;
+  -webkit-mask-image:linear-gradient(90deg,#0000 0%,#000 9%,#000 91%,#0000 100%),
+                     linear-gradient(180deg,#0000 0%,#000 10%,#000 46%,#0000 92%);
+          mask-image:linear-gradient(90deg,#0000 0%,#000 9%,#000 91%,#0000 100%),
+                     linear-gradient(180deg,#0000 0%,#000 10%,#000 46%,#0000 92%);
+  -webkit-mask-composite:source-in;mask-composite:intersect}
+.hw-consult__copy{max-width:var(--ds-measure);margin:0 auto;padding:0 var(--ds-space-md);
+  text-align:center}
+.hw-consult__copy .hw-cta{justify-content:center}
+
+/* THE COPY IS NOT OVERLAID ON THE PHOTOGRAPH, and that is a correction rather than a
+   preference. Overlaying it centred-bottom was tried and rendered: at 1440 the photo is
+   800px tall and the copy ~340px, so the text sat across 45-88% of the frame -- straight
+   over the standing row's faces and torsos, dark-on-dark and genuinely unreadable. Fading
+   the image far enough to clear it would have meant dissolving the bottom half of the
+   photograph, taking the seated row with it.
+
+   So the photo dissolves into white and the copy sits in that white, pulled up into the
+   faded tail so the two read as one block rather than as a picture with a caption below
+   it. The text is still at the bottom of the image and still centred; it is simply on the
+   part of the image that has already become white. */
+.hw-consult__copy{margin-top:calc(-1 * var(--ds-space-2xl));position:relative;z-index:1}
