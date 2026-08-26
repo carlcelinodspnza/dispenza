@@ -1796,3 +1796,31 @@
    three are NOT filtered: cannabis-guys and firehouse carry real internal detail
    that a flat fill would destroy. Named for what it does, not for the client. */
 .rs-plate__mark--mono{filter:brightness(0) invert(1)}
+
+/* ============================================================================
+   HOW-IT-WORKS CLOSE CTA  ..  owner, 2026-08-26: "reduce the gap at the top and
+   bottom of the CTA buttons and center-align".
+
+   Scoped to .hw-close, which the section already carries, so no other page's
+   .mc-actions moves. Measured before changing, at 1440:
+
+     hw-grid -> CTA        64px   from `.mc-section .container > .row + .row`,
+                                  NOT from .mc-actions (that is already margin-top:0)
+     CTA -> footer card   192px   the section's own 96px padding-bottom PLUS the
+                                  footer's 96px padding-top. Every page measures
+                                  96px from its SECTION EDGE to the footer card;
+                                  this section adds a second 96 below the buttons.
+     alignment            LEFT    buttons inset 0 / 802px
+
+   The row rule is beaten on specificity (0,4,0 vs 0,3,0) rather than by order, so
+   this holds wherever the block ends up in the sheet.
+   ============================================================================ */
+.mc-section.hw-close .container > .row + .row{margin-top:var(--ds-space-lg)}
+/* padding-bottom:0, not a smaller pad. 96px of the remaining gap is the FOOTER'S
+   own padding-top, which is shared by all 27 pages and is not touched, so 96px is
+   the floor here whatever this section does. Zeroing it puts the CTA at exactly
+   the clearance every other page has from its section edge to the footer card.
+   Safe because .hw-close's background rgb(21,22,26) is the SAME as the body's --
+   measured -- so the band has no visible edge to cut short. */
+.hw-close{padding-bottom:0}
+.hw-close .mc-actions{justify-content:center}
