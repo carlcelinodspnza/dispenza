@@ -2064,7 +2064,11 @@
   mask-image:linear-gradient(180deg,#0000 0%,#000 14%,#000 86%,#0000 100%)}
 .ig-col{overflow:hidden;min-width:0}
 .ig-track{display:flex;flex-direction:column;align-items:center;will-change:transform}
-.ig-logo{display:block;width:100%;max-width:118px;height:auto;
+/* .ig-marquee .ig-logo, not .ig-logo. `.hw-media img` carries (0,1,1) -- one class plus an
+   element -- and beat a bare `.ig-logo` at (0,1,0), so the max-width here never applied and
+   the browser used .hw-media img's max-width:100% instead. It went unnoticed while the
+   columns were narrower than the cap; widening the media column exposed it. */
+.ig-marquee .ig-logo{display:block;width:100%;max-width:150px;height:auto;
   margin:0 0 var(--ds-space-lg);object-fit:contain}
 .ig-col--up .ig-track{animation:ig-up 28s linear infinite}
 .ig-col--down .ig-track{animation:ig-down 28s linear infinite}
@@ -2258,3 +2262,18 @@
    it. The text is still at the bottom of the image and still centred; it is simply on the
    part of the image that has already become white. */
 .hw-consult__copy{margin-top:calc(-1 * var(--ds-space-2xl));position:relative;z-index:1}
+
+/* HOVER SPEEDS UP THE COLUMN UNDER THE CURSOR (owner, 2026-08-26: "an additional effect
+   where when hovered the column where the cursor is scrolls a bit faster").
+
+   Only animation-duration changes, so the column keeps its direction and its position in
+   the loop -- it does not restart or jump direction. Scoped to .ig-col:hover, so exactly
+   the column the pointer is over reacts and the other two carry on at their own pace,
+   which is what makes the effect read as a response rather than as the whole block
+   changing gear.
+
+   Gated on a real pointer: on touch there is no hover to leave, so a tapped column would
+   stay stuck at the faster speed for the rest of the session. */
+@media (hover:hover) and (pointer:fine){
+  .ig-col:hover .ig-track{animation-duration:11s}
+}
