@@ -1921,7 +1921,7 @@
 .dg-odo--dim{fill:#5a4520}
 
 /* the label the owner replaced: was "4.7 L100km" in the source artwork */
-.dg-label{fill:#fff;font-family:var(--ds-font-display,sans-serif);font-size:9.5px;font-weight:700;
+.dg-label{fill:#fff;font-family:var(--ds-font-display,sans-serif);font-size:7.5px;font-weight:700;
   letter-spacing:.18em;text-anchor:middle}
 .dg-rule{stroke:#fff;stroke-width:1.4;stroke-linecap:round;opacity:.9}
 
@@ -2021,3 +2021,11 @@
   .hw-media--flush img{max-height:none;width:100%;height:auto}
   .hw-media--gauge .dg{width:100%;height:auto}
 }
+
+
+/* The section's own heading now sits INSIDE the first service row's copy column rather
+   than in a row of its own above it. That is what lets the web-design media match "this
+   whole section": .hw-media--flush sizes itself to the copy column, so the heading had to
+   be part of that column for the image to reach up to it. It keeps the interval the
+   removed row gap used to provide, so nothing moves visually. */
+.hw-svc__lede{margin-bottom:var(--ds-space-xl)}
