@@ -1858,3 +1858,32 @@
   .svc-pager__now .svc-pager__pos{margin-left:0;flex-basis:100%}
   .svc-pager__meter{gap:4px;margin-bottom:10px}
 }
+
+
+/* ============================================================================
+   HOW-IT-WORKS HEADER GLOW: STOP CROPPING IT  ..  owner, 2026-08-26: "ensure
+   the glow is not cropped".
+
+   MEASURED CAUSE. --ds-glow-wash is radial-gradient(closest-side, ...) painted
+   at background-size:62vw 62vw -- an 892px tile at 1440 -- anchored off the
+   top-right corner. The .hw-head__wash div carrying it was nested inside the
+   heading's .col, and `.hw-head>*{position:relative}` makes .container the
+   containing block, so the div measured just 1120x170 (x160-1280, y215-385).
+   The tile spans x589-1481 / y-101-791, so the div's own edges sliced straight
+   through it: at x=1280 the gradient is still #420f7b29, nowhere near
+   transparent, which is the hard rectangular edge visible behind the heading.
+
+   THE FIX is to give the glow the box it was written for. The div is now the
+   header's first child, so it fills the whole header (1440x536) and the tile's
+   remaining overhang is clipped at the SECTION boundary instead of mid-content:
+   on the right the gradient is ~91% of the way to transparent by then, and at
+   the bottom the header's own `linear-gradient(to top, surface 0, transparent
+   160px)` fades over the cut. Nothing is trimmed where anyone can see it.
+
+   THE SPECIFICITY GUARD IS NOT OPTIONAL. `.hw-head>*{z-index:1;position:relative}`
+   lives LATER in this sheet and carries the same (0,1,0) weight as
+   `.hw-head__wash{position:absolute}`, so the moment the div became a direct
+   child it would have won on source order, turned the glow into a relative block
+   in the flow and pushed the heading down. This rule is (0,2,0) so it cannot.
+   z-index:0 keeps it under the content, which `.hw-head>*` raises to 1. */
+.hw-head > .hw-head__wash{position:absolute;top:0;right:0;bottom:0;left:0;z-index:0}
