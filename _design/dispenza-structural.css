@@ -2255,9 +2255,9 @@
    The opacity is owner-set: over the white page it sinks the photo back so the CONSULTING
    heading and copy carry the row. Landed at .7 after a round at .6 read too washed. Check it
    by prediction, not by eye -- ink over white scales linearly, so centre ink must equal
-   opacity x 222 (the unfaded measurement): .6 -> 133, .7 -> 155. */
+   opacity x 222 (the unfaded measurement): .6 -> 133, .7 -> 155, .8 -> 178. */
 .hw-consult__media img{display:block;width:100%;height:auto;
-  opacity:.7;
+  opacity:.8;
   -webkit-mask-image:linear-gradient(90deg,#0000 0%,#000 10%,#000 90%,#0000 100%);
           mask-image:linear-gradient(90deg,#0000 0%,#000 10%,#000 90%,#0000 100%)}
 /* The copy is deliberately WIDER than the site measure here, and only here. Centred at the
