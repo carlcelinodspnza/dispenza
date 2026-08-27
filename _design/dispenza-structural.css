@@ -2253,9 +2253,12 @@
    and no corner-tapering ellipse is needed -- that problem only appears when a horizontal and
    a vertical gradient are intersected and meet at right angles.
    The opacity is owner-set: over the white page it sinks the photo back so the CONSULTING
-   heading and copy carry the row. Landed at .7 after a round at .6 read too washed. Check it
-   by prediction, not by eye -- ink over white scales linearly, so centre ink must equal
-   opacity x 222 (the unfaded measurement): .6 -> 133, .7 -> 155, .8 -> 178. */
+   heading and copy carry the row. Do NOT record the current value in prose here -- it goes
+   stale on the next round. Check any new value by PREDICTION, not by eye: ink over white
+   scales linearly, so centre ink must equal opacity x 222, where 222 is this photo unfaded.
+   RESTORING THE MASK: if this photo is ever replaced by one with HARD edges, the fade cannot
+   come from the file and the removed three-layer mask has to come back -- that condition is
+   the trigger, not the date. It is at `git show 698a3fd -- this file`. */
 .hw-consult__media img{display:block;width:100%;height:auto;
   opacity:.8;
   -webkit-mask-image:linear-gradient(90deg,#0000 0%,#000 10%,#000 90%,#0000 100%);
