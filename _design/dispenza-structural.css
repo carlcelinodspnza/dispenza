@@ -2243,15 +2243,21 @@
    margins that pulled it out to 100vw are gone. */
 .hw-consult__stack{position:relative}
 .hw-consult__media{margin:0}
-/* NO MASK HERE -- DELIBERATELY. This image used to carry a three-layer CSS mask (two linear
-   fades plus a large ellipse to taper the corners) because the photo it replaced had hard,
-   square edges. The owner-supplied replacement is already feathered into white in the file.
-   Measured on the source webp, distance-from-white at the border (0 = pure white, of 255):
-   top max 0, bottom max 8, right max 22, left max 52 -- the left being the one spot where the
-   plant reaches the frame. Masking an already-faded photo compounded the falloff and ate the
-   seated front row, so the mask is gone. If this photo is ever swapped for one with hard
-   edges, the mask has to come back: git show 698a3fd -- this file. */
-.hw-consult__media img{display:block;width:100%;height:auto}
+/* SIDE FADES ONLY -- ONE AXIS, ON PURPOSE. The photo is already feathered into white at the
+   top and bottom in the file itself (measured on the source webp, distance from white of 255:
+   top max 19, bottom max 13), so a vertical gradient here would only compound what the image
+   already does -- that is exactly what ate the seated front row before (698a3fd..bca0b26).
+   The sides are where the file stops short: the plant reaches the left border at 52 and the
+   right sits at 22, so those two edges get the fade.
+   Because this is a SINGLE horizontal gradient, there is no rectangular envelope to break up
+   and no corner-tapering ellipse is needed -- that problem only appears when a horizontal and
+   a vertical gradient are intersected and meet at right angles.
+   The opacity is a deliberate 40-point reduction, asked for by the owner: over the white page
+   it sinks the photo back so the CONSULTING heading and copy carry the row. */
+.hw-consult__media img{display:block;width:100%;height:auto;
+  opacity:.6;
+  -webkit-mask-image:linear-gradient(90deg,#0000 0%,#000 10%,#000 90%,#0000 100%);
+          mask-image:linear-gradient(90deg,#0000 0%,#000 10%,#000 90%,#0000 100%)}
 /* The copy is deliberately WIDER than the site measure here, and only here. Centred at the
    680px measure this paragraph set six lines; the owner asked for three or four. Centred text
    also reads differently from the left-aligned columns elsewhere -- a ragged centre over six
